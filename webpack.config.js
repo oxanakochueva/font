@@ -10,7 +10,7 @@ module.exports = (env, argv) => ({
 
     entry: {
         ui: './src/app/index.tsx', // The entry point for your UI code
-        code: './src/plugin/controller.ts', // The entry point for your plugin code
+        code: './src/plugin/controller.js', // The entry point for your plugin code
     },
 
     module: {
