@@ -1,53 +1,49 @@
-figma.showUI(__html__);
+figma.showUI(__html__)
+
+figma.ui.resize(600, 900)
 
 function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
+  return self.indexOf(value) === index
 }
 
 function showFonts(fonts) {
   figma.ui.postMessage({
     type: 'get-font-list',
-    message: fonts,
-  });
+    message: fonts
+  })
 
-  let styles = [];
+  let styles = []
+  let names = []
+  let test
 
   fonts.forEach((font, i) => {
-    styles.push(font.fontName.style);
-  });
+    styles.push(font.fontName.style)
+    names.push(font.fontName.family)
+    test.push(font.textStyle.description)
+  })
 
-  styles = styles.filter(onlyUnique);
+  console.log('hi', test)
 
-  console.log(styles);
+  styles = styles.filter(onlyUnique)
+
+  console.log(styles, names)
+  console.log(local)
+
+  // let futuraPromise = figma.loadFontAsync({ family: 'futura', style: 'bold' })
+  // let futuraPromise = figma.loadFontAsync(fonts[0].fontName)
+  // futuraPromise.then(showFutura)
+}
+
+function showFutura(futura) {
+  console.log('yo', futura)
 }
 
 figma.ui.onmessage = msg => {
-  if (msg.type === 'create-rectangles') {
-    const nodes = [];
-
-    for (let i = 0; i < msg.count; i++) {
-      const rect = figma.createRectangle();
-      rect.x = i * 150;
-      rect.fills = [{type: 'SOLID', color: {r: 1, g: 0.5, b: 0}}];
-      figma.currentPage.appendChild(rect);
-      nodes.push(rect);
-    }
-
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
-
-    // This is how figma responds back to the ui
-    figma.ui.postMessage({
-      type: 'create-rectangles',
-      message: `Created ${msg.count} Rectangles`,
-    });
-
-    figma.closePlugin();
-  }
-
   if (msg.type === 'get-font-list') {
-    let fonts = figma.listAvailableFontsAsync();
+    let fontsPromise = figma.listAvailableFontsAsync()
+    let local = figma.getLocalTextStyles()
 
-    fonts.then(showFonts);
+    fontsPromise.then(showFonts)
+    local.then(showFonts)
   }
-};
+}
