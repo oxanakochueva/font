@@ -1,6 +1,7 @@
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path')
 
 module.exports = (env, argv) => ({
   mode: argv.mode === 'production' ? 'production' : 'development',
@@ -10,7 +11,7 @@ module.exports = (env, argv) => ({
 
   entry: {
     ui: './src/app/index.tsx', // The entry point for your UI code
-    code: './src/plugin/controller.js', // The entry point for your plugin code
+    code: './src/plugin/controller.js' // The entry point for your plugin code
   },
 
   module: {
@@ -21,52 +22,56 @@ module.exports = (env, argv) => ({
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties'],
-          },
+            plugins: ['@babel/plugin-proposal-class-properties']
+          }
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
 
       // Converts TypeScript code to JavaScript
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
+      { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
 
       // Enables including CSS by doing "import './file.css'" in your TypeScript code
       // {test: /\.css$/, loader: [{loader: 'style-loader'}, {loader: 'css-loader'}]},
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass'),
-            },
-          },
-        ],
+              implementation: require('sass')
+            }
+          }
+        ]
       },
 
       // Allows you to use "<%= require('./file.svg') %>" in your HTML code to get a data URI
-      {test: /\.(png|jpg|gif|webp|svg)$/, loader: [{loader: 'url-loader'}]},
-    ],
+      { test: /\.(png|jpg|gif|webp|svg)$/, loader: [{ loader: 'url-loader' }] }
+    ]
   },
-
+  // stats: { children: false },
   // Webpack tries these extensions for you if you omit the extension like "import './file'"
-  resolve: {extensions: ['.tsx', '.ts', '.jsx', '.js']},
+  resolve: { extensions: ['.tsx', '.ts', '.jsx', '.js'] },
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'), // Compile into a folder called "dist"
+    path: path.resolve(__dirname, 'dist') // Compile into a folder called "dist"
   },
 
   // Tells Webpack to generate "ui.html" and to inline "ui.ts" into it
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new HtmlWebpackPlugin({
       template: './src/app/index.html',
       filename: 'ui.html',
       inlineSource: '.(js)$',
-      chunks: ['ui'],
+      chunks: ['ui']
     }),
-    new HtmlWebpackInlineSourcePlugin(),
-  ],
-});
+    new HtmlWebpackInlineSourcePlugin()
+  ]
+})
