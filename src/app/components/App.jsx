@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-//import '../styles/ui.scss'
-import * as style from '../styles/ui.scss'
+import '../styles/ui.scss'
 
 export default class App extends React.Component {
   constructor(params) {
