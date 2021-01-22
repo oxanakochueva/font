@@ -17,18 +17,18 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
-          }
-        },
-        exclude: /node_modules/
+          loader: 'babel-loader'
+          // options: {
+          //   presets: ['@babel/preset-env', '@babel/preset-react'],
+          //   plugins: ['@babel/plugin-proposal-class-properties']
+          // }
+        }
       },
 
       // Converts TypeScript code to JavaScript
-      { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
+      // { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
 
       // Enables including CSS by doing "import './file.css'" in your TypeScript code
       // {
@@ -37,6 +37,7 @@ module.exports = (env, argv) => ({
       // },
 
       {
+        // test: /\.s[ac]ss$/i,
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
@@ -47,6 +48,8 @@ module.exports = (env, argv) => ({
           'sass-loader'
         ]
       },
+
+      // { test: /\.css$/, use: ['style-loader', { loader: 'css-loader' }] },
 
       // Allows you to use "<%= require('./file.svg') %>" in your HTML code to get a data URI
       { test: /\.(png|jpg|gif|webp|svg)$/, loader: [{ loader: 'url-loader' }] }

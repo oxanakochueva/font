@@ -1,5 +1,4 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import '../styles/ui.scss'
 
 export default class App extends React.Component {
@@ -216,7 +215,7 @@ export default class App extends React.Component {
       }
 
       fontElements.push(
-        <div сlass="fontLine" style={styles} key={i}>
+        <div className="fontLine" style={styles} key={i}>
           {font.fontName.family} {font.fontName.style}
         </div>
       )
@@ -247,27 +246,58 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <div сlass="searchField">
+        <div className="searchField">
           <input
             type="text"
             placeholder="i'm looking for"
             onChange={this.handleChange}
           ></input>
         </div>
-        <div сlass="container">
-          <div сlass="fontPair" style={pairSyle}>
-            <div сlass="rectangleTest"></div>
-            <h1 сlass="header" style={h1}>
+        <div className="container">
+          <div className="fontPair" style={pairSyle}>
+            <div className="rectangleTest"></div>
+            <h1 className="header" style={h1}>
               Make the Web Faster
             </h1>
-            <p сlass="text" style={p}>
+            <p className="text" style={p}>
               Google Fonts makes product and web pages run faster by safely
               caching fonts without compromising users’ privacy or security.
             </p>
           </div>
-          <div сlass="container">{fontElements}</div>
+          <div className="container">{fontElements}</div>
         </div>
       </div>
     )
   }
 }
+
+// Пример с использованием компонента-класса
+// export default class App extends React.Component {
+//   constructor(params) {
+//     super(params)
+//   }
+//
+//   render() {
+//     return (
+//       <div>
+//         <img src={require('../assets/logo.svg')} />
+//         <h2 className="test10">Rectangle Creator</h2>
+//         <h2 className="test11">Rectangle Creator</h2>
+//         <button id="create">Create</button>
+//       </div>
+//     )
+//   }
+// }
+
+// Пример с использованием компонента-функции
+// const App = () => {
+//   return (
+//     <div>
+//       <img src={require('../assets/logo.svg')} />
+//       <h2 className="test10">Rectangle Creator</h2>
+//       <button id="create">Create</button>
+//     </div>
+//   )
+// }
+//
+// export default App

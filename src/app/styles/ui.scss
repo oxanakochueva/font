@@ -1,5 +1,31 @@
 body {
-  background: green;
+  background: grey;
+}
+
+.container {
+  background: red;
+}
+
+.test10 {
+  border: 10px solid black;
+}
+
+.test10 {
+  border: 10px solid red;
+}
+
+input {
+  border: 10px solid green;
+  background: red;
+}
+
+.searchField {
+  border: 10px solid black;
+}
+
+.text {
+  font-size: 50px;
+  color: red;
 }
 
 .fontPair {
