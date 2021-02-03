@@ -1,21 +1,11 @@
-# Figma Plugin React Template
+<!-- нужно, чтобы были прописаны шрифтовые пары которые бы рендерились с определенным айди которое было бы и на статье и по нему кнопка понимала что выводить -->
 
-![62862431-71537f00-bd0e-11e9-85db-d97c0fb729a4](https://user-images.githubusercontent.com/16322616/62862692-46b5f600-bd0f-11e9-93b0-75955d1de8f3.png)
+<!-- ссылки на другие не просто картинка а элемент с рандомным фоном -->
 
+<!-- размер статьи зависит от размера контента -->
 
-This template contains the react example as shown on [Figma Docs](https://www.figma.com/plugin-docs/intro/), with some structural changes and extra tooling.
+<!-- добавлять по ховеру класс актив (спрашивать есть ли класс если нет добавить если есть то ничего)и менять адрес картинки -->
 
-## Quickstart
-* Run `yarn` to install dependencies.
-* Run `yarn build:watch` to start webpack in watch mode.
-* Open `Figma` -> `Plugins` -> `Development` -> `New Plugin...` and choose `manifest.json` file from this repo.
+<!-- добавить стейт с адресами картинок -->
 
-⭐ To change the UI of your plugin (the react code), start editing [App.tsx](./src/app/components/App.tsx).  
-⭐ To interact with the Figma API edit [controller.ts](./src/plugin/controller.ts).  
-⭐ Read more on the [Figma API Overview](https://www.figma.com/plugin-docs/api/api-overview/).
-
-## Toolings
-This repo is using:
-* React + Webpack
-* TypeScript
-* Prettier precommit hook
+<!-- обсудить формат данных -->

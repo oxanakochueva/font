@@ -40,3 +40,21 @@ figma.ui.onmessage = msg => {
     fontsPromise.then(showFonts)
   }
 }
+
+figma.ui.onmessage = msg => {
+  if (msg.type === 'create-article') {
+    const nodes = []
+
+    const frame = figma.createFrame()
+    frame.x = 150
+    frame.resize(768, 768)
+    frame.fills = [{ type: 'SOLID', color: { r: 0.96, g: 0.96, b: 0.95 } }]
+    figma.currentPage.appendChild(frame)
+    nodes.push(frame)
+
+    figma.currentPage.selection = nodes
+    figma.viewport.scrollAndZoomIntoView(nodes)
+  }
+
+  // figma.closePlugin()
+}

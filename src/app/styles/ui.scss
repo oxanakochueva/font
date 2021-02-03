@@ -1,23 +1,177 @@
 body {
-  background: green;
-}
+  background: #f6f4f3;
 
-.fontPair {
-  width: 500px;
-  height: 500px;
-  background: #ffffff;
-  border: 1px solid #f7f4f3;
-  box-sizing: border-box;
-  box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
-  border-radius: 12px;
-}
+  .navigation {
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+    top: 21px;
+    font-family: 'PT Sans';
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-.fontLine {
-  width: 500px;
-  height: 100px;
-  background: #ffffff;
-  border: 1px solid #f7f4f3;
-  box-sizing: border-box;
-  box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
-  border-radius: 12px;
+    .select {
+      height: 30px;
+      width: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .selectType {
+        font-size: 14px;
+        line-height: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        padding: 10px 15px;
+        border-radius: 7px;
+        margin-left: 10px;
+      }
+      .chevron {
+        background-image: url('../assets/images/Q_chevron/down.svg');
+        width: 8px;
+        height: 8px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-left: 6px;
+      }
+    }
+
+    form {
+      .closeIcon {
+        width: 8px;
+        border: none;
+        height: 8px;
+        background-color: ffffff;
+        padding: 0;
+        position: relative;
+        right: 20px;
+        background-image: url('../assets/Close.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        outline: none;
+        cursor: pointer;
+        visibility: visible;
+      }
+
+      input {
+        width: 170px;
+        height: 30px;
+        border-radius: 6px;
+        background: #ffffff;
+        border-style: none;
+        padding-left: 13px;
+
+        /*         &:not(:valid) {
+  .closeIcon {
+    visibility: hidden;
+  }
+} */
+
+        &::placeholder {
+          font-size: 14px;
+          color: #9e9e9e;
+        }
+
+        &:focus {
+          outline: none;
+          border: 1px solid rgba(36, 37, 38, 0.1);
+          box-shadow: 1px 6px 15px 0px rgba(36, 37, 38, 0.08);
+          padding-left: 13px;
+
+          &::placeholder {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .cardBlock {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    top: 20px;
+    justify-content: center;
+
+    .fontPairCard {
+      width: 177px;
+      height: 208px;
+      background: #ffffff;
+      border: 1px solid #f7f4f3;
+      box-sizing: border-box;
+      box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
+      border-radius: 12px;
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .top {
+        width: 86%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin: 0 auto;
+        padding-top: 7%;
+        align-items: center;
+        .pairName {
+          font-family: 'PT Sans';
+          font-size: 10.44px;
+          color: #2a2921;
+        }
+        .star {
+          width: 16px;
+          height: 16px;
+          background-image: url('../assets/images/star/empty.svg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          &:hover {
+            cursor: pointer;
+            background-image: url('../assets/images/star/hover.svg');
+          }
+        }
+        .starActive {
+          background-image: url('../assets/images/star/fill.svg');
+        }
+      }
+
+      .fontPairImage {
+        width: 146.99px;
+        height: 118.29px;
+        margin: 0 auto;
+      }
+      .tabs {
+        width: 86%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin: 0 auto;
+        position: relative;
+        bottom: 7%;
+        .tab {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        .active {
+          background: #aeaeae;
+          color: #ffffff;
+          border-radius: 16px;
+        }
+      }
+    }
+  }
 }

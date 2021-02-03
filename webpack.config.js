@@ -30,12 +30,6 @@ module.exports = (env, argv) => ({
       // Converts TypeScript code to JavaScript
       { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
 
-      // Enables including CSS by doing "import './file.css'" in your TypeScript code
-      // {
-      //   test: /\.css$/,
-      //   loader: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-      // },
-
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -52,7 +46,7 @@ module.exports = (env, argv) => ({
       { test: /\.(png|jpg|gif|webp|svg)$/, loader: [{ loader: 'url-loader' }] }
     ]
   },
-  // stats: { children: false },
+
   // Webpack tries these extensions for you if you omit the extension like "import './file'"
   resolve: { extensions: ['.tsx', '.ts', '.jsx', '.js'] },
 

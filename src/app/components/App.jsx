@@ -1,271 +1,548 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import '../styles/ui.scss'
+
+import '../styles/reset.scss'
+import * as styles from '../styles/ui.scss'
+import '../styles/fonts.scss'
+
+import Search from './atoms/A_Search'
+import Select from './atoms/A_Select'
+import FontCard from './organisms/O_FontCard'
+import Star from './quarks/Q_Star'
+import Navigation from './organisms/O_Navigation'
+
+const selectContents = [
+  {
+    selectType: 'language',
+    selectTypeList: ['Cyrillic', 'Latin']
+  },
+  {
+    selectType: 'font',
+    selectTypeList: ['Serif', 'Sans Serif', 'Mono']
+  },
+  {
+    selectType: 'view',
+    selectTypeList: ['Letters', 'Words', 'Phrase']
+  }
+]
+
+const fontPairs = [
+  {
+    pairName: 'Josefin Sans + Abril Fatface',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Josefin Sans + Cardo',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Josefin Sans + Fira Mono',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Josefin Sans + Lato',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Josefin Sans + Playfair',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Josefin Sans + Yeseva One',
+    folder: 'Josefin Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lato + Abril Fatface',
+    folder: 'Lato',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lato + Francois One',
+    folder: 'Lato',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lato + Karla',
+    folder: 'Lato',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lato + Merriweather',
+    folder: 'Lato',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Alegreya',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Merriweather',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Nunito',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Roboto',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Source Sans Pro',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Lora + Ubuntu',
+    folder: 'Lora',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Cabin',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Fira Sans',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Hind',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Inconsolata',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Karla',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Montserrat + Source Sans Pro',
+    folder: 'Montserrat',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Nunito + Alegreya',
+    folder: 'Nunito',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Nunito + Lora',
+    folder: 'Nunito',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Nunito + Open Sans',
+    folder: 'Nunito',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Nunito + Roboto',
+    folder: 'Nunito',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Open Sans + Bitter',
+    folder: 'Open Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Open Sans + Domine',
+    folder: 'Open Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Open Sans + Montserrat',
+    folder: 'Open Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Open Sans + Source Sans Pro',
+    folder: 'Open Sans',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + Bitter',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + Cabin',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + Merriweather',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + Open Sans',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + PT Sans',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Raleway + Roboto',
+    folder: 'Raleway',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Archivo',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Lora',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Nunito',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Raleway',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Rokkitt',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Roboto + Space Mono',
+    folder: 'Roboto',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Source Sans Pro + Alegreya',
+    folder: 'Source Sans Pro',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Source Sans Pro + Lora',
+    folder: 'Source Sans Pro',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Source Sans Pro + Montserrat',
+    folder: 'Source Sans Pro',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Source Sans Pro + Ubuntu',
+    folder: 'Source Sans Pro',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Cabin',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Kreon',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Lora',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Prompt',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Rokkitt',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  },
+  {
+    pairName: 'Ubuntu + Source Sans Pro',
+    folder: 'Ubuntu',
+    category: '',
+    language: []
+  }
+]
+
+// const fontPairs = [
+//   {
+//     JosefinSans: [
+//       {
+//         pairName: 'Josefin Sans + Abril Fatface'
+//       },
+//       {
+//         pairName: 'Josefin Sans + Cardo'
+//       },
+//       {
+//         pairName: 'Josefin Sans + Fira Mono'
+//       },
+//       {
+//         pairName: 'Josefin Sans + Lato'
+//       },
+//       {
+//         pairName: 'Josefin Sans + Playfair'
+//       },
+//       {
+//         pairName: 'Josefin Sans + Yeseva One'
+//       }
+//     ],
+//     Lato: [
+//       {
+//         pairName: 'Lato + Abril Fatface'
+//       },
+//       {
+//         pairName: 'Lato + Francois One'
+//       },
+//       {
+//         pairName: 'Lato + Karla'
+//       },
+//       {
+//         pairName: 'Lato + Merriweather'
+//       }
+//     ],
+//     Lora: [
+//       {
+//         pairName: 'Lora + Alegreya'
+//       },
+//       {
+//         pairName: 'Lora + Merriweather'
+//       },
+//       {
+//         pairName: 'Lora + Nunito'
+//       },
+//       {
+//         pairName: 'Lora + Roboto'
+//       },
+//       {
+//         pairName: 'Lora + Source Sans Pro'
+//       },
+//       {
+//         pairName: 'Lora + Ubuntu'
+//       }
+//     ],
+//     Montserrat: [
+//       {
+//         pairName: 'Montserrat + Cabin'
+//       },
+//       {
+//         pairName: 'Montserrat + Fira Sans'
+//       },
+//       {
+//         pairName: 'Montserrat + Hind'
+//       },
+//       {
+//         pairName: 'Montserrat + Inconsolata'
+//       },
+//       {
+//         pairName: 'Montserrat + Karla'
+//       },
+//       {
+//         pairName: 'Montserrat + Source Sans Pro'
+//       }
+//     ],
+//     Nunito: [
+//       {
+//         pairName: 'Nunito + Alegreya'
+//       },
+//       {
+//         pairName: 'Nunito + Lora'
+//       },
+//       {
+//         pairName: 'Nunito + Open Sans'
+//       },
+//       {
+//         pairName: 'Nunito + Roboto'
+//       }
+//     ],
+//     OpenSans: [
+//       {
+//         pairName: 'Open Sans + Bitter'
+//       },
+//       {
+//         pairName: 'Open Sans + Domine'
+//       },
+//       {
+//         pairName: 'Open Sans + Montserrat'
+//       },
+//       {
+//         pairName: 'Open Sans + Source Sans Pro'
+//       }
+//     ],
+//     Raleway: [
+//       {
+//         pairName: 'Raleway + Bitter'
+//       },
+//       {
+//         pairName: 'Raleway + Cabin'
+//       },
+//       {
+//         pairName: 'Raleway + Merriweather'
+//       },
+//       {
+//         pairName: 'Raleway + Open Sans'
+//       },
+//       {
+//         pairName: 'Raleway + PT Sans'
+//       },
+//       {
+//         pairName: 'Raleway + Roboto'
+//       }
+//     ],
+//     Roboto: [
+//       {
+//         pairName: 'Roboto + Archivo'
+//       },
+//       {
+//         pairName: 'Roboto + Lora'
+//       },
+//       {
+//         pairName: 'Roboto + Nunito'
+//       },
+//       {
+//         pairName: 'Roboto + Raleway'
+//       },
+//       {
+//         pairName: 'Roboto + Rokkitt'
+//       },
+//       {
+//         pairName: 'Roboto + Space Mono'
+//       }
+//     ],
+//     SourceSansPro: [
+//       {
+//         pairName: 'Source Sans Pro + Alegreya'
+//       },
+//       {
+//         pairName: 'Source Sans Pro + Lora'
+//       },
+//       {
+//         pairName: 'Source Sans Pro + Montserrat'
+//       },
+//       {
+//         pairName: 'Source Sans Pro + Ubuntu'
+//       }
+//     ],
+//     Ubuntu: [
+//       {
+//         pairName: 'Ubuntu + Cabin'
+//       },
+//       {
+//         pairName: 'Ubuntu + Kreon'
+//       },
+//       {
+//         pairName: 'Ubuntu + Lora'
+//       },
+//       {
+//         pairName: 'Ubuntu + Prompt'
+//       },
+//       {
+//         pairName: 'Ubuntu + Rokkitt'
+//       },
+//       {
+//         pairName: 'Ubuntu + Source Sans Pro'
+//       }
+//     ]
+//   }
+// ]
 
 export default class App extends React.Component {
   constructor(params) {
     super(params)
 
-    this.state = {
-      fonts: [],
-      filtered: [],
-      fontpairs: {
-        testPair: {
-          josefinSans: {
-            family: 'Josefin Sans',
-            category: 'sans-serif',
-            language: 'latin'
-          },
-          cardo: {
-            family: 'Cardo',
-            category: 'serif',
-            language: 'latin'
-          }
-        }
-        // Josefin Sans + Cardo
-        //     {
-        //   "family": "Josefin Sans",
-        //   "variants": [
-        //     "100",
-        //     "200",
-        //     "300",
-        //     "regular",
-        //     "500",
-        //     "600",
-        //     "700",
-        //     "100italic",
-        //     "200italic",
-        //     "300italic",
-        //     "italic",
-        //     "500italic",
-        //     "600italic",
-        //     "700italic"
-        //   ],
-        //   "subsets": [
-        //     "latin",
-        //     "latin-ext",
-        //     "vietnamese"
-        //   ],
-        //   "version": "v16",
-        //   "lastModified": "2020-06-26",
-        //   "files": {
-        //     "100": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjRXMFrLgTsQV0.ttf",
-        //     "200": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_LjQXMFrLgTsQV0.ttf",
-        //     "300": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_GbQXMFrLgTsQV0.ttf",
-        //     "regular": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQXMFrLgTsQV0.ttf",
-        //     "500": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_ArQXMFrLgTsQV0.ttf",
-        //     "600": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_ObXXMFrLgTsQV0.ttf",
-        //     "700": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_N_XXMFrLgTsQV0.ttf",
-        //     "100italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTtINhKibpUV3MEQ.ttf",
-        //     "200italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTNIJhKibpUV3MEQ.ttf",
-        //     "300italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCT6oJhKibpUV3MEQ.ttf",
-        //     "italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTtIJhKibpUV3MEQ.ttf",
-        //     "500italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCThoJhKibpUV3MEQ.ttf",
-        //     "600italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTaoVhKibpUV3MEQ.ttf",
-        //     "700italic": "http://fonts.gstatic.com/s/josefinsans/v16/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTU4VhKibpUV3MEQ.ttf"
-        //   },
-        //   "category": "sans-serif",
-        //   "kind": "webfonts#webfont"
-        // },
-        //     {
-        //   "family": "Cardo",
-        //   "variants": [
-        //     "regular",
-        //     "italic",
-        //     "700"
-        //   ],
-        //   "subsets": [
-        //     "greek",
-        //     "greek-ext",
-        //     "latin",
-        //     "latin-ext"
-        //   ],
-        //   "version": "v13",
-        //   "lastModified": "2020-09-25",
-        //   "files": {
-        //     "regular": "http://fonts.gstatic.com/s/cardo/v13/wlp_gwjKBV1pqiv_1oAZ2H5O.ttf",
-        //     "italic": "http://fonts.gstatic.com/s/cardo/v13/wlpxgwjKBV1pqhv93IQ73W5OcCk.ttf",
-        //     "700": "http://fonts.gstatic.com/s/cardo/v13/wlpygwjKBV1pqhND-aQR82JHaTBX.ttf"
-        //   },
-        //   "category": "serif",
-        //   "kind": "webfonts#webfont"
-        // }
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
+    this.onCreate = this.onCreate.bind(this)
   }
 
-  componentDidMount() {
-    // This is how we read messages sent from the plugin controller
-    window.onmessage = event => {
-      const { type, message } = event.data.pluginMessage
-
-      if (type === 'get-font-list') {
-        console.log('message inside componentDidMount', message)
-
-        this.setState({
-          fonts: message,
-          filtered: message
-        })
-      }
-    }
-
-    parent.postMessage({ pluginMessage: { type: 'get-font-list' } }, '*')
+  onCreate = () => {
+    //написать чтобы выбиралась конкретная штука
+    parent.postMessage({ pluginMessage: { type: 'create-article' } }, '*')
   }
-
-  onCancel = () => {
-    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-  }
-  ///////////////// search ////////////
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     filtered: nextProps.fonts
-  //   })
-  // }
-
-  handleChange(e) {
-    let currentList = this.state.fonts
-    let newList = []
-
-    if (e.target.value !== '') {
-      console.log(currentList)
-
-      currentList.filter(font => {
-        const family = font.fontName.family.toLowerCase()
-        const style = font.fontName.style.toLowerCase()
-        const familyAndStyle = [family, style].join(' ')
-        const filter = e.target.value.toLowerCase()
-
-        if (family.includes(filter) || familyAndStyle.includes(filter)) {
-          newList.push(font)
-        }
-      })
-
-      this.setState({
-        filtered: newList
-      })
-    }
-  }
-
-  /////////////////////////////////
 
   render() {
-    let fontElements = []
-    let matchItalic = /\b(\w*italic\w*)\b/
-    let matchWeight = /\b\w*\b/
-
-    this.state.filtered.forEach((font, i) => {
-      const { style } = font.fontName
-      const fontFamily = font.fontName.family
-      // let fontWeight = style;
-      let fontWeight = '400'
-      let fontStyle = 'normal'
-      let fontSize = '40px'
-      // let medium = '500';
-
-      const basicWeights = [
-        'thin',
-        'light',
-        'regular',
-        'medium',
-        'semibold',
-        'bold'
-      ]
-      const thin = ['thin', 'ultralight', 'extralight']
-      // const bold = ['bold', ]
-
-      if (style.toLowerCase().includes(basicWeights)) {
-        fontWeight = style.toLowerCase()
-        fontSize = fontSize
-      }
-      if (style.toLowerCase() == thin) {
-        fontWeight = '100'
-      } else if (style.toLowerCase() == 'light') {
-        fontWeight = '300'
-      } else if (style.toLowerCase() == 'medium') {
-        fontWeight = '500'
-      } else if (style.toLowerCase() == 'semibold') {
-        fontWeight = '600'
-      } else if (style.toLowerCase() == 'bold') {
-        fontWeight = '700'
-      }
-
-      if (style.toLowerCase().match(matchItalic)) {
-        fontStyle = 'italic'
-        // fontWeight = style.toLowerCase().match(matchWeight)[0];
-        if (fontWeight == 'thin') {
-          fontWeight = '100'
-        } else if (fontWeight == 'light') {
-          fontWeight = '300'
-        } else if (fontWeight == 'medium') {
-          fontWeight = '500'
-        } else if (fontWeight == 'semibold') {
-          fontWeight = '600'
-        } else if (fontWeight == 'bold') {
-          fontWeight = '700'
-        }
-        // console.log(style.toLowerCase().match(matchWeight)[0]);
-      }
-
-      const styles = {
-        fontFamily,
-        fontWeight,
-        fontStyle,
-        fontSize
-      }
-
-      fontElements.push(
-        <div сlass="fontLine" style={styles} key={i}>
-          {font.fontName.family} {font.fontName.style}
-        </div>
-      )
-    })
-
-    const containerStyle = {
-      background: 'orange'
-    }
-    const pairSyle = {
-      width: '150px',
-      height: '200px',
-      padding: '20px',
-      border: '1px solid black',
-      borderRadius: '9px'
-    }
-    const h1 = {
-      fontSize: '26px',
-      fontFamily: '"Josefin Sans", sans-serif',
-      margin: '0 auto'
-    }
-    const p = {
-      fontSize: '15px',
-      fontFamily: '"Cardo", serif',
-      margin: '0 auto'
-    }
-
-    console.log(this.props.styles)
-
     return (
       <div>
-        <div сlass="searchField">
-          <input
-            type="text"
-            placeholder="i'm looking for"
-            onChange={this.handleChange}
-          ></input>
-        </div>
-        <div сlass="container">
-          <div сlass="fontPair" style={pairSyle}>
-            <div сlass="rectangleTest"></div>
-            <h1 сlass="header" style={h1}>
-              Make the Web Faster
-            </h1>
-            <p сlass="text" style={p}>
-              Google Fonts makes product and web pages run faster by safely
-              caching fonts without compromising users’ privacy or security.
-            </p>
-          </div>
-          <div сlass="container">{fontElements}</div>
+        <Navigation selectContents={selectContents} />
+        <div className="container">
+          <button id="export" onClick={this.onCreate}>
+            Export
+          </button>
+          <FontCard fontPairs={fontPairs} />
         </div>
       </div>
     )
