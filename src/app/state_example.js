@@ -1,4 +1,5 @@
 let state = {
+  page: 'pairs',
   search: {
     input_text: 'what is now in input',
     query: 'what you searched for'
@@ -22,7 +23,7 @@ let state = {
 }
 
 const props = {
-  language: ['en', 'ru']
-  font: ['sans-serif', 'serif', 'mono']
+  language: ['en', 'ru'],
+  font: ['sans-serif', 'serif', 'mono'],
   view: ['letters', 'words', 'phrase']
 }
