@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
 //import FontPairName from './FontPairName'
-import Star from '../quarks/Q_Star'
 
 export default class FontCard extends React.Component {
   constructor(props) {
@@ -10,7 +9,9 @@ export default class FontCard extends React.Component {
 
     this.changeView = this.changeView.bind(this)
     this.mouseOut = this.mouseOut.bind(this)
-    this.handleClickFavourite = this.handleClickFavourite.bind(this)
+    // this.changeImg = this.changeImg.bind(this)
+
+    this.changeImg = React.createRef()
 
     this.state = {
       imageView: 'letters',
@@ -22,6 +23,7 @@ export default class FontCard extends React.Component {
       wordsImageUrl: 'words',
       phraseImageUrl: 'phrase',
       imageUrl: 'letters',
+      imageUrlHover: '',
 
       favourite: false,
       favouritePairs: {}
@@ -34,29 +36,30 @@ export default class FontCard extends React.Component {
     // this.setState({
     //   imageUrl: e.target.value
     // })
+    // require(`../../assets/images/pairs/${this.state.imageUrlHover}/${this.state.imageUrlHover}.svg`
     e.target.classList.contains('active')
-      ? ''
+      ? this.setState({
+          imageUrl: e.target.id,
+          imageView: e.target.id
+        })
       : e.target.classList.add('active'),
+      e.target.parentElement.classList.add('active'),
       this.setState({
-        imageView: e.target.id
+        imageView: e.target.id,
+        imageUrlHover: e.target.dataset.value
       })
 
-    // e.target.value ==
-    // e.target.parentElement.getElementsByClassName('fontPairCard').value
-    //   ? e.target.parentElement.getElementsByClassName('fontPairImage').src(src)
-    //   : ''
+    let src = `../../assets/images/pairs/${this.state.imageView}/${this.state.imageUrlHover}.svg`
+    e.target.parentElement.classList.contains('active')
+      ? this.changeImg.current.src(require(src))
+      : ''
 
-    e.target.classList.contains('words')
-      ? this.setState({
-          imageUrl: this.state.wordsImageUrl
-        })
-      : e.target.classList.contains('phrase')
-      ? this.setState({
-          imageUrl: this.state.phraseImageUrl
-        })
-      : this.setState({
-          imageUrl: this.state.lettersImageUrl
-        })
+    // this.сhangeImg()
+    // this.img.current.src(src)
+    console.log(e.target)
+    console.log(e.target.dataset.value)
+    console.log(e.target.id)
+    console.log(this.state.imageUrlHover)
   }
 
   mouseOut(e) {
@@ -68,79 +71,72 @@ export default class FontCard extends React.Component {
       })
   }
 
-  handleClickFavourite(e) {
-    console.log('click f')
-    e.preventDefault()
-
-    e.target.value == false
-      ? this.setState(
-          { favourite: true, favouritePairs: e.target.name },
-          e.target.classList.add('starActive')
-        )
-      : this.setState({ favourite: false, favouritePairs: '' })
-  }
+  // changeImg() {
+  //   this.img.current.src(
+  //     `../../assets/images/pairs/${this.state.imageUrlHover}/${this.state.imageUrlHover}.svg`
+  //   )
+  // }
 
   render() {
-    console.log(this.state.imageUrl)
+    console.log(this.state.imageUrlHover)
 
-    let { fontPairs } = this.props
-    let { favourite } = this.state
+    let pairs = this.props.pairs
+    console.log(pairs)
     // const image = require(imageUrl + ${fontPair.pairName} + '.svg')
 
-    let pairName = fontPairs.map((fontPair, i) => (
-      <div key={i} className="fontPairCard" value={fontPair.pairName}>
-        <div key={i} className="top">
-          <div key={i} className="pairName">
-            {fontPair.pairName}
+    let pairCard = pairs.map((pair, i) => (
+      <div key={i} className="fontPairFolder">
+        <div key={i} className="fontPairCard">
+          <div key={i} className="top">
+            <div key={i} className="pairName">
+              {pair.heading}
+            </div>
           </div>
-          <Star
-            handleClick={this.handleClickFavourite}
-            value={this.favourite}
-            name={fontPair.pairName}
-          />
-        </div>
-        <img
-          className="fontPairImage"
-          id="image"
-          //src={require(`../../assets/images/pairs/letters/${fontPair.pairName}.svg`)}
-          // src={require(`${imageUrl}${fontPair.pairName}.svg`)}
-          // src={image}
-          src={require(`../../assets/images/pairs/${this.state.imageUrl}/${fontPair.pairName}.svg`)}
-        ></img>
-        <div className="tabs">
-          <div
-            id="letters"
-            value={fontPair.pairName}
-            className="tab letters active"
-            onMouseOver={this.changeView}
-            onMouseOut={this.mouseOut}
-          >
-            Letters
-          </div>
-          <div
-            id="words"
-            value={fontPair.pairName}
-            className="tab words"
-            onMouseOver={this.changeView}
-            onMouseOut={this.mouseOut}
-          >
-            Words
-          </div>
-          <div
-            id="phrase"
-            value={fontPair.pairName}
-            className="tab phrase"
-            onMouseOver={this.changeView}
-            onMouseOut={this.mouseOut}
-          >
-            Phrase
+          <img
+            className="fontPairImage"
+            id="image"
+            ref={this.changeImg}
+            //src={require(`../../assets/images/pairs/letters/${fontPair.pairName}.svg`)}
+            // src={require(`${imageUrl}${fontPair.pairName}.svg`)}
+            // src={image}
+            src={require(`../../assets/images/pairs/${this.state.imageUrl}/${pair.id}.svg`)}
+          ></img>
+          <div className="tabs">
+            <div
+              id="letters"
+              data-value={pair.id}
+              className="tab letters active"
+              onMouseOver={this.changeView}
+              onMouseOut={this.mouseOut}
+            >
+              Letters
+            </div>
+            <div
+              id="words"
+              data-value={pair.id}
+              className="tab words"
+              onMouseOver={this.changeView}
+              onMouseOut={this.mouseOut}
+            >
+              Words
+            </div>
+            <div
+              id="phrase"
+              data-value={pair.id}
+              className="tab phrase"
+              onMouseOver={this.changeView}
+              onMouseOut={this.mouseOut}
+            >
+              Phrase
+            </div>
           </div>
         </div>
       </div>
     ))
     let cards = []
+    let folders = []
 
-    cards.push(pairName)
+    cards.push(pairCard)
 
     console.log(cards)
     return <div className="cardBlock">{cards}</div>
