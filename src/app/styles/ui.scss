@@ -1,6 +1,10 @@
 body {
   background: #f6f4f3;
 
+  .hidden {
+    display: none;
+  }
+
   .navigation {
     width: 90%;
     position: relative;
@@ -31,7 +35,7 @@ body {
         margin-left: 10px;
       }
       .chevron {
-        background-image: url('../assets/images/Q_chevron/down.svg');
+        background-image: url('../assets/images/chevrons/down.svg');
         width: 8px;
         height: 8px;
         background-size: cover;
@@ -86,6 +90,42 @@ body {
             color: #ffffff;
           }
         }
+      }
+    }
+  }
+
+  .folder {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    .fontPairFolder {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 21px;
+      margin: 6px;
+      border-radius: 12px;
+      background: #ffffff;
+      font-size: 20px;
+      line-height: 20px;
+
+      .chevron {
+        width: 10px;
+        height: 10px;
+      }
+      .down {
+        background-image: url('../assets/images/chevrons/down.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .up {
+        background-image: url('../assets/images/chevrons/up.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }
