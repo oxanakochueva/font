@@ -1,0 +1,117 @@
+.fontPairCard {
+  width: 177px;
+  height: 208px;
+  background: #ffffff;
+  border: 1px solid #f7f4f3;
+  box-sizing: border-box;
+  box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
+  border-radius: 12px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.letters {
+    .fontPairImage {
+      &.letters {
+        display: block;
+      }
+      &.words {
+        display: none;
+      }
+      &.phrase {
+        display: none;
+      }
+    }
+  }
+  &.words {
+    .fontPairImage {
+      &.letters {
+        display: none;
+      }
+      &.words {
+        display: block;
+      }
+      &.phrase {
+        display: none;
+      }
+    }
+  }
+  &.phrase {
+    .fontPairImage {
+      &.letters {
+        display: none;
+      }
+      &.words {
+        display: none;
+      }
+      &.phrase {
+        display: block;
+      }
+    }
+  }
+
+  .top {
+    width: 86%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    padding-top: 7%;
+    align-items: center;
+    .pairName {
+      font-family: 'PT Sans';
+      font-size: 10.44px;
+      color: #2a2921;
+    }
+    .star {
+      width: 16px;
+      height: 16px;
+      background-image: url('../assets/images/star/empty.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      &:hover {
+        cursor: pointer;
+        background-image: url('../assets/images/star/hover.svg');
+      }
+    }
+    .starActive {
+      background-image: url('../assets/images/star/fill.svg');
+    }
+  }
+
+  .fontPairImage {
+    width: 146.99px;
+    height: 118.29px;
+    margin: 0 auto;
+  }
+  .tabs {
+    width: 86%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    position: relative;
+    bottom: 7%;
+    .tab {
+      width: 48px;
+      height: 17px;
+      font-family: 'PT Sans';
+      font-weight: bold;
+      font-size: 10.44px;
+      color: #aeaeae;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background: #aeaeae;
+        color: #ffffff;
+        border-radius: 16px;
+      }
+    }
+  }
+}

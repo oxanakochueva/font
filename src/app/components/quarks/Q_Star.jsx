@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-import FontCard from '../organisms/O_FontCard'
+import FontCard from '../organisms/FontCard'
 
 export default class Star extends React.Component {
   constructor(props) {

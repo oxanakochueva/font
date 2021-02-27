@@ -1,5 +1,5 @@
 const fonts = {
-  josefin: {
+  josefin_sans: {
     heading: 'Josefin Sans',
     texts: {
       en: {
@@ -899,6 +899,34 @@ const fonts = {
         }
       }
     }
+  },
+  lora: {
+    heading: 'Lora',
+    texts: {
+      en: {
+        description:
+          "<p>Lora is a well-balanced contemporary serif with roots in calligraphy. It is a text typeface with moderate contrast well suited for body text.</p><p>A paragraph set in Lora will make a memorable appearance because of its brushed curves in contrast with driving serifs. The overall typographic voice of Lora perfectly conveys the mood of a modern-day story, or an art essay.</p><p>Technically Lora is optimised for screen appearance, and works equally well in print.</p><p>In March 2019, the family has been updated to a variable font family.</p><p>To contribute, see  <a href = 'github.com/cyrealtype/Lora-Cyrillic.'> </a>.</p>",
+        designer: {
+          heading: '<h1>Designer</h1>',
+          name: 'Cyreal',
+          company: 'Principal design',
+          description: '',
+          userpic:
+            'https://lh3.googleusercontent.com/8_Ko9pfyjgJZcRYFkYxecsGSTs5ybw8025-aYOi_M2KX4-L0fAkRY0PFnUk=w80-h80-fbw=1'
+        }
+      },
+      ru: {
+        description:
+          "<p>Bla bla bla</p><p>To contribute <a href='http://yo.rap'>http://yo.rap</a></p>",
+        designer: {
+          heading: '<h1>Designer</h1>',
+          name: 'Raph Levien',
+          company: 'Principal design',
+          description: '',
+          userpic: ''
+        }
+      }
+    }
   }
 }
 
@@ -907,7 +935,7 @@ const pairs = [
     id: 'josefin_sans_cardo',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Cardo',
-    fonts: ['Josefin Sans', 'Cardo'],
+    fonts: ['josefin_sans', 'cardo'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif']
   },
@@ -915,7 +943,7 @@ const pairs = [
     id: 'josefin_sans_abril_fatface',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Abril Fatface',
-    fonts: ['Josefin Sans', 'Abril Fatface'],
+    fonts: ['josefin_sans', 'abril_fatface'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif']
   },
@@ -923,7 +951,7 @@ const pairs = [
     id: 'josefin_sans_yeseva_one',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Yeseva One',
-    fonts: ['Josefin Sans', 'Yeseva One'],
+    fonts: ['josefin_sans', 'yeseva_one'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -931,7 +959,7 @@ const pairs = [
     id: 'josefin_sans_lato',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Lato',
-    fonts: ['Josefin Sans', 'Lato'],
+    fonts: ['josefin_sans', 'lato'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -939,7 +967,7 @@ const pairs = [
     id: 'josefin_sans_playfair',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Playfair',
-    fonts: ['Josefin Sans', 'Playfair'],
+    fonts: ['josefin_sans', 'playfair'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -947,7 +975,7 @@ const pairs = [
     id: 'josefin_sans_fira_mono',
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Fira Mono',
-    fonts: ['Josefin Sans', 'Fira Mono'],
+    fonts: ['josefin_sans', 'fira_mono'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono']
   },
@@ -955,7 +983,7 @@ const pairs = [
     id: 'lora_merriweather',
     folder: 'Lora',
     heading: 'Lora + Merriweather',
-    fonts: ['Lora', 'Merriweather'],
+    fonts: ['lora', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Serif']
   },
@@ -963,7 +991,7 @@ const pairs = [
     id: 'lora_source_sans_pro',
     folder: 'Lora',
     heading: 'Lora + Source Sans Pro',
-    fonts: ['Lora', 'Source Sans Pro'],
+    fonts: ['lora', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif']
   },
@@ -971,7 +999,7 @@ const pairs = [
     id: 'lora_roboto',
     folder: 'Lora',
     heading: 'Lora + Roboto',
-    fonts: ['Lora', 'Roboto'],
+    fonts: ['lora', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif']
   },
@@ -979,7 +1007,7 @@ const pairs = [
     id: 'lora_ubuntu',
     folder: 'Lora',
     heading: 'Lora + Ubuntu',
-    fonts: ['Lora', 'Ubuntu'],
+    fonts: ['lora', 'ubuntu'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif']
   },
@@ -987,7 +1015,7 @@ const pairs = [
     id: 'lora_alegreya',
     folder: 'Lora',
     heading: 'Lora + Alegreya',
-    fonts: ['Lora', 'Alegreya'],
+    fonts: ['lora', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Serif']
   },
@@ -995,7 +1023,7 @@ const pairs = [
     id: 'lora_nunito',
     folder: 'Lora',
     heading: 'Lora + Nunito',
-    fonts: ['Lora', 'Nunito'],
+    fonts: ['lora', 'nunito'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif']
   },
@@ -1003,7 +1031,7 @@ const pairs = [
     id: 'ubuntu_lora',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Lora',
-    fonts: ['Ubuntu', 'Lora'],
+    fonts: ['ubuntu', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1011,7 +1039,7 @@ const pairs = [
     id: 'ubuntu_kreon',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Kreon',
-    fonts: ['Ubuntu', 'Kreon'],
+    fonts: ['ubuntu', 'kreon'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1019,7 +1047,7 @@ const pairs = [
     id: 'ubuntu_rokkitt',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Rokkitt',
-    fonts: ['Ubuntu', 'Rokkitt'],
+    fonts: ['ubuntu', 'rokkitt'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1027,7 +1055,7 @@ const pairs = [
     id: 'ubuntu_cabin',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Cabin',
-    fonts: ['Ubuntu', 'Cabin'],
+    fonts: ['ubuntu', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1035,7 +1063,7 @@ const pairs = [
     id: 'ubuntu_source_sans_pro',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Source Sans Pro',
-    fonts: ['Ubuntu', 'Source Sans Pro'],
+    fonts: ['ubuntu', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1043,7 +1071,7 @@ const pairs = [
     id: 'ubuntu_prompt',
     folder: 'Ubuntu',
     heading: 'Ubuntu + Prompt',
-    fonts: ['Ubuntu', 'Prompt'],
+    fonts: ['ubuntu', 'prompt'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1051,7 +1079,7 @@ const pairs = [
     id: 'nunito_alegreya',
     folder: 'Nunito',
     heading: 'Nunito + Alegreya',
-    fonts: ['Nunito', 'Alegreya'],
+    fonts: ['nunito', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1059,7 +1087,7 @@ const pairs = [
     id: 'nunito_lora',
     folder: 'Nunito',
     heading: 'Nunito + Lora',
-    fonts: ['Nunito', 'Lora'],
+    fonts: ['nunito', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1067,7 +1095,7 @@ const pairs = [
     id: 'nunito_roboto',
     folder: 'Nunito',
     heading: 'Nunito + Roboto',
-    fonts: ['Nunito', 'Roboto'],
+    fonts: ['nunito', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1075,7 +1103,7 @@ const pairs = [
     id: 'nunito_open_sans',
     folder: 'Nunito',
     heading: 'Nunito + Open Sans',
-    fonts: ['Nunito', 'Open Sans'],
+    fonts: ['nunito', 'open_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1083,7 +1111,7 @@ const pairs = [
     id: 'source_sans_pro_ubuntu',
     folder: 'Source Sans Pro',
     heading: 'Source Sans Pro + Ubuntu',
-    fonts: ['Source Sans Pro', 'Ubuntu'],
+    fonts: ['source_sans_pro', 'ubuntu'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1091,7 +1119,7 @@ const pairs = [
     id: 'source_sans_pro_lora',
     folder: 'Source Sans Pro',
     heading: 'Source Sans Pro + Lora',
-    fonts: ['Source Sans Pro', 'Lora'],
+    fonts: ['source_sans_pro', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1099,7 +1127,7 @@ const pairs = [
     id: 'source_sans_pro_montserrat',
     folder: 'Source Sans Pro',
     heading: 'Source Sans Pro + Montserrat',
-    fonts: ['Source Sans Pro', 'Montserrat'],
+    fonts: ['source_sans_pro', 'montserrat'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1107,7 +1135,7 @@ const pairs = [
     id: 'source_sans_pro_alegreya',
     folder: 'Source Sans Pro',
     heading: 'Source Sans Pro + Alegreya',
-    fonts: ['Source Sans Pro', 'Alegreya'],
+    fonts: ['source_sans_pro', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1115,7 +1143,7 @@ const pairs = [
     id: 'roboto_archivo',
     folder: 'Roboto',
     heading: 'Roboto + Archivo',
-    fonts: ['Roboto', 'Archivo'],
+    fonts: ['roboto', 'archivo'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1123,7 +1151,7 @@ const pairs = [
     id: 'roboto_lora',
     folder: 'Roboto',
     heading: 'Roboto + Lora',
-    fonts: ['Roboto', 'Lora'],
+    fonts: ['roboto', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1131,7 +1159,7 @@ const pairs = [
     id: 'roboto_rokkitt',
     folder: 'Roboto',
     heading: 'Roboto + Rokkitt',
-    fonts: ['Roboto', 'Rokkitt'],
+    fonts: ['roboto', 'rokkitt'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1139,7 +1167,7 @@ const pairs = [
     id: 'roboto_nunito',
     folder: 'Roboto',
     heading: 'Roboto + Nunito',
-    fonts: ['Roboto', 'Nunito'],
+    fonts: ['roboto', 'nunito'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1147,7 +1175,7 @@ const pairs = [
     id: 'roboto_raleway',
     folder: 'Roboto',
     heading: 'Roboto + Raleway',
-    fonts: ['Roboto', 'Raleway'],
+    fonts: ['roboto', 'raleway'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1155,7 +1183,7 @@ const pairs = [
     id: 'roboto_space_mono',
     folder: 'Roboto',
     heading: 'Roboto + Space Mono',
-    fonts: ['Roboto', 'Space Mono'],
+    fonts: ['roboto', 'space_mono'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono']
   },
@@ -1163,7 +1191,7 @@ const pairs = [
     id: 'open_sans_montserrat',
     folder: 'Open Sans',
     heading: 'Open Sans + Montserrat',
-    fonts: ['Open Sans', 'Montserrat'],
+    fonts: ['open_sans', 'montserrat'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1171,7 +1199,7 @@ const pairs = [
     id: 'open_sans_bitter',
     folder: 'Open Sans',
     heading: 'Open Sans + Bitter',
-    fonts: ['Open Sans', 'Bitter'],
+    fonts: ['open_sans', 'bitter'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1179,7 +1207,7 @@ const pairs = [
     id: 'open_sans_domine',
     folder: 'Open Sans',
     heading: 'Open Sans + Domine',
-    fonts: ['Open Sans', 'Domine'],
+    fonts: ['open_sans', 'domine'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1187,7 +1215,7 @@ const pairs = [
     id: 'open_sans_source_sans_pro',
     folder: 'Open Sans',
     heading: 'Open Sans + Source Sans Pro',
-    fonts: ['Open Sans', 'Source Sans Pro'],
+    fonts: ['open_sans', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1195,7 +1223,7 @@ const pairs = [
     id: 'raleway_merriweather',
     folder: 'Raleway',
     heading: 'Raleway + Merriweather',
-    fonts: ['Raleway', 'Merriweather'],
+    fonts: ['raleway', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1203,7 +1231,7 @@ const pairs = [
     id: 'raleway_bitter',
     folder: 'Raleway',
     heading: 'Raleway + Bitter',
-    fonts: ['Raleway', 'Bitter'],
+    fonts: ['raleway', 'bitter'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1211,7 +1239,7 @@ const pairs = [
     id: 'raleway_cabin',
     folder: 'Raleway',
     heading: 'Raleway + Cabin',
-    fonts: ['Raleway', 'Cabin'],
+    fonts: ['raleway', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1219,7 +1247,7 @@ const pairs = [
     id: 'raleway_roboto',
     folder: 'Raleway',
     heading: 'Raleway + Roboto',
-    fonts: ['Raleway', 'Roboto'],
+    fonts: ['raleway', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1227,7 +1255,7 @@ const pairs = [
     id: 'raleway_open_sans',
     folder: 'Raleway',
     heading: 'Raleway + Open Sans',
-    fonts: ['Raleway', 'Open Sans'],
+    fonts: ['raleway', 'open_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1235,7 +1263,7 @@ const pairs = [
     id: 'raleway_pt_sans',
     folder: 'Raleway',
     heading: 'Raleway + PT Sans',
-    fonts: ['Raleway', 'PT Sans'],
+    fonts: ['raleway', 'pt_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1243,7 +1271,7 @@ const pairs = [
     id: 'lato_abril_fatface',
     folder: 'Lato',
     heading: 'Lato + Abril Fatface',
-    fonts: ['Lato', 'Abril Fatface'],
+    fonts: ['lato', 'abril_fatface'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1251,7 +1279,7 @@ const pairs = [
     id: 'lato_karla',
     folder: 'Lato',
     heading: 'Lato + Karla',
-    fonts: ['Lato', 'Karla'],
+    fonts: ['lato', 'karla'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1259,7 +1287,7 @@ const pairs = [
     id: 'lato_merriweather',
     folder: 'Lato',
     heading: 'Lato + Merriweather',
-    fonts: ['Lato', 'Merriweather'],
+    fonts: ['lato', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1267,7 +1295,7 @@ const pairs = [
     id: 'lato_francois_one',
     folder: 'Lato',
     heading: 'Lato + Francois One',
-    fonts: ['Lato', 'Francois One'],
+    fonts: ['lato', 'francois_one'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },
@@ -1275,7 +1303,7 @@ const pairs = [
     id: 'montserrat_source_sans_pro',
     folder: 'Montserrat',
     heading: 'Montserrat + Source Sans Pro',
-    fonts: ['Montserrat', 'Source Sans Pro'],
+    fonts: ['montserrat', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1283,7 +1311,7 @@ const pairs = [
     id: 'montserrat_karla',
     folder: 'Montserrat',
     heading: 'Montserrat + Karla',
-    fonts: ['Montserrat', 'Karla'],
+    fonts: ['montserrat', 'marla'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1291,7 +1319,7 @@ const pairs = [
     id: 'montserrat_fira_sans',
     folder: 'Montserrat',
     heading: 'Montserrat + Fira Sans',
-    fonts: ['Montserrat', 'Fira Sans'],
+    fonts: ['montserrat', 'fira_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1299,7 +1327,7 @@ const pairs = [
     id: 'montserrat_cabin',
     folder: 'Montserrat',
     heading: 'Montserrat + Cabin',
-    fonts: ['Montserrat', 'Cabin'],
+    fonts: ['montserrat', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1307,7 +1335,7 @@ const pairs = [
     id: 'montserrat_hind',
     folder: 'Montserrat',
     heading: 'Montserrat + Hind',
-    fonts: ['Montserrat', 'Hind'],
+    fonts: ['montserrat', 'hind'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif']
   },
@@ -1315,7 +1343,7 @@ const pairs = [
     id: 'montserrat_inconsolata',
     folder: 'Montserrat',
     heading: 'Montserrat + Inconsolata',
-    fonts: ['Montserrat', 'Inconsolata'],
+    fonts: ['montserrat', 'inconsolata'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono']
   }

@@ -7,9 +7,9 @@ import '../styles/fonts.scss'
 
 import Search from './atoms/A_Search'
 import Select from './atoms/A_Select'
-import FontCard from './organisms/O_FontCard'
+import FontCard from './organisms/FontCard'
 import Star from './quarks/Q_Star'
-import Navigation from './organisms/O_Navigation'
+import Navigation from './organisms/Navigation'
 
 const selectContents = [
   {

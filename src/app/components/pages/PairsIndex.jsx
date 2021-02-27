@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '../App'
-//import FontPairName from './FontPairName'
+import PairList from '../organisms/PairList'
 
 export default class PairsIndex extends React.Component {
   constructor(props) {
@@ -13,8 +12,14 @@ export default class PairsIndex extends React.Component {
   }
 
   render() {
-    let card = this.props.pair
+    const { pairs, changeCardView, openPairShow } = this.props
 
-    return <div className="cardBlock">{card}</div>
+    return (
+      <PairList
+        pairs={pairs}
+        changeCardView={changeCardView}
+        openPairShow={openPairShow}
+      />
+    )
   }
 }
