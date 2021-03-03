@@ -1,0 +1,48 @@
+.buttonsSet {
+  display: flex;
+  justify-content: space-between;
+  width: 86%;
+  margin-top: 20px;
+  .Button {
+    display: flex;
+    flex-direction: row;
+    color: #2a2921;
+    background: #ffffff;
+    font-size: 13px;
+    font-family: 'PT Sans';
+    border-radius: 7px;
+    padding: 10px 10px;
+    align-items: center;
+    cursor: pointer;
+
+    .chevronLeft {
+      width: 6px;
+      height: 10px;
+      margin-right: 6px;
+      background-image: url('../assets/images/chevrons/left.svg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .exportIcon {
+      width: 10px;
+      height: 10px;
+      background-image: url('../assets/exportIcon.svg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-left: 6px;
+    }
+  }
+}
+
+/* .buttonsRight {
+  display: flex;
+  justify-content: flex-end;
+}
+.buttonsLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+ */

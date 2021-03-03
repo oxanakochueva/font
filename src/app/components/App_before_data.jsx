@@ -5,11 +5,11 @@ import '../styles/reset.scss'
 import * as styles from '../styles/ui.scss'
 import '../styles/fonts.scss'
 
-import Search from './atoms/A_Search'
-import Select from './atoms/A_Select'
-import FontCard from './organisms/FontCard'
+import Search from './atoms/Search'
+import Select from './atoms/Select'
+import FontPairCard from './organisms/FontPairCard'
 import Star from './quarks/Q_Star'
-import Navigation from './organisms/Navigation'
+import PageNavigation from './organisms/PageNavigation'
 
 const selectContents = [
   {
@@ -356,12 +356,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navigation selectContents={selectContents} />
+        <PageNavigation selectContents={selectContents} />
         <div className="container">
           <button id="export" onClick={this.onCreate}>
             Export
           </button>
-          <FontCard fontPairs={fontPairs} />
+          <FontPairCard fontPairs={fontPairs} />
         </div>
       </div>
     )

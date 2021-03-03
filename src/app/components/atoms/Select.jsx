@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-//import SelectItem from './A_SelectItem'
+//import SelectItem from './SelectItem'
 import App from '../App'
 
 export default class Select extends React.Component {

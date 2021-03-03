@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-export default class FontAbout extends React.Component {
+export default class FontDescription extends React.Component {
   constructor(props) {
     super(props)
   }
 
   createMarkup(font) {
     return { __html: font.texts.en.description }
+  }
+  createMarkup(designer) {
+    return { __html: designer.texts.en.designer.description }
   }
 
   render() {
@@ -36,9 +39,10 @@ export default class FontAbout extends React.Component {
               </div>
             </div>
           </div>
-          <div className="designerDescription">
-            {font.texts.en.designer.description}
-          </div>
+          <div
+            className="designerDescription"
+            dangerouslySetInnerHTML={this.createMarkup(font)}
+          ></div>
         </div>
       </div>
     )

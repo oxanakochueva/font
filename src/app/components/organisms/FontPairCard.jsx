@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import CardImage from '../atoms/CardImage'
+import FontPairCardImage from '../atoms/FontPairCardImage'
 
-export default class FontCard extends React.Component {
+export default class FontPairCard extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -13,9 +13,9 @@ export default class FontCard extends React.Component {
     changeCardView(pair.id, view)
   }
 
-  openPairShow = () => {
-    const { pair, openPairShow } = this.props
-    openPairShow(pair.id)
+  openPairPage = () => {
+    const { pair, openPairPage } = this.props
+    openPairPage(pair.id)
   }
 
   render() {
@@ -33,13 +33,13 @@ export default class FontCard extends React.Component {
       <div
         className={classes}
         id={pair.folder}
-        onClick={() => this.openPairShow()}
+        onClick={() => this.openPairPage()}
       >
-        <div className="top">
-          <div className="pairName">{pair.heading}</div>
+        <div className="cardHeader">
+          <div className="fontPairName">{pair.heading}</div>
         </div>
-        <CardImage pair={pair.id} folder={pair.folder} view="letters" />
-        <div className="tabs">
+        <FontPairCardImage pair={pair.id} folder={pair.folder} view="letters" />
+        <div className="cardViewTabs">
           <div
             id="letters"
             className="tab letters"

@@ -51,7 +51,7 @@
     }
   }
 
-  .top {
+  .cardHeader {
     width: 86%;
     display: flex;
     flex-direction: row;
@@ -60,7 +60,7 @@
     margin: 0 auto;
     padding-top: 7%;
     align-items: center;
-    .pairName {
+    .fontPairName {
       font-family: 'PT Sans';
       font-size: 10.44px;
       color: #2a2921;
@@ -86,7 +86,7 @@
     height: 118.29px;
     margin: 0 auto;
   }
-  .tabs {
+  .cardViewTabs {
     width: 86%;
     display: flex;
     flex-direction: row;

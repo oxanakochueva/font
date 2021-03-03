@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-import FontCard from '../organisms/FontCard'
+import FontPairCard from '../organisms/FontPairCard'
 
 export default class FontPairName extends React.Component {
   constructor(props) {

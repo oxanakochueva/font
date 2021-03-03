@@ -97,7 +97,7 @@ const pairs = {
   josefin_sans_playfair: {
     folder: 'Josefin Sans',
     heading: 'Josefin Sans + Playfair',
-    fonts: ['Josefin Sans', 'Playfair'],
+    fonts: ['Josefin Sans', 'Playfair Display'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif']
   },

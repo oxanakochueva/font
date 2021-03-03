@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
 
-export default class CardImage extends React.Component {
+export default class FontPairCardImage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
