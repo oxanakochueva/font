@@ -113,6 +113,7 @@ export default class App extends React.Component {
                 currentPairId={this.state.currentPairId}
                 exportPageToFigma={this.exportPageToFigma}
                 openPairsPageIndex={this.openPairsPageIndex}
+                openPairPage={this.openPairPage}
               />
             </div>
           ) : (

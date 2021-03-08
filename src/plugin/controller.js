@@ -306,7 +306,16 @@ function renderFigmaTemplate(currentPairId, language) {
   firstFontDescription.layoutAlign = 'STRETCH'
 
   ////////дизайнер первого шрифта
-
+  //////////заголовок дизайнера
+  let firstDesignerFrameName = figma.createText()
+  firstDesignerFrameName.characters =
+    fontElements[0].texts[language].designer.heading
+  firstDesignerFrameName.fontSize = 20
+  firstDesignerFrameName.fontName = {
+    family: fontElements[0].heading,
+    style: 'Bold'
+  }
+  firstDesignerFrameName.fills = black
   //////////фрейм блока
   let firstDesignerFrame = figma.createFrame()
   firstDesignerFrame.layoutMode = 'VERTICAL'
@@ -388,18 +397,17 @@ function renderFigmaTemplate(currentPairId, language) {
   }
   secondFontDescription.layoutAlign = 'STRETCH'
 
-  ////////заголовок дизайнера
-  let designerFrameName = figma.createText()
-  designerFrameName.characters =
+  ////////дизайнер второго шрифта
+  //////////заголовок дизайнера
+  let secondDesignerFrameName = figma.createText()
+  secondDesignerFrameName.characters =
     fontElements[0].texts[language].designer.heading
-  designerFrameName.fontSize = 20
-  designerFrameName.fontName = {
+  secondDesignerFrameName.fontSize = 20
+  secondDesignerFrameName.fontName = {
     family: fontElements[0].heading,
     style: 'Bold'
   }
-  designerFrameName.fills = black
-
-  ////////дизайнер второго шрифта
+  secondDesignerFrameName.fills = black
   //////////фрейм блока
   let secondDesignerFrame = figma.createFrame()
   secondDesignerFrame.layoutMode = 'VERTICAL'
@@ -471,11 +479,48 @@ function renderFigmaTemplate(currentPairId, language) {
   }
   copyright.resize(688, 14)
 
+  ////рекомендации пар
+  let recomendations = figma.createFrame()
+  recomendations.layoutMode = 'VERTICAL'
+  recomendations.primaryAxisSizingMode = 'AUTO'
+  recomendations.counterAxisSizingMode = 'AUTO'
+  recomendations.layoutAlign = 'STRETCH'
+  recomendations.itemSpacing = 15
+  recomendations.fills = background
+  //////заголовок
+  let recomendationsTitle = figma.createText()
+  recomendationsTitle.characters = 'Other pairings'
+  recomendationsTitle.fontSize = 20
+  recomendationsTitle.fontName = {
+    family: fontElements[0].heading,
+    style: 'Bold'
+  }
+  recomendationsTitle.fills = black
+  //////ссылки на пары
+  let recomendationsList = figma.createFrame()
+  recomendationsList.layoutMode = 'HORIZONTAL'
+  recomendationsList.primaryAxisSizingMode = 'AUTO'
+  recomendationsList.counterAxisSizingMode = 'AUTO'
+  recomendationsList.primaryAxisAlignItems = 'SPACE_BETWEEN'
+  recomendationsList.itemSpacing = 20
+  recomendationsList.fills = background
+  ////////  пары
+  let recomendationsListItemFirst = figma.createRectangle()
+  recomendationsListItemFirst.resize(215.9, 115)
+  recomendationsListItemFirst.cornerRadius = 7
+  let recomendationsListItemSecond = figma.createRectangle()
+  recomendationsListItemSecond.resize(215.9, 115)
+  recomendationsListItemSecond.cornerRadius = 7
+  let recomendationsListItemThird = figma.createRectangle()
+  recomendationsListItemThird.resize(215.9, 115)
+  recomendationsListItemThird.cornerRadius = 7
+
   articleFrame.appendChild(topBarFrame)
   articleFrame.appendChild(pairInfoFrame)
   pairInfoFrame.appendChild(articleName)
   pairInfoFrame.appendChild(imageRectangle)
   pairInfoFrame.appendChild(fontInfoFrame)
+  pairInfoFrame.appendChild(recomendations)
   pairInfoFrame.appendChild(copyright)
   fontInfoFrame.appendChild(firstFontName)
   fontInfoFrame.appendChild(firstFontDescription)
@@ -489,20 +534,25 @@ function renderFigmaTemplate(currentPairId, language) {
   buttonBack.appendChild(buttonBackText)
   buttonExport.appendChild(buttonExportText)
   buttonExport.appendChild(buttonExportIcon)
-  firstDesignerFrame.appendChild(designerFrameName)
+  firstDesignerFrame.appendChild(firstDesignerFrameName)
   firstDesignerFrame.appendChild(firstDesignerInnerFrame)
   firstDesignerFrame.appendChild(firstDesignerDescription)
   firstDesignerInnerFrame.appendChild(firstDesignerAvatar)
   firstDesignerInnerFrame.appendChild(firstDesignerNameFrame)
   firstDesignerNameFrame.appendChild(firstDesignerName)
   firstDesignerNameFrame.appendChild(firstDesignerCompany)
-  secondDesignerFrame.appendChild(designerFrameName)
+  secondDesignerFrame.appendChild(secondDesignerFrameName)
   secondDesignerFrame.appendChild(secondDesignerInnerFrame)
   secondDesignerFrame.appendChild(secondDesignerDescription)
   secondDesignerInnerFrame.appendChild(secondDesignerAvatar)
   secondDesignerInnerFrame.appendChild(secondDesignerNameFrame)
   secondDesignerNameFrame.appendChild(secondDesignerName)
   secondDesignerNameFrame.appendChild(secondDesignerCompany)
+  recomendations.appendChild(recomendationsTitle)
+  recomendations.appendChild(recomendationsList)
+  recomendationsList.appendChild(recomendationsListItemFirst)
+  recomendationsList.appendChild(recomendationsListItemSecond)
+  recomendationsList.appendChild(recomendationsListItemThird)
   figma.currentPage.appendChild(articleFrame)
 
   nodes.push(articleFrame)

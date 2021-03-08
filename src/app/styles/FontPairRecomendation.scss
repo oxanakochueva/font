@@ -1,0 +1,24 @@
+.otherPairings {
+  margin-bottom: 60px;
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .FontPairList {
+    width: 568px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .FontPairRecomendationCard {
+      width: 178px;
+      height: 106px;
+      border-radius: 7px;
+      background: #cccccc;
+      cursor: pointer;
+      &:hover {
+        background: #d8d8d8;
+      }
+    }
+  }
+}

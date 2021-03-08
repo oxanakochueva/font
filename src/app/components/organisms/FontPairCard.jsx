@@ -14,13 +14,12 @@ export default class FontPairCard extends React.Component {
   }
 
   openPairPage = () => {
-    const { pair, openPairPage, pairsInCurrentFolder } = this.props
-    console.log(pairsInCurrentFolder)
+    const { pair, openPairPage } = this.props
     openPairPage(pair.id)
   }
 
   render() {
-    const { pair, pairsInCurrentFolder } = this.props
+    const { pair } = this.props
 
     const classes = classnames({
       fontPairCard: true,

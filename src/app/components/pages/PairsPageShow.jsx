@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import FontDescription from '../organisms/FontDescription'
 import PageNavigation from '../organisms/PageNavigation'
+import FontPairRecomendation from '../organisms/FontPairRecomendation'
 
 export default class PairsPageShow extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class PairsPageShow extends React.Component {
       currentPairId,
       exportPageToFigma,
       openPairsPageIndex,
-      pairsInCurrentFolder
+      pairsInCurrentFolder,
+      openPairPage
     } = this.props
     let fontList = []
     let fontElements = []
@@ -31,12 +33,6 @@ export default class PairsPageShow extends React.Component {
         fontStyle = pair.folder
       }
     })
-    // this.setState({
-    //   firstFontName: fontList[0],
-    //   secondFontName: fontList[1]
-    // })
-    //
-    // console.log(this.state.firstFontName, this.state.secondFontName)
 
     Object.keys(fonts).forEach((key, i) => {
       console.log(key === fontList[0], key === fontList[1])
@@ -47,29 +43,8 @@ export default class PairsPageShow extends React.Component {
         )
       }
     })
-
-    console.log(pairsInCurrentFolder)
-
-    ////рабочие кнопки
-    // <div className="buttonsSet">
-    //   <div className="buttonsLeft">
-    //     <Button
-    //       buttonAction={openPairsPageIndex}
-    //       buttonName="Back"
-    //       leftIcon="chevronLeft"
-    //       rightIcon=""
-    //     />
-    //   </div>
-    //   <div className="buttonsRight">
-    //     <Button
-    //       buttonAction={this.exportPageToFigma}
-    //       buttonName="Export to artboard"
-    //       leftIcon=""
-    //       rightIcon="exportIcon"
-    //     />
-    //   </div>
-    // </div>
-    //
+    console.log(fontElements)
+    console.log(pairs)
 
     return (
       <>
@@ -89,6 +64,16 @@ export default class PairsPageShow extends React.Component {
           </div>
           <div className="pairCover"></div>
           {fontElements}
+          <div className="otherPairings">
+            <h2 style={{ fontFamily: fontFamily[0], fontWeight: 600 }}>
+              Other pairings
+            </h2>
+            <FontPairRecomendation
+              pairs={pairs}
+              currentPairId={currentPairId}
+              openPairPage={openPairPage}
+            />
+          </div>
           <div className="copyright">
             Information from{' '}
             <a href="https://fonts.google.com/">Google Fonts</a>
