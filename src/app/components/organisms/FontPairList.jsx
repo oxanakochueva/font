@@ -12,9 +12,11 @@ export default class FontPairList extends React.Component {
   render() {
     const { folder, pairs, changeCardView, openPairPage } = this.props
     let cards = []
+    let pairsInCurrentFolder = []
 
     pairs.forEach((pair, i) => {
       if (pair.folder === folder) {
+        pairsInCurrentFolder.push(pair)
         cards.push(
           <FontPairCard
             folder={folder}
@@ -22,6 +24,7 @@ export default class FontPairList extends React.Component {
             changeCardView={changeCardView}
             openPairPage={openPairPage}
             key={i}
+            pairsInCurrentFolder={pairsInCurrentFolder}
           />
         )
       }

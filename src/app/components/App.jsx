@@ -93,6 +93,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(fonts)
     return (
       <div>
         <div className="container">

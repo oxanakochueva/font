@@ -7,25 +7,30 @@ export default class FontDescription extends React.Component {
   }
 
   createMarkup(font) {
-    return { __html: font.texts.en.description }
+    return { __html: font.texts.en.descriptionHTML }
   }
-  createMarkup(designer) {
-    return { __html: designer.texts.en.designer.description }
-  }
+  // createMarkup(designer) {
+  //   return { __html: designer.texts.en.designer.description }
+  // }
 
   render() {
-    const { font } = this.props
+    const { font, fontFamily } = this.props
 
+    console.log(fontFamily)
     return (
       <div className="fontInfo">
-        <h1 className="fontName" style={{ fontFamily: font.heading }}>
+        <h1
+          className="fontName"
+          style={{ fontFamily: fontFamily[0], fontWeight: 600 }}
+        >
           {font.heading}
         </h1>
         <div
           className="aboutFont"
           dangerouslySetInnerHTML={this.createMarkup(font)}
+          style={{ fontFamily: fontFamily[1] }}
         ></div>
-        <h2>Designer</h2>
+        <h2 style={{ fontFamily: fontFamily[0], fontWeight: 600 }}>Designer</h2>
         <div className="aboutDesigner">
           <div className="designer">
             <img
@@ -33,16 +38,27 @@ export default class FontDescription extends React.Component {
               src={font.texts.en.designer.userpic}
             ></img>
             <div className="designerInfo">
-              <div className="designerName">{font.texts.en.designer.name}</div>
-              <div className="designerCompany">
+              <div
+                className="designerName"
+                style={{ fontFamily: fontFamily[0], fontWeight: 600 }}
+              >
+                {font.texts.en.designer.name}
+              </div>
+              <div
+                className="designerCompany"
+                style={{ fontFamily: fontFamily[1] }}
+              >
                 {font.texts.en.designer.company}
               </div>
             </div>
           </div>
           <div
             className="designerDescription"
-            dangerouslySetInnerHTML={this.createMarkup(font)}
-          ></div>
+            // dangerouslySetInnerHTML={this.createMarkup(font)}
+            style={{ fontFamily: fontFamily[1] }}
+          >
+            {font.texts.en.designer.descriptionHTML}
+          </div>
         </div>
       </div>
     )

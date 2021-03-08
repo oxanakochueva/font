@@ -1,20 +1,49 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '../App'
 import Search from '../atoms/Search'
 import Select from '../atoms/Select'
+import Button from '../atoms/Button'
 
-export default class PagePageNavigation extends React.Component {
+export default class PageNavigation extends React.Component {
   constructor(props) {
     super(props)
   }
+  exportPageToFigma = () => {
+    const { currentPairId, exportPageToFigma } = this.props
+    exportPageToFigma(currentPairId)
+  }
 
   render() {
-    let { selectContents } = this.props
+    let {
+      openPairsPageIndex,
+      exportPageToFigma,
+      currentPairId,
+      page
+    } = this.props
     return (
       <div className="PageNavigation">
-        <Search onChange={this.handleChange} />
-        <Select selectContents={selectContents} />
+        {page === 'show' ? (
+          <div className="buttonsSet">
+            <div className="buttonsLeft">
+              <Button
+                buttonAction={openPairsPageIndex}
+                buttonName="Back"
+                leftIcon="chevronLeft"
+                rightIcon=""
+              />
+            </div>
+            <div className="buttonsRight">
+              <Button
+                buttonAction={this.exportPageToFigma}
+                buttonName="Export to artboard"
+                leftIcon=""
+                rightIcon="exportIcon"
+              />
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     )
   }

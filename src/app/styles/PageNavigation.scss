@@ -1,12 +1,12 @@
 .PageNavigation {
-  width: 90%;
+  width: 100%;
   position: relative;
   margin: 0 auto;
   top: 21px;
   font-family: 'PT Sans';
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   .select {

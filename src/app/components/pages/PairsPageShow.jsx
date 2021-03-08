@@ -1,17 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import FontDescription from '../organisms/FontDescription'
-import Button from '../atoms/Button'
+import PageNavigation from '../organisms/PageNavigation'
 
 export default class PairsPageShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
-  }
-
-  exportPageToFigma = () => {
-    const { currentPairId, exportPageToFigma } = this.props
-    exportPageToFigma(currentPairId)
   }
 
   render() {
@@ -20,12 +15,14 @@ export default class PairsPageShow extends React.Component {
       pairs,
       currentPairId,
       exportPageToFigma,
-      openPairsPageIndex
+      openPairsPageIndex,
+      pairsInCurrentFolder
     } = this.props
     let fontList = []
     let fontElements = []
     let pairHeader = ''
     let fontStyle = ''
+    let fontFamily = []
 
     pairs.forEach((pair, i) => {
       if (pair.id === currentPairId) {
@@ -44,46 +41,57 @@ export default class PairsPageShow extends React.Component {
     Object.keys(fonts).forEach((key, i) => {
       console.log(key === fontList[0], key === fontList[1])
       if (key === fontList[0] || key === fontList[1]) {
-        fontElements.push(<FontDescription font={fonts[key]} key={i} />)
+        fontFamily.push(fonts[key].heading)
+        fontElements.push(
+          <FontDescription font={fonts[key]} fontFamily={fontFamily} key={i} />
+        )
       }
     })
 
-    console.log(fontList)
+    console.log(pairsInCurrentFolder)
 
-    // <Button
-    //   backToPairsPage={backToPairsPage}
-    //   exportPageToFigma={exportPageToFigma}
-    // />
-    // <Button buttonAction={this.backToPairsPage} buttonName="Back" />
+    ////рабочие кнопки
+    // <div className="buttonsSet">
+    //   <div className="buttonsLeft">
+    //     <Button
+    //       buttonAction={openPairsPageIndex}
+    //       buttonName="Back"
+    //       leftIcon="chevronLeft"
+    //       rightIcon=""
+    //     />
+    //   </div>
+    //   <div className="buttonsRight">
+    //     <Button
+    //       buttonAction={this.exportPageToFigma}
+    //       buttonName="Export to artboard"
+    //       leftIcon=""
+    //       rightIcon="exportIcon"
+    //     />
+    //   </div>
+    // </div>
+    //
 
     return (
       <>
-        <div className="buttonsSet">
-          <div className="buttonsLeft">
-            <Button
-              buttonAction={openPairsPageIndex}
-              buttonName="Back"
-              leftIcon="chevronLeft"
-              rightIcon=""
-            />
-          </div>
-          <div className="buttonsRight">
-            <Button
-              buttonAction={this.exportPageToFigma}
-              buttonName="Export to artboard"
-              leftIcon=""
-              rightIcon="exportIcon"
-            />
-          </div>
-        </div>
+        <PageNavigation
+          openPairsPageIndex={openPairsPageIndex}
+          exportPageToFigma={exportPageToFigma}
+          currentPairId={currentPairId}
+          page="show"
+        />
+
         <div className="pairContainer">
-          <div className="pairHeader" style={{ fontFamily: fontStyle }}>
+          <div
+            className="pairHeader"
+            style={{ fontFamily: fontFamily[0], fontWeight: 600 }}
+          >
             {pairHeader}
           </div>
           <div className="pairCover"></div>
           {fontElements}
           <div className="copyright">
-            Information from<a href="https://fonts.google.com/">Google Fonts</a>
+            Information from{' '}
+            <a href="https://fonts.google.com/">Google Fonts</a>
           </div>
         </div>
       </>
