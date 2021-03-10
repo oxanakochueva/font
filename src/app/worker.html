@@ -1,0 +1,105 @@
+<script>
+  // Encoding an image is also done by sticking pixels in an
+  // HTML canvas and by asking the canvas to serialize it into
+  // an actual PNG file via canvas.toBlob().
+  async function encode(canvas, ctx, imageData) {
+    ctx.putImageData(imageData, 0, 0)
+
+    return await new Promise((resolve, reject) => {
+      canvas.toBlob(blob => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(new Uint8Array(reader.result))
+        reader.onerror = () => reject(new Error('Could not read from blob'))
+        reader.readAsArrayBuffer(blob)
+      })
+    })
+  }
+
+  // async function imageToUint8Array(image, context) {
+  //   return new Promise((resolve, reject) => {
+  //     context.width = image.width
+  //     context.height = image.height
+  //     context.drawImage(image, 0, 0)
+  //     context.canvas.toBlob(blob =>
+  //       blob
+  //         .arrayBuffer()
+  //         .then(buffer => resolve(new Uint8Array(buffer)))
+  //         .catch(reject)
+  //     )
+  //   })
+  // }
+
+  // Decoding an image can be done by sticking it in an HTML
+  // canvas, as we can read individual pixels off the canvas.
+  async function decode(canvas, ctx, bytes) {
+    console.log('decode started', bytes)
+
+    // const url = URL.createObjectURL(new Blob([bytes]))
+    // console.log('url', url)
+
+    const image = await new Promise((resolve, reject) => {
+      console.log('promise image', bytes)
+
+      const img = new Image()
+      console.log('new image', img)
+      img.onload = () => resolve(img)
+      console.log('image status', img)
+      img.onerror = () => reject()
+      console.log('image status', img)
+      img.src = bytes
+      console.log('image src', img)
+    })
+
+    canvas.width = image.width
+    canvas.height = image.height
+    console.log('canvas resize', canvas.width)
+    ctx.drawImage(image, 0, 0)
+    const imageData = ctx.getImageData(0, 0, image.width, image.height)
+
+    console.log('before rerurn')
+
+    return imageData
+  }
+
+  // Create an event handler to receive messages from the main
+  // thread.
+  window.onmessage = async event => {
+    // Just get the bytes directly from the pluginMessage since
+    // that's the only type of message we'll receive in this
+    // plugin. In more complex plugins, you'll want to check the
+    // type of the message.
+    const bytes = event.data.pluginMessage
+
+    console.log('bytes =======')
+    console.log(bytes)
+    console.log('bytes =======')
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    const imageData = await decode(canvas, ctx, bytes)
+    // const pixels = imageData.data
+
+    // Do the actual work of inverting the colors.
+    // for (let i = 0; i < pixels.length; i += 4) {
+    //   pixels[i + 0] = 255 - pixels[i + 0]
+    //   pixels[i + 1] = 255 - pixels[i + 1]
+    //   pixels[i + 2] = 255 - pixels[i + 2]
+    //   // Don't invert the alpha channel.
+    // }
+
+    console.log('imageData =======')
+    console.log(imageData)
+    console.log('imageData =======')
+
+    const newBytes = await encode(canvas, ctx, imageData)
+
+    console.log('newBytes =======')
+    console.log(newBytes)
+    console.log('newBytes =======')
+
+    console.log(window.parent.postMessage({ pluginMessage: newBytes }, '*'))
+
+    window.parent.postMessage({ pluginMessage: newBytes }, '*')
+  }
+</script>

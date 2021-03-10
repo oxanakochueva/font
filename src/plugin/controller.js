@@ -1,8 +1,26 @@
+// import * as reactFigma from 'react-figma'
+
 import { fonts, pairs } from '../app/font_library.js'
+import imageFile from '../app/assets/none.png'
 
-figma.showUI(__html__)
-
+figma.showUI(__uiFiles__.ui)
 figma.ui.resize(668, 628)
+
+figma.ui.onmessage = message => {
+  //   subscribeOnMessages(message)
+  //
+  console.log('message received', message)
+}
+
+// figma.ui.onmessage = value => console.log('onmessage', value)
+
+let preloadedImageData
+
+async function preloadImageData() {
+  preloadedImageData = await prepareImage()
+}
+
+preloadImageData()
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index
@@ -31,9 +49,72 @@ function showFonts(fonts) {
   // futuraPromise.then(showFutura)
 }
 
-function showFutura(futura) {
-  console.log('yo', futura)
+// async function invertImages(node) {
+//   const newFills = []
+//
+//   for (const paint of node.fills) {
+//     if (paint.type === 'IMAGE') {
+//       // Get the (encoded) bytes for this image.
+//       const image = figma.getImageByHash(paint.imageHash)
+//       const bytes = await image.getBytesAsync()
+//
+//       // Create an invisible iframe to act as a "worker" which
+//       // will do the task of decoding and send us a message
+//       // when it's done.
+//       figma.showUI(__html__, { visible: false })
+//
+//       // Send the raw bytes of the file to the worker.
+//       figma.ui.postMessage(bytes)
+//
+//       // Wait for the worker's response.
+//       const newBytes = await new Promise((resolve, reject) => {
+//         figma.ui.onmessage = value => resolve(value)
+//       })
+//
+//       // Create a new paint for the new image.
+//       const newPaint = JSON.parse(JSON.stringify(paint))
+//       newPaint.imageHash = figma.createImage(newBytes).hash
+//       newFills.push(newPaint)
+//     }
+//   }
+//   node.fills = newFills
+// }
+
+async function prepareImage() {
+  // imageRectangle.fills[0].type = 'IMAGE'
+
+  // Create an invisible iframe to act as a "worker" which
+  // will do the task of decoding and send us a message
+  // when it's done.
+  figma.showUI(__uiFiles__.worker, { visible: false })
+
+  // Send the raw bytes of the file to the worker.
+  figma.ui.postMessage(imageFile)
+
+  console.log('message send and we are waiting for response')
+
+  // Wait for the worker's response.
+  const newBytes = await new Promise((resolve, reject) => {
+    console.log('message pending 1')
+    figma.ui.onmessage = value => resolve(value)
+  })
+
+  console.log('new bytes from promise', newBytes)
+
+  // Create a new paint for the new image.
+  // const newPaint = JSON.parse(JSON.stringify(node.fills[0]))
+  // newPaint.imageHash = figma.createImage(newBytes).hash
+
+  const newPaint = figma.createImage(newBytes).hash
+
+  console.log('after create image', newPaint)
+
+  return newPaint
 }
+
+// function showFutura(futura) {
+//   console.log('yo', futura)
+// }
 // let all = [
 //   abril_fatface,
 //   alegreya,
@@ -277,6 +358,22 @@ function renderFigmaTemplate(currentPairId, language) {
   let imageRectangle = figma.createRectangle()
   imageRectangle.resize(688, 367)
   imageRectangle.cornerRadius = 20
+
+  // console.log('preloaded image data', preloadedImageData)
+
+  // imageRectangle.fills[0].imageHash = preloadedImageData
+
+  // imageRectangle.fills[0] = prepareImage(imageRectangle)
+  // console.log('returned data', prepareImage(imageRectangle))
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
 
   //////фрейм шрифта внутри пары
   let fontInfoFrame = figma.createFrame()
