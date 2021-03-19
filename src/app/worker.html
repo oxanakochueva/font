@@ -95,10 +95,10 @@
     const newBytes = await encode(canvas, ctx, imageData)
 
     console.log('newBytes =======')
-    console.log(newBytes)
+    console.log(newBytes + '')
     console.log('newBytes =======')
 
-    console.log(window.parent.postMessage({ pluginMessage: newBytes }, '*'))
+    // console.log(window.parent.postMessage({ pluginMessage: newBytes }, '*'))
 
     window.parent.postMessage({ pluginMessage: newBytes }, '*')
   }

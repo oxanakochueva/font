@@ -6,21 +6,31 @@ import imageFile from '../app/assets/none.png'
 figma.showUI(__uiFiles__.ui)
 figma.ui.resize(668, 628)
 
-figma.ui.onmessage = message => {
-  //   subscribeOnMessages(message)
-  //
-  console.log('message received', message)
-}
+// figma.ui.onmessage = message => {
+//   //   subscribeOnMessages(message)
+//   //
+//   console.log('message received', message)
+// }
 
 // figma.ui.onmessage = value => console.log('onmessage', value)
 
-let preloadedImageData
-
-async function preloadImageData() {
-  preloadedImageData = await prepareImage()
-}
-
-preloadImageData()
+// let preloadedImageData
+//
+// async function preloadImageData() {
+//   // preloadedImageData = await prepareImage()
+//
+//   prepareImage()
+//
+//   preloadedImageData = await new Promise((resolve, reject) => {
+//     console.log('prepareImage Promise')
+//     figma.ui.onmessage = value => {
+//       resolve(value)
+//       console.log('Value Resolved From Promise')
+//     }
+//   })
+// }
+//
+// preloadImageData()
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index
@@ -80,24 +90,38 @@ function showFonts(fonts) {
 //   node.fills = newFills
 // }
 
+let newPaintOutside = 'default value not changed'
+
+async function exportTest() {
+  // newPaintOutside = await prepareImage()
+
+  newPaintOutside = await new Promise((resolve, reject) => {
+    console.log('message pending 1')
+    prepareImage(() => resolve(value))
+  })
+}
+
 async function prepareImage() {
   // imageRectangle.fills[0].type = 'IMAGE'
 
   // Create an invisible iframe to act as a "worker" which
   // will do the task of decoding and send us a message
   // when it's done.
-  figma.showUI(__uiFiles__.worker, { visible: false })
+  // figma.showUI(__uiFiles__.worker, { visible: false })
 
   // Send the raw bytes of the file to the worker.
-  figma.ui.postMessage(imageFile)
+  // figma.ui.postMessage(imageFile)
 
   console.log('message send and we are waiting for response')
 
   // Wait for the worker's response.
-  const newBytes = await new Promise((resolve, reject) => {
-    console.log('message pending 1')
-    figma.ui.onmessage = value => resolve(value)
-  })
+  // const newBytes = await new Promise((resolve, reject) => {
+  //   console.log('message pending 1')
+  //   figma.ui.onmessage = value => resolve(value)
+  // })
+
+  // prettier-ignore
+  const newBytes = new Uint8Array([137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,70,0,0,0,70,8,6,0,0,0,113,46,226,132,0,0,4,66,73,68,65,84,120,94,237,156,235,81,227,48,16,128,181,54,230,55,116,0,21,0,191,163,48,164,2,160,2,72,5,119,84,112,80,193,113,21,28,87,1,164,2,103,98,133,191,164,131,11,21,92,126,163,216,123,179,70,206,195,248,109,231,101,75,51,153,201,76,28,203,250,188,47,173,180,2,182,198,54,28,14,79,93,215,61,53,12,227,4,0,142,16,241,84,117,127,20,122,140,49,99,108,162,62,35,198,216,59,0,244,91,173,22,125,95,75,131,85,246,98,219,246,129,101,89,183,140,177,75,130,0,0,7,101,250,67,196,137,97,24,125,198,88,239,227,227,163,223,233,116,8,224,74,218,74,192,56,142,115,1,0,63,24,99,23,43,121,106,117,83,0,120,113,93,247,207,249,249,249,75,213,253,84,10,102,56,28,222,34,34,1,9,171,70,213,207,29,190,223,24,0,30,90,173,214,83,85,29,85,2,70,73,200,239,13,0,89,25,160,82,96,108,219,62,178,44,139,128,172,84,101,10,72,193,147,148,242,161,140,13,42,12,230,245,245,245,155,235,186,247,101,13,106,129,65,103,253,203,4,0,238,138,170,87,110,48,202,211,144,29,249,158,245,9,55,124,221,35,231,252,46,239,51,228,2,163,84,231,153,49,22,196,31,121,251,219,212,245,35,41,229,117,30,213,202,12,70,65,177,183,192,192,22,133,59,150,82,118,178,194,201,4,166,6,80,2,152,153,225,164,130,169,17,148,92,112,82,193,8,33,222,118,208,166,164,169,27,217,28,82,43,154,143,69,182,68,48,66,136,159,59,228,125,210,96,132,127,79,244,86,177,96,84,120,79,193,91,157,219,29,231,252,49,106,128,145,96,200,174,236,237,237,189,109,113,240,86,213,203,154,72,41,207,162,60,85,36,24,33,4,73,10,165,11,154,208,250,156,243,78,120,160,95,192,52,68,133,150,56,32,98,167,221,110,83,158,103,214,190,128,17,66,252,221,225,32,174,168,132,143,57,231,199,177,96,154,40,45,1,12,0,232,46,78,56,151,36,166,161,210,50,11,252,22,165,102,6,102,48,24,92,25,134,65,19,196,198,182,69,91,51,3,227,56,206,51,0,92,53,150,202,231,192,103,30,202,7,163,230,67,100,116,27,223,164,148,135,52,85,240,193,52,217,232,70,72,130,31,13,251,96,180,26,45,225,241,213,201,7,35,132,248,199,24,43,181,24,86,35,29,156,112,206,15,193,182,237,83,203,178,40,181,160,155,34,0,0,103,32,132,160,164,54,165,23,116,155,131,233,130,227,56,143,0,240,77,83,153,19,64,196,95,36,49,148,224,222,182,5,179,77,191,167,30,129,169,99,234,178,20,88,0,24,19,152,38,206,166,19,193,5,96,176,20,222,154,254,153,36,70,131,137,120,185,26,76,140,196,107,48,9,96,180,241,13,193,209,94,41,222,113,140,40,242,213,9,170,175,128,250,122,74,16,33,53,254,148,96,48,24,220,26,134,81,247,165,216,188,209,214,157,78,59,68,197,48,148,118,208,137,170,47,100,62,19,85,10,140,158,97,207,249,244,56,231,87,1,24,157,172,90,72,82,209,138,100,176,124,66,197,16,148,247,109,124,147,82,30,211,182,144,217,130,155,78,88,249,50,225,171,17,125,89,92,137,164,138,17,178,53,141,109,158,231,93,7,149,44,122,81,127,46,6,75,91,65,150,192,52,121,69,50,113,27,136,114,221,77,156,109,39,111,28,34,48,170,246,168,81,182,38,44,45,75,198,119,209,226,54,204,67,61,113,206,187,97,143,19,187,157,85,45,219,214,122,61,155,138,79,167,211,105,246,237,172,202,214,212,62,26,142,82,161,64,114,18,183,204,215,121,249,150,114,46,237,118,59,182,24,45,17,140,170,102,35,67,188,107,133,91,105,65,234,136,115,126,150,116,81,106,245,137,46,203,73,192,87,35,56,213,21,114,5,188,106,0,39,51,148,216,56,38,78,120,116,177,104,138,233,218,37,111,69,222,103,58,157,222,39,85,179,69,13,55,213,248,198,49,82,19,78,218,162,182,149,65,32,5,111,116,222,67,92,161,86,154,219,42,12,134,110,76,170,101,154,230,189,97,24,55,105,29,173,249,247,190,148,178,155,181,148,184,82,137,89,188,217,6,79,1,9,143,105,140,136,221,112,237,81,145,151,82,74,98,194,29,110,16,208,118,30,147,18,6,68,149,44,166,105,222,32,226,170,139,54,250,136,248,80,133,132,100,154,93,23,17,189,168,255,144,13,218,223,223,167,29,161,151,158,231,81,78,185,148,161,86,6,149,206,169,234,73,41,159,242,122,154,60,227,170,84,149,210,58,166,195,187,16,241,2,17,143,0,224,68,121,52,130,21,117,120,23,3,128,145,231,121,239,136,56,50,77,115,180,206,195,187,254,3,16,194,8,88,119,124,180,233,0,0,0,0,73,69,78,68,174,66,96,130])
 
   console.log('new bytes from promise', newBytes)
 
@@ -105,12 +129,90 @@ async function prepareImage() {
   // const newPaint = JSON.parse(JSON.stringify(node.fills[0]))
   // newPaint.imageHash = figma.createImage(newBytes).hash
 
-  const newPaint = figma.createImage(newBytes).hash
+  // console.log('after create image', newPaint)
 
-  console.log('after create image', newPaint)
+  renderTestImage(newBytes)
+
+  // return newPaint
+}
+
+const exportPromise = new Promise((resolve, reject) => {
+  exportTest(() => resolve('yo'))
+  // resolve('yo')
+})
+
+function renderTestImage(newBytes) {
+  let imageRectangle = figma.createRectangle()
+  imageRectangle.resize(688, 367)
+  imageRectangle.cornerRadius = 20
+
+  const newFills = []
+
+  for (const paint of imageRectangle.fills) {
+    newFills.push(getNewPaint(paint, newBytes))
+  }
+
+  imageRectangle.fills = newFills
+
+  console.log('ENDED')
+}
+
+function getNewPaint(paint, newBytes) {
+  console.log('getNewPaint')
+
+  // blendMode: "NORMAL"
+  // filters: {
+  // contrast: 0
+  // exposure: 0
+  // highlights: 0
+  // saturation: 0
+  // shadows: 0
+  // temperature: 0
+  // tint: 0
+  // }
+  // imageHash: "551c20175b1b0b5e27aebd3a9bb0709bec53a94c"
+  // imageTransform: (2) [Array(3), Array(3)]
+  // opacity: 1
+  // scaleMode: "FILL"
+  // scalingFactor: 0.5
+  // type: "IMAGE"
+  // visible: true
+
+  // const newPaint = JSON.parse(JSON.stringify(paint))
+
+  const newPaint = {}
+
+  newPaint.blendMode = 'NORMAL'
+  newPaint.type = 'IMAGE'
+  newPaint.imageHash = figma.createImage(newBytes).hash
+
+  newPaint.filters = {
+    contrast: 0,
+    exposure: 0,
+    highlights: 0,
+    saturation: 0,
+    shadows: 0,
+    temperature: 0,
+    tint: 0
+  }
+
+  newPaint.opacity = 1
+  newPaint.scaleMode = 'FILL'
+  newPaint.scalingFactor = 0.5
+
+  newPaint.imageTransform = [
+    [1, 0, 0],
+    [0, 1, 0]
+  ]
+
+  newPaint.visible = true
+
+  console.log('NEW PAINT3', newPaint)
 
   return newPaint
 }
+
+exportPromise.then(console.log('WIN', newPaintOutside))
 
 // function showFutura(futura) {
 //   console.log('yo', futura)
