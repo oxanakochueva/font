@@ -62,7 +62,11 @@ export default class PairsPageShow extends React.Component {
           >
             {pairHeader}
           </div>
-          <div className="pairCover"></div>
+
+          <img
+            className="pairCover"
+            src={require(`../../assets/images/pairs/articles/4x/${currentPairId}.png`)}
+          />
           {fontElements}
           <div className="otherPairings">
             <h2 style={{ fontFamily: fontFamily[0], fontWeight: 600 }}>

@@ -305,81 +305,157 @@ function renderFigmaTemplate(currentPairId, language) {
   }
   firstFontDescription.layoutAlign = 'STRETCH'
 
-  ////////дизайнер первого шрифта
+  ////////дизайнеры первого шрифта
   //////////заголовок дизайнера
-  let firstDesignerFrameName = figma.createText()
-  firstDesignerFrameName.characters =
-    fontElements[0].texts[language].designer.heading
-  firstDesignerFrameName.fontSize = 20
-  firstDesignerFrameName.fontName = {
+  let firstFontFirstDesignerFrameName = figma.createText()
+  firstFontFirstDesignerFrameName.characters = 'Designer'
+  firstFontFirstDesignerFrameName.fontSize = 20
+  firstFontFirstDesignerFrameName.fontName = {
     family: fontElements[0].heading,
     style: 'Bold'
   }
-  firstDesignerFrameName.fills = black
-  //////////фрейм блока
-  let firstDesignerFrame = figma.createFrame()
-  firstDesignerFrame.layoutMode = 'VERTICAL'
-  firstDesignerFrame.primaryAxisSizingMode = 'AUTO'
-  firstDesignerFrame.counterAxisSizingMode = 'AUTO'
-  firstDesignerFrame.layoutAlign = 'STRETCH'
-  firstDesignerFrame.itemSpacing = 15
-  firstDesignerFrame.fills = background
+  firstFontFirstDesignerFrameName.fills = black
 
-  //////////фрейм с аватаром и именем
-  let firstDesignerInnerFrame = figma.createFrame()
-  firstDesignerInnerFrame.layoutMode = 'HORIZONTAL'
-  firstDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
-  firstDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
-  firstDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
-  firstDesignerInnerFrame.itemSpacing = 6
-  firstDesignerInnerFrame.fills = background
+  //////////первый дизайнер первого шрифта
 
-  ////////////аватар
-  let firstDesignerAvatar = figma.createEllipse()
-  firstDesignerAvatar.resize(35, 35)
+  ////////////фрейм блока первого дизайнера первого шрифта
+  let firstFontFirstDesignerFrame = figma.createFrame()
+  firstFontFirstDesignerFrame.layoutMode = 'VERTICAL'
+  firstFontFirstDesignerFrame.primaryAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerFrame.counterAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerFrame.layoutAlign = 'STRETCH'
+  firstFontFirstDesignerFrame.itemSpacing = 15
+  firstFontFirstDesignerFrame.fills = background
 
-  ////////////фрейм с именем и компанией
-  let firstDesignerNameFrame = figma.createFrame()
-  firstDesignerNameFrame.layoutMode = 'VERTICAL'
-  firstDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
-  firstDesignerNameFrame.counterAxisSizingMode = 'AUTO'
-  firstDesignerNameFrame.layoutAlign = 'STRETCH'
-  firstDesignerNameFrame.itemSpacing = 4
-  firstDesignerNameFrame.fills = background
+  ////////////фрейм с аватаром и именем первого дизайнера первого шрифта
+  let firstFontFirstDesignerInnerFrame = figma.createFrame()
+  firstFontFirstDesignerInnerFrame.layoutMode = 'HORIZONTAL'
+  firstFontFirstDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
+  firstFontFirstDesignerInnerFrame.itemSpacing = 6
+  firstFontFirstDesignerInnerFrame.fills = background
 
-  //////////////имя
-  let firstDesignerName = figma.createText()
-  firstDesignerName.characters = fontElements[0].texts[language].designer.name
-  firstDesignerName.fontSize = 16
-  firstDesignerName.fontName = {
+  //////////////аватар первого дизайнера первого шрифта
+  let firstFontFirstDesignerAvatar = figma.createEllipse()
+  firstFontFirstDesignerAvatar.resize(35, 35)
+
+  //////////////фрейм с именем и компанией первого дизайнера первого шрифта
+  let firstFontFirstDesignerNameFrame = figma.createFrame()
+  firstFontFirstDesignerNameFrame.layoutMode = 'VERTICAL'
+  firstFontFirstDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerNameFrame.counterAxisSizingMode = 'AUTO'
+  firstFontFirstDesignerNameFrame.layoutAlign = 'STRETCH'
+  firstFontFirstDesignerNameFrame.itemSpacing = 4
+  firstFontFirstDesignerNameFrame.fills = background
+
+  ////////////////имя первого дизайнера первого шрифта
+  let firstFontFirstDesignerName = figma.createText()
+  firstFontFirstDesignerName.characters =
+    fontElements[0].texts[language].designers[0].name
+  firstFontFirstDesignerName.fontSize = 16
+  firstFontFirstDesignerName.fontName = {
     family: fontElements[0].heading,
     style: 'Bold'
   }
-  firstDesignerName.fills = black
+  firstFontFirstDesignerName.fills = black
 
-  //////////////компания
-  let firstDesignerCompany = figma.createText()
-  firstDesignerCompany.characters =
-    fontElements[0].texts[language].designer.company
-  firstDesignerCompany.fontSize = 10
-  firstDesignerCompany.fontName = {
+  ////////////////компания первого дизайнера первого шрифта
+  let firstFontFirstDesignerCompany = figma.createText()
+  firstFontFirstDesignerCompany.characters =
+    fontElements[0].texts[language].designers[0].company
+  firstFontFirstDesignerCompany.fontSize = 10
+  firstFontFirstDesignerCompany.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
   }
-  firstDesignerCompany.fills = black
+  firstFontFirstDesignerCompany.fills = black
 
-  //////////описание
-  let firstDesignerDescription = figma.createText()
-  firstDesignerDescription.characters =
-    fontElements[0].texts[language].designer.descriptionHTML
-  firstDesignerDescription.layoutAlign = 'STRETCH'
-  firstDesignerDescription.fontSize = 12
-  firstDesignerDescription.fontName = {
+  ////////////описание первого дизайнера первого шрифта
+  let firstFontFirstDesignerDescription = figma.createText()
+  console.log(fontElements[0].texts[language].designer)
+  firstFontFirstDesignerDescription.characters =
+    fontElements[0].texts[language].designers[0].descriptionHTML
+  firstFontFirstDesignerDescription.layoutAlign = 'STRETCH'
+  firstFontFirstDesignerDescription.fontSize = 12
+  firstFontFirstDesignerDescription.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
   }
-  firstDesignerDescription.fills = background
-  firstDesignerDescription.fills = black
+  firstFontFirstDesignerDescription.fills = background
+  firstFontFirstDesignerDescription.fills = black
+
+  //////////второй дизайнер первого шрифта
+
+  console.log(fontElements[0].texts[language].designers[1])
+  if (fontElements[0].texts[language].designers[1] !== undefined) {
+    ////////////фрейм блока второго дизайнера первого шрифта
+    let firstFontSecondDesignerFrame = figma.createFrame()
+    firstFontSecondDesignerFrame.layoutMode = 'VERTICAL'
+    firstFontSecondDesignerFrame.primaryAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerFrame.counterAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerFrame.layoutAlign = 'STRETCH'
+    firstFontSecondDesignerFrame.itemSpacing = 15
+    firstFontSecondDesignerFrame.fills = background
+
+    ////////////фрейм с аватаром и именем второго дизайнера первого шрифта
+    let firstFontSecondDesignerInnerFrame = figma.createFrame()
+    firstFontSecondDesignerInnerFrame.layoutMode = 'HORIZONTAL'
+    firstFontSecondDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
+    firstFontSecondDesignerInnerFrame.itemSpacing = 6
+    firstFontSecondDesignerInnerFrame.fills = background
+
+    //////////////аватар второго дизайнера первого шрифта
+    let firstFontSecondDesignerAvatar = figma.createEllipse()
+    firstFontSecondDesignerAvatar.resize(35, 35)
+
+    //////////////фрейм с именем и компанией второго дизайнера первого шрифта
+    let firstFontSecondDesignerNameFrame = figma.createFrame()
+    firstFontSecondDesignerNameFrame.layoutMode = 'VERTICAL'
+    firstFontSecondDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerNameFrame.counterAxisSizingMode = 'AUTO'
+    firstFontSecondDesignerNameFrame.layoutAlign = 'STRETCH'
+    firstFontSecondDesignerNameFrame.itemSpacing = 4
+    firstFontSecondDesignerNameFrame.fills = background
+
+    ////////////////имя второго дизайнера первого шрифта
+    let firstFontSecondDesignerName = figma.createText()
+    firstFontSecondDesignerName.characters =
+      fontElements[0].texts[language].designers[1].name
+    firstFontSecondDesignerName.fontSize = 16
+    firstFontSecondDesignerName.fontName = {
+      family: fontElements[0].heading,
+      style: 'Bold'
+    }
+    firstFontSecondDesignerName.fills = black
+
+    ////////////////компания второго дизайнера первого шрифта
+    let firstFontSecondDesignerCompany = figma.createText()
+    firstFontSecondDesignerCompany.characters =
+      fontElements[0].texts[language].designers[1].company
+    firstFontSecondDesignerCompany.fontSize = 10
+    firstFontSecondDesignerCompany.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    firstFontFirstDesignerCompany.fills = black
+
+    ////////////описание второго дизайнера первого шрифта
+    let firstFontSecondDesignerDescription = figma.createText()
+    console.log(fontElements[0].texts[language].designer)
+    firstFontSecondDesignerDescription.characters =
+      fontElements[0].texts[language].designers[1].descriptionHTML
+    firstFontSecondDesignerDescription.layoutAlign = 'STRETCH'
+    firstFontSecondDesignerDescription.fontSize = 12
+    firstFontSecondDesignerDescription.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    firstFontSecondDesignerDescription.fills = background
+    firstFontSecondDesignerDescription.fills = black
+  }
 
   ////////название второго шрифта
   let secondFontName = figma.createText()
@@ -397,76 +473,149 @@ function renderFigmaTemplate(currentPairId, language) {
   }
   secondFontDescription.layoutAlign = 'STRETCH'
 
-  ////////дизайнер второго шрифта
-  //////////заголовок дизайнера
-  let secondDesignerFrameName = figma.createText()
-  secondDesignerFrameName.characters =
-    fontElements[0].texts[language].designer.heading
-  secondDesignerFrameName.fontSize = 20
-  secondDesignerFrameName.fontName = {
+  ////////дизайнеры второго шрифта
+  //////////заголовок дизайнера второго шрифта
+  let secondFontFirstDesignerFrameName = figma.createText()
+  secondFontFirstDesignerFrameName.characters = 'Designer'
+  secondFontFirstDesignerFrameName.fontSize = 20
+  secondFontFirstDesignerFrameName.fontName = {
     family: fontElements[0].heading,
     style: 'Bold'
   }
-  secondDesignerFrameName.fills = black
-  //////////фрейм блока
-  let secondDesignerFrame = figma.createFrame()
-  secondDesignerFrame.layoutMode = 'VERTICAL'
-  secondDesignerFrame.primaryAxisSizingMode = 'AUTO'
-  secondDesignerFrame.counterAxisSizingMode = 'AUTO'
-  secondDesignerFrame.layoutAlign = 'STRETCH'
-  secondDesignerFrame.itemSpacing = 15
-  secondDesignerFrame.fills = background
-  //////////фрейм с аватаром и именем
-  let secondDesignerInnerFrame = figma.createFrame()
-  secondDesignerInnerFrame.layoutMode = 'HORIZONTAL'
-  secondDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
-  secondDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
-  secondDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
-  secondDesignerInnerFrame.itemSpacing = 6
-  secondDesignerInnerFrame.fills = background
-  ////////////аватар
-  let secondDesignerAvatar = figma.createEllipse()
-  secondDesignerAvatar.resize(35, 35)
+  secondFontFirstDesignerFrameName.fills = black
 
-  ////////////фрейм с именем и компанией
-  let secondDesignerNameFrame = figma.createFrame()
-  secondDesignerNameFrame.layoutMode = 'VERTICAL'
-  secondDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
-  secondDesignerNameFrame.counterAxisSizingMode = 'AUTO'
-  secondDesignerNameFrame.layoutAlign = 'STRETCH'
-  secondDesignerNameFrame.itemSpacing = 4
-  secondDesignerNameFrame.fills = background
-  //////////////имя
-  let secondDesignerName = figma.createText()
-  secondDesignerName.characters = fontElements[1].texts[language].designer.name
-  secondDesignerName.fontSize = 16
-  secondDesignerName.fontName = {
+  ////////////фрейм блока первого дизайнера второго шрифта
+  let secondFontFirstDesignerFrame = figma.createFrame()
+  secondFontFirstDesignerFrame.layoutMode = 'VERTICAL'
+  secondFontFirstDesignerFrame.primaryAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerFrame.counterAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerFrame.layoutAlign = 'STRETCH'
+  secondFontFirstDesignerFrame.itemSpacing = 15
+  secondFontFirstDesignerFrame.fills = background
+  ////////////фрейм с аватаром и именем первого дизайнера второго шрифта
+  let secondFontFirstDesignerInnerFrame = figma.createFrame()
+  secondFontFirstDesignerInnerFrame.layoutMode = 'HORIZONTAL'
+  secondFontFirstDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
+  secondFontFirstDesignerInnerFrame.itemSpacing = 6
+  secondFontFirstDesignerInnerFrame.fills = background
+  //////////////аватар первого дизайнера второго шрифта
+  let secondFontFirstDesignerAvatar = figma.createEllipse()
+  secondFontFirstDesignerAvatar.resize(35, 35)
+
+  //////////////фрейм с именем и компанией первого дизайнера второго шрифта
+  let secondFontFirstDesignerNameFrame = figma.createFrame()
+  secondFontFirstDesignerNameFrame.layoutMode = 'VERTICAL'
+  secondFontFirstDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerNameFrame.counterAxisSizingMode = 'AUTO'
+  secondFontFirstDesignerNameFrame.layoutAlign = 'STRETCH'
+  secondFontFirstDesignerNameFrame.itemSpacing = 4
+  secondFontFirstDesignerNameFrame.fills = background
+  ////////////////имя первого дизайнера второго шрифта
+  let secondFontFirstDesignerName = figma.createText()
+  secondFontFirstDesignerName.characters =
+    fontElements[1].texts[language].designers[0].name
+  secondFontFirstDesignerName.fontSize = 16
+  secondFontFirstDesignerName.fontName = {
     family: fontElements[0].heading,
     style: 'Bold'
   }
-  secondDesignerName.fills = black
-  //////////////компания
-  let secondDesignerCompany = figma.createText()
-  secondDesignerCompany.characters =
-    fontElements[1].texts[language].designer.company
-  secondDesignerCompany.fontSize = 10
-  secondDesignerCompany.fontName = {
+  secondFontFirstDesignerName.fills = black
+  ////////////////компания первого дизайнера второго шрифта
+  let secondFontFirstDesignerCompany = figma.createText()
+  secondFontFirstDesignerCompany.characters =
+    fontElements[1].texts[language].designers[0].company
+  secondFontFirstDesignerCompany.fontSize = 10
+  secondFontFirstDesignerCompany.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
   }
-  secondDesignerCompany.fills = black
-  //////////описание
-  let secondDesignerDescription = figma.createText()
-  secondDesignerDescription.characters =
-    fontElements[1].texts[language].designer.descriptionHTML
-  secondDesignerDescription.layoutAlign = 'STRETCH'
-  secondDesignerDescription.fontSize = 12
-  secondDesignerDescription.fontName = {
+  secondFontFirstDesignerCompany.fills = black
+  ////////////описание первого дизайнера второго шрифта
+  let secondFontFirstDesignerDescription = figma.createText()
+  secondFontFirstDesignerDescription.characters =
+    fontElements[1].texts[language].designers[0].descriptionHTML
+  secondFontFirstDesignerDescription.layoutAlign = 'STRETCH'
+  secondFontFirstDesignerDescription.fontSize = 12
+  secondFontFirstDesignerDescription.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
   }
-  secondDesignerDescription.fills = background
-  secondDesignerDescription.fills = black
+  secondFontFirstDesignerDescription.fills = background
+  secondFontFirstDesignerDescription.fills = black
+
+  //////////второй дизайнер второго шрифта
+
+  console.log(fontElements[1].texts[language].designers[1])
+  if (fontElements[1].texts[language].designers[1] !== undefined) {
+    ////////////фрейм блока второго дизайнера второго шрифта
+    let secondFontSecondDesignerFrame = figma.createFrame()
+    secondFontSecondDesignerFrame.layoutMode = 'VERTICAL'
+    secondFontSecondDesignerFrame.primaryAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerFrame.counterAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerFrame.layoutAlign = 'STRETCH'
+    secondFontSecondDesignerFrame.itemSpacing = 15
+    secondFontSecondDesignerFrame.fills = background
+
+    ////////////фрейм с аватаром и именем второго дизайнера второго шрифта
+    let secondFontSecondDesignerInnerFrame = figma.createFrame()
+    secondFontSecondDesignerInnerFrame.layoutMode = 'HORIZONTAL'
+    secondFontSecondDesignerInnerFrame.primaryAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerInnerFrame.counterAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerInnerFrame.counterAxisAlignItems = 'CENTER'
+    secondFontSecondDesignerInnerFrame.itemSpacing = 6
+    secondFontSecondDesignerInnerFrame.fills = background
+
+    //////////////аватар второго дизайнера второго шрифта
+    let secondFontSecondDesignerAvatar = figma.createEllipse()
+    secondFontSecondDesignerAvatar.resize(35, 35)
+
+    //////////////фрейм с именем и компанией второго дизайнера второго шрифта
+    let secondFontSecondDesignerNameFrame = figma.createFrame()
+    secondFontSecondDesignerNameFrame.layoutMode = 'VERTICAL'
+    secondFontSecondDesignerNameFrame.primaryAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerNameFrame.counterAxisSizingMode = 'AUTO'
+    secondFontSecondDesignerNameFrame.layoutAlign = 'STRETCH'
+    secondFontSecondDesignerNameFrame.itemSpacing = 4
+    secondFontSecondDesignerNameFrame.fills = background
+
+    ////////////////имя второго дизайнера второго шрифта
+    let secondFontSecondDesignerName = figma.createText()
+    secondFontSecondDesignerName.characters =
+      fontElements[1].texts[language].designers[1].name
+    secondFontSecondDesignerName.fontSize = 16
+    secondFontSecondDesignerName.fontName = {
+      family: fontElements[0].heading,
+      style: 'Bold'
+    }
+    secondFontSecondDesignerName.fills = black
+
+    ////////////////компания второго дизайнера второго шрифта
+    let secondFontSecondDesignerCompany = figma.createText()
+    secondFontSecondDesignerCompany.characters =
+      fontElements[1].texts[language].designers[1].company
+    secondFontSecondDesignerCompany.fontSize = 10
+    secondFontSecondDesignerCompany.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    secondFontSecondDesignerCompany.fills = black
+
+    ////////////описание второго дизайнера второго шрифта
+    let secondFontSecondDesignerDescription = figma.createText()
+    console.log(fontElements[1].texts[language].designer)
+    secondFontSecondDesignerDescription.characters =
+      fontElements[1].texts[language].designers[1].descriptionHTML
+    secondFontSecondDesignerDescription.layoutAlign = 'STRETCH'
+    secondFontSecondDesignerDescription.fontSize = 12
+    secondFontSecondDesignerDescription.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    secondFontSecondDesignerDescription.fills = background
+    secondFontSecondDesignerDescription.fills = black
+  }
 
   ////копирайт
   let copyright = figma.createText()
@@ -524,30 +673,69 @@ function renderFigmaTemplate(currentPairId, language) {
   pairInfoFrame.appendChild(copyright)
   fontInfoFrame.appendChild(firstFontName)
   fontInfoFrame.appendChild(firstFontDescription)
-  fontInfoFrame.appendChild(firstDesignerFrame)
+  fontInfoFrame.appendChild(firstFontFirstDesignerFrame)
+  if (fontElements[0].texts[language].designers[1] !== undefined) {
+    fontInfoFrame.appendChild(firstFontSecondDesignerFrame)
+  }
   fontInfoFrame.appendChild(secondFontName)
   fontInfoFrame.appendChild(secondFontDescription)
-  fontInfoFrame.appendChild(secondDesignerFrame)
+  fontInfoFrame.appendChild(secondFontFirstDesignerFrame)
+  if (fontElements[1].texts[language].designers[1] !== undefined) {
+    fontInfoFrame.appendChild(secondFontSecondDesignerFrame)
+  }
   topBarFrame.appendChild(buttonBack)
   topBarFrame.appendChild(buttonExport)
   buttonBack.appendChild(buttonBackIcon)
   buttonBack.appendChild(buttonBackText)
   buttonExport.appendChild(buttonExportText)
   buttonExport.appendChild(buttonExportIcon)
-  firstDesignerFrame.appendChild(firstDesignerFrameName)
-  firstDesignerFrame.appendChild(firstDesignerInnerFrame)
-  firstDesignerFrame.appendChild(firstDesignerDescription)
-  firstDesignerInnerFrame.appendChild(firstDesignerAvatar)
-  firstDesignerInnerFrame.appendChild(firstDesignerNameFrame)
-  firstDesignerNameFrame.appendChild(firstDesignerName)
-  firstDesignerNameFrame.appendChild(firstDesignerCompany)
-  secondDesignerFrame.appendChild(secondDesignerFrameName)
-  secondDesignerFrame.appendChild(secondDesignerInnerFrame)
-  secondDesignerFrame.appendChild(secondDesignerDescription)
-  secondDesignerInnerFrame.appendChild(secondDesignerAvatar)
-  secondDesignerInnerFrame.appendChild(secondDesignerNameFrame)
-  secondDesignerNameFrame.appendChild(secondDesignerName)
-  secondDesignerNameFrame.appendChild(secondDesignerCompany)
+  firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerFrameName)
+  firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerInnerFrame)
+  firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerDescription)
+  firstFontFirstDesignerInnerFrame.appendChild(firstFontFirstDesignerAvatar)
+  firstFontFirstDesignerInnerFrame.appendChild(firstFontFirstDesignerNameFrame)
+  firstFontFirstDesignerNameFrame.appendChild(firstFontFirstDesignerName)
+  firstFontFirstDesignerNameFrame.appendChild(firstFontFirstDesignerCompany)
+  if (fontElements[0].texts[language].designers[1] !== undefined) {
+    firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerFrameName)
+    firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerInnerFrame)
+    firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerDescription)
+    firstFontSecondDesignerInnerFrame.appendChild(firstFontSecondDesignerAvatar)
+    firstFontSecondDesignerInnerFrame.appendChild(
+      firstFontSecondDesignerNameFrame
+    )
+    firstFontSecondDesignerNameFrame.appendChild(firstFontSecondDesignerName)
+    firstFontSecondDesignerNameFrame.appendChild(firstFontSecondDesignerCompany)
+  }
+
+  secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerFrameName)
+  secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerInnerFrame)
+  secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerDescription)
+  secondFontFirstDesignerInnerFrame.appendChild(secondFontFirstDesignerAvatar)
+  secondFontFirstDesignerInnerFrame.appendChild(
+    secondFontFirstDesignerNameFrame
+  )
+  secondFontFirstDesignerNameFrame.appendChild(secondFontFirstDesignerName)
+  secondFontFirstDesignerNameFrame.appendChild(secondFontFirstDesignerCompany)
+  if (fontElements[1].texts[language].designers[1] !== undefined) {
+    secondFontSecondDesignerFrame.appendChild(secondFontSecondDesignerFrameName)
+    secondFontSecondDesignerFrame.appendChild(
+      secondFontSecondDesignerInnerFrame
+    )
+    secondFontSecondDesignerFrame.appendChild(
+      secondFontSecondDesignerDescription
+    )
+    secondFontSecondDesignerInnerFrame.appendChild(
+      secondFontSecondDesignerAvatar
+    )
+    secondFontSecondDesignerInnerFrame.appendChild(
+      secondFontSecondDesignerNameFrame
+    )
+    secondFontSecondDesignerNameFrame.appendChild(secondFontSecondDesignerName)
+    secondFontSecondDesignerNameFrame.appendChild(
+      secondFontSecondDesignerCompany
+    )
+  }
   recomendations.appendChild(recomendationsTitle)
   recomendations.appendChild(recomendationsList)
   recomendationsList.appendChild(recomendationsListItemFirst)

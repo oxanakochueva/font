@@ -6,9 +6,17 @@ export default class FontPairRecomendationCard extends React.Component {
     super(props)
   }
 
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   openPairPage = () => {
     const { pair, openPairPage } = this.props
     openPairPage(pair.id)
+    this.scrollToTop()
   }
 
   render() {
@@ -19,7 +27,10 @@ export default class FontPairRecomendationCard extends React.Component {
         onClick={() => this.openPairPage()}
         title={pair.heading}
       >
-        <img className="cardImage"></img>
+        <img
+          className="cardImage"
+          src={require(`../../assets/images/pairs/articles/4x/${pair.id}.png`)}
+        />
       </div>
     )
   }
