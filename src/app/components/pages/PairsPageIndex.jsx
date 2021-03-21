@@ -38,8 +38,8 @@ export default class PairsPageIndex extends React.Component {
         />
       )
     })
-    console.log(folderContent)
-    console.log(folders)
+    // console.log(folderContent)
+    // console.log(folders)
 
     return <div className="folder">{folderContent}</div>
   }
