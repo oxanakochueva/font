@@ -998,6 +998,10 @@ const fonts = {
   }
 }
 
+import josefin_sans_cardo_cover from './assets/cover.png'
+import josefin_sans_cardo_first_designer from './assets/none.png'
+import josefin_sans_cardo_second_designer from './assets/none.png'
+
 const pairs = [
   {
     id: 'josefin_sans_cardo',
@@ -1005,7 +1009,12 @@ const pairs = [
     heading: 'Josefin Sans + Cardo',
     fonts: ['josefin_sans', 'cardo'],
     languages: ['en'],
-    type: ['Sans Serif', 'Serif']
+    type: ['Sans Serif', 'Serif'],
+    images: {
+      cover: josefin_sans_cardo_cover,
+      firstFontDesigner: josefin_sans_cardo_first_designer,
+      secondFontDesigner: josefin_sans_cardo_second_designer
+    }
   },
   {
     id: 'josefin_sans_abril_fatface',

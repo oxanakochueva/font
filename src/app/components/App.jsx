@@ -70,7 +70,13 @@ export default class App extends React.Component {
   exportPageToFigma = currentPairId => {
     console.log(currentPairId)
     parent.postMessage(
-      { pluginMessage: { type: currentPairId, language: this.state.language } },
+      {
+        pluginMessage: {
+          type: 'font-pair-export',
+          pair: currentPairId,
+          language: this.state.language
+        }
+      },
       '*'
     )
   }
