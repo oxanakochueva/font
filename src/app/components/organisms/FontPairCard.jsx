@@ -28,6 +28,13 @@ export default class FontPairCard extends React.Component {
       phrase: pair.view === 'phrase'
     })
 
+    const tabs = classnames({
+      cardViewTabs: true,
+      letters: pair.view === 'letters',
+      words: pair.view === 'words',
+      phrase: pair.view === 'phrase'
+    })
+
     // return <div className="cardBlock">{card}</div>
     return (
       <div
@@ -39,9 +46,8 @@ export default class FontPairCard extends React.Component {
           <div className="fontPairName">{pair.heading}</div>
         </div>
         <FontPairCardImage pair={pair.id} folder={pair.folder} view="letters" />
-        <div className="cardViewTabs">
+        <div className={tabs}>
           <div
-            id="letters"
             className="tab letters"
             onMouseOver={() => this.changeCardView('letters')}
             onMouseOut={() => this.changeCardView('letters')}
@@ -49,7 +55,6 @@ export default class FontPairCard extends React.Component {
             Letters
           </div>
           <div
-            id="words"
             className="tab words"
             onMouseOver={() => this.changeCardView('words')}
             onMouseOut={() => this.changeCardView('letters')}
@@ -57,7 +62,6 @@ export default class FontPairCard extends React.Component {
             Words
           </div>
           <div
-            id="phrase"
             className="tab phrase"
             onMouseOver={() => this.changeCardView('phrase')}
             onMouseOut={() => this.changeCardView('letters')}

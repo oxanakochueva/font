@@ -7,7 +7,8 @@ import FontPairCard from './organisms/FontPairCard'
 import PairsPageShow from './pages/PairsPageShow'
 import PairsPageIndex from './pages/PairsPageIndex'
 
-import { fonts, pairs } from '../font_library.js'
+import { fonts } from '../library/fonts_library.js'
+import { pairs } from '../library/pairs_library.js'
 
 const selectContents = [
   {
@@ -70,7 +71,13 @@ export default class App extends React.Component {
   exportPageToFigma = currentPairId => {
     console.log(currentPairId)
     parent.postMessage(
-      { pluginMessage: { type: currentPairId, language: this.state.language } },
+      {
+        pluginMessage: {
+          type: 'font-pair-export',
+          pair: currentPairId,
+          language: this.state.language
+        }
+      },
       '*'
     )
   }

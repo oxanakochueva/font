@@ -106,11 +106,104 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-
-      &:hover {
-        background: #aeaeae;
-        color: #ffffff;
-        border-radius: 16px;
+    }
+    &.letters {
+      .tab {
+        &.letters {
+          background: #aeaeae;
+          color: #ffffff;
+          border-radius: 16px;
+        }
+        &.words {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        &.phrase {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+    }
+    &.words {
+      .tab {
+        &.letters {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        &.words {
+          background: #aeaeae;
+          color: #ffffff;
+          border-radius: 16px;
+        }
+        &.phrase {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+    }
+    &.phrase {
+      .tab {
+        &.letters {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        &.words {
+          width: 48px;
+          height: 17px;
+          font-family: 'PT Sans';
+          font-weight: bold;
+          font-size: 10.44px;
+          color: #aeaeae;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        &.phrase {
+          background: #aeaeae;
+          color: #ffffff;
+          border-radius: 16px;
+        }
       }
     }
   }

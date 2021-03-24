@@ -1,171 +1,123 @@
-import { fonts, pairs } from '../app/font_library.js'
+import { fonts } from '../app/library/fonts_library.js'
+import { pairs } from '../app/library/pairs_library.js'
+import { fontsToLoad } from '../app/library/load_fonts.js'
+
+let currentPair = {}
+let imagesForExportQuantity = 0
+let imagesForExport = {}
 
 figma.showUI(__html__)
-
 figma.ui.resize(668, 628)
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index
+figma.ui.onmessage = msg => {
+  console.log('FIGMA JUST GOT A MESSAGE, YO', msg)
+
+  if (msg.type === 'image-in-bytes') {
+    saveImageDataOrExportToFigma(msg.name, msg.bytes)
+  } else if (msg.type === 'font-pair-export') {
+    // console.log(msg.pair, pairs, pairs[msg.pair], pairs[`${msg.pair}`])
+
+    pairs.forEach((pair, i) => {
+      if (pair.id === msg.pair) {
+        currentPair.id = msg.pair
+        currentPair.language = msg.language
+
+        pairs.forEach((pair, i) => {
+          if (pair.id === msg.pair) {
+            currentPair.data = pair
+          }
+        })
+
+        imagesForExportQuantity = Object.keys(pair.images).length
+
+        Object.keys(pair.images).forEach((key, i) => {
+          figma.ui.postMessage({ type: key, data: pair.images[key] })
+        })
+      }
+    })
+  } else {
+    console.log('unknown message')
+  }
 }
 
-function showFonts(fonts) {
-  figma.ui.postMessage({
-    type: 'get-font-list',
-    message: fonts
+function loadFonts() {
+  fontsToLoad.forEach((fontToLoad, i) => {
+    figma.loadFontAsync({ family: fontToLoad.family, style: fontToLoad.style })
   })
-
-  let styles = []
-  let names = []
-
-  fonts.forEach((font, i) => {
-    styles.push(font.fontName.style)
-    names.push(font.fontName.family)
-  })
-
-  styles = styles.filter(onlyUnique)
-
-  console.log(styles, names)
-
-  // let futuraPromise = figma.loadFontAsync({ family: 'futura', style: 'bold' })
-  // let futuraPromise = figma.loadFontAsync(fonts[0].fontName)
-  // futuraPromise.then(showFutura)
 }
 
-function showFutura(futura) {
-  console.log('yo', futura)
+loadFonts()
+
+function saveImageDataOrExportToFigma(name, bytes) {
+  imagesForExport[name] = bytes
+
+  console.log(Object.keys(imagesForExport).length, imagesForExportQuantity)
+
+  if (Object.keys(imagesForExport).length >= imagesForExportQuantity) {
+    renderFigmaTemplate()
+  }
 }
-// let all = [
-//   abril_fatface,
-//   alegreya,
-//   archivo,
-//   bitter,
-//   cabin,
-//   cardo,
-//   domine,
-//   fira_mono,
-//   fira_sans,
-//   francois_one,
-//   hind,
-//   inconsolata,
-//   josefin_sans,
-//   karla,
-//   kreon,
-//   lato,
-//   lora,
-//   merriweather,
-//   montserrat,
-//   nunito,
-//   open_sans,
-//   playfair,
-//   prompt,
-//   pt_sans,
-//   raleway,
-//   roboto,
-//   rokkitt,
-//   source_sans_pro,
-//   space_mono,
-//   ubuntu,
-//   yeseva_one
-// ]
 
-figma.loadFontAsync({ family: 'Roboto', style: 'Regular' })
-figma.loadFontAsync({ family: 'Roboto', style: 'Bold' })
+function getNewFills(rectangle, imageBytes) {
+  const fills = []
 
-figma.loadFontAsync({ family: 'Josefin Sans', style: 'Regular' })
-figma.loadFontAsync({ family: 'Josefin Sans', style: 'Bold' })
+  for (const paint of rectangle.fills) {
+    fills.push(getNewPaint(paint, imageBytes))
+  }
 
-figma.loadFontAsync({ family: 'Abril Fatface', style: 'Regular' })
+  return fills
+}
 
-figma.loadFontAsync({ family: 'Alegreya', style: 'Regular' })
-figma.loadFontAsync({ family: 'Alegreya', style: 'Bold' })
+function getNewPaint(paint, imageBytes) {
+  const newPaint = {}
 
-figma.loadFontAsync({ family: 'Archivo', style: 'Regular' })
-figma.loadFontAsync({ family: 'Archivo', style: 'Bold' })
+  newPaint.blendMode = 'NORMAL'
+  newPaint.type = 'IMAGE'
 
-figma.loadFontAsync({ family: 'Bitter', style: 'Regular' })
-figma.loadFontAsync({ family: 'Bitter', style: 'Bold' })
+  console.log('before')
+  newPaint.imageHash = figma.createImage(imageBytes).hash
+  console.log('after')
 
-figma.loadFontAsync({ family: 'Cabin', style: 'Regular' })
-figma.loadFontAsync({ family: 'Cabin', style: 'Bold' })
+  newPaint.filters = {
+    contrast: 0,
+    exposure: 0,
+    highlights: 0,
+    saturation: 0,
+    shadows: 0,
+    temperature: 0,
+    tint: 0
+  }
 
-figma.loadFontAsync({ family: 'Cardo', style: 'Regular' })
-figma.loadFontAsync({ family: 'Cardo', style: 'Bold' })
+  newPaint.opacity = 1
+  newPaint.scaleMode = 'FILL'
+  newPaint.scalingFactor = 0.5
 
-figma.loadFontAsync({ family: 'Domine', style: 'Regular' })
-figma.loadFontAsync({ family: 'Domine', style: 'Bold' })
+  newPaint.imageTransform = [
+    [1, 0, 0],
+    [0, 1, 0]
+  ]
 
-figma.loadFontAsync({ family: 'Fira Mono', style: 'Regular' })
-figma.loadFontAsync({ family: 'Fira Mono', style: 'Bold' })
+  newPaint.visible = true
 
-figma.loadFontAsync({ family: 'Fira Sans', style: 'Regular' })
-figma.loadFontAsync({ family: 'Fira Sans', style: 'Bold' })
+  return newPaint
+}
+//
+//
+//
+//
+//
+//
 
-figma.loadFontAsync({ family: 'Karla', style: 'Regular' })
-figma.loadFontAsync({ family: 'Karla', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Kreon', style: 'Regular' })
-figma.loadFontAsync({ family: 'Kreon', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Lato', style: 'Regular' })
-figma.loadFontAsync({ family: 'Lato', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Lora', style: 'Regular' })
-figma.loadFontAsync({ family: 'Lora', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Merriweather', style: 'Regular' })
-figma.loadFontAsync({ family: 'Merriweather', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Montserrat', style: 'Regular' })
-figma.loadFontAsync({ family: 'Montserrat', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Nunito', style: 'Regular' })
-figma.loadFontAsync({ family: 'Nunito', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Open Sans', style: 'Regular' })
-figma.loadFontAsync({ family: 'Open Sans', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Playfair', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Prompt', style: 'Regular' })
-figma.loadFontAsync({ family: 'Prompt', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'PT Sans', style: 'Regular' })
-figma.loadFontAsync({ family: 'PT Sans', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Raleway', style: 'Regular' })
-figma.loadFontAsync({ family: 'Raleway', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Roboto', style: 'Regular' })
-figma.loadFontAsync({ family: 'Roboto', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Rokkitt', style: 'Regular' })
-figma.loadFontAsync({ family: 'Rokkitt', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Source Sans Pro', style: 'Regular' })
-figma.loadFontAsync({ family: 'Source Sans Pro', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Space Mono', style: 'Regular' })
-figma.loadFontAsync({ family: 'Space Mono', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Ubuntu', style: 'Regular' })
-figma.loadFontAsync({ family: 'Ubuntu', style: 'Bold' })
-
-figma.loadFontAsync({ family: 'Yeseva One', style: 'Regular' })
-
-function renderFigmaTemplate(currentPairId, language) {
-  console.log(currentPairId)
-
-  let currentPair
+function renderFigmaTemplate() {
+  const { language } = currentPair
+  const articleNameText = currentPair.data.heading
   let fontElements = []
 
-  pairs.forEach((pair, i) => {
-    if (pair.id === currentPairId) {
-      currentPair = pair
-    }
-  })
-
   Object.keys(fonts).forEach((key, i) => {
-    if (key === currentPair.fonts[0] || key === currentPair.fonts[1]) {
+    if (
+      key === currentPair.data.fonts[0] ||
+      key === currentPair.data.fonts[1]
+    ) {
       fontElements.push(fonts[key])
     }
   })
@@ -178,7 +130,9 @@ function renderFigmaTemplate(currentPairId, language) {
 
   //фрейм самого экспорта
   let articleFrame = figma.createFrame()
-  articleFrame.x = 150
+  articleFrame.x = figma.viewport.center.x
+  articleFrame.y = figma.viewport.center.y
+
   articleFrame.paddingTop = 23
   articleFrame.itemSpacing = 23
   articleFrame.resize(768, 1659)
@@ -213,22 +167,19 @@ function renderFigmaTemplate(currentPairId, language) {
   buttonBack.paddingRight = 10
   buttonBack.paddingBottom = 10
   buttonBack.paddingLeft = 10
+
   ////////иконка кнопки назад
-  let buttonBackIcon = figma.createVector()
+  let buttonBackIcon = figma.createRectangle()
   buttonBackIcon.resize(7, 8)
-  buttonBackIcon.vectorPaths[
-    {
-      windingRule: 'EVENODD',
-      data:
-        'M4.35355 0.646447C4.54882 0.841709 4.54882 1.15829 4.35355 1.35355L1.70711 4L4.35355 6.64645C4.54882 6.84171 4.54882 7.15829 4.35355 7.35355C4.15829 7.54882 3.84171 7.54882 3.64645 7.35355L0.646446 4.35355C0.451184 4.15829 0.451184 3.84171 0.646446 3.64645L3.64645 0.646447C3.84171 0.451184 4.15829 0.451184 4.35355 0.646447Z'
-    }
-  ]
-  buttonBackIcon.fills = black
+  buttonBackIcon.fills = getNewFills(buttonBackIcon, imagesForExport.left)
+  // buttonBackIcon.fills = black
+
   ////////текст кнопки назад
   let buttonBackText = figma.createText()
   buttonBackText.characters = 'Back'
   buttonBackText.fontSize = 14
   buttonBackText.fills = black
+
   //////фрейм кнопки экспорт
   let buttonExport = figma.createFrame()
   buttonExport.cornerRadius = 7
@@ -241,14 +192,17 @@ function renderFigmaTemplate(currentPairId, language) {
   buttonExport.paddingRight = 10
   buttonExport.paddingBottom = 10
   buttonExport.paddingLeft = 10
+
   ////////текст кнопки экспорт
   let buttonExportText = figma.createText()
   buttonExportText.characters = 'Export to artboard'
   buttonExportText.fontSize = 14
   buttonExportText.fills = black
-  ////////иконка кнопки эккспорт
-  let buttonExportIcon = figma.createVector()
-  buttonExportIcon.resize(7, 8)
+
+  ////////иконка кнопки экспорт
+  let buttonExportIcon = figma.createRectangle()
+  buttonExportIcon.resize(8, 9)
+  buttonExportIcon.fills = getNewFills(buttonExportIcon, imagesForExport.export)
 
   ////фрейм пары
   let pairInfoFrame = figma.createFrame()
@@ -269,7 +223,7 @@ function renderFigmaTemplate(currentPairId, language) {
 
   //////заголовок статьи
   let articleName = figma.createText()
-  articleName.characters = currentPair.heading
+  articleName.characters = articleNameText
   articleName.fontSize = 40
   articleName.fontName = { family: fontElements[0].heading, style: 'Bold' }
 
@@ -277,6 +231,7 @@ function renderFigmaTemplate(currentPairId, language) {
   let imageRectangle = figma.createRectangle()
   imageRectangle.resize(688, 367)
   imageRectangle.cornerRadius = 20
+  imageRectangle.fills = getNewFills(imageRectangle, imagesForExport.cover)
 
   //////фрейм шрифта внутри пары
   let fontInfoFrame = figma.createFrame()
@@ -302,6 +257,10 @@ function renderFigmaTemplate(currentPairId, language) {
   firstFontDescription.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
+  }
+  firstFontDescription.lineHeight = {
+    value: 160,
+    unit: 'PERCENT'
   }
   firstFontDescription.layoutAlign = 'STRETCH'
 
@@ -372,18 +331,23 @@ function renderFigmaTemplate(currentPairId, language) {
   firstFontFirstDesignerCompany.fills = black
 
   ////////////описание первого дизайнера первого шрифта
-  let firstFontFirstDesignerDescription = figma.createText()
-  console.log(fontElements[0].texts[language].designer)
-  firstFontFirstDesignerDescription.characters =
-    fontElements[0].texts[language].designers[0].descriptionHTML
-  firstFontFirstDesignerDescription.layoutAlign = 'STRETCH'
-  firstFontFirstDesignerDescription.fontSize = 12
-  firstFontFirstDesignerDescription.fontName = {
-    family: fontElements[1].heading,
-    style: 'Regular'
+  if (fontElements[0].texts[language].designers[0].descriptionHTML.length > 0) {
+    let firstFontFirstDesignerDescription = figma.createText()
+    firstFontFirstDesignerDescription.characters =
+      fontElements[0].texts[language].designers[0].descriptionHTML
+    firstFontFirstDesignerDescription.layoutAlign = 'STRETCH'
+    firstFontFirstDesignerDescription.fontSize = 12
+    firstFontFirstDesignerDescription.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    firstFontFirstDesignerDescription.lineHeight = {
+      value: 160,
+      unit: 'PERCENT'
+    }
+    firstFontFirstDesignerDescription.fills = background
+    firstFontFirstDesignerDescription.fills = black
   }
-  firstFontFirstDesignerDescription.fills = background
-  firstFontFirstDesignerDescription.fills = black
 
   //////////второй дизайнер первого шрифта
 
@@ -443,18 +407,26 @@ function renderFigmaTemplate(currentPairId, language) {
     firstFontFirstDesignerCompany.fills = black
 
     ////////////описание второго дизайнера первого шрифта
-    let firstFontSecondDesignerDescription = figma.createText()
-    console.log(fontElements[0].texts[language].designer)
-    firstFontSecondDesignerDescription.characters =
-      fontElements[0].texts[language].designers[1].descriptionHTML
-    firstFontSecondDesignerDescription.layoutAlign = 'STRETCH'
-    firstFontSecondDesignerDescription.fontSize = 12
-    firstFontSecondDesignerDescription.fontName = {
-      family: fontElements[1].heading,
-      style: 'Regular'
+    if (
+      fontElements[0].texts[language].designers[1].descriptionHTML.length > 0
+    ) {
+      let firstFontSecondDesignerDescription = figma.createText()
+      console.log(fontElements[0].texts[language].designer)
+      firstFontSecondDesignerDescription.characters =
+        fontElements[0].texts[language].designers[1].descriptionHTML
+      firstFontSecondDesignerDescription.layoutAlign = 'STRETCH'
+      firstFontSecondDesignerDescription.fontSize = 12
+      firstFontSecondDesignerDescription.fontName = {
+        family: fontElements[1].heading,
+        style: 'Regular'
+      }
+      firstFontSecondDesignerDescription.lineHeight = {
+        value: 160,
+        unit: 'PERCENT'
+      }
+      firstFontSecondDesignerDescription.fills = background
+      firstFontSecondDesignerDescription.fills = black
     }
-    firstFontSecondDesignerDescription.fills = background
-    firstFontSecondDesignerDescription.fills = black
   }
 
   ////////название второго шрифта
@@ -470,6 +442,10 @@ function renderFigmaTemplate(currentPairId, language) {
   secondFontDescription.fontName = {
     family: fontElements[1].heading,
     style: 'Regular'
+  }
+  secondFontDescription.lineHeight = {
+    value: 160,
+    unit: 'PERCENT'
   }
   secondFontDescription.layoutAlign = 'STRETCH'
 
@@ -533,18 +509,23 @@ function renderFigmaTemplate(currentPairId, language) {
   }
   secondFontFirstDesignerCompany.fills = black
   ////////////описание первого дизайнера второго шрифта
-  let secondFontFirstDesignerDescription = figma.createText()
-  secondFontFirstDesignerDescription.characters =
-    fontElements[1].texts[language].designers[0].descriptionHTML
-  secondFontFirstDesignerDescription.layoutAlign = 'STRETCH'
-  secondFontFirstDesignerDescription.fontSize = 12
-  secondFontFirstDesignerDescription.fontName = {
-    family: fontElements[1].heading,
-    style: 'Regular'
+  if (fontElements[1].texts[language].designers[0].descriptionHTML.length > 0) {
+    let secondFontFirstDesignerDescription = figma.createText()
+    secondFontFirstDesignerDescription.characters =
+      fontElements[1].texts[language].designers[0].descriptionHTML
+    secondFontFirstDesignerDescription.layoutAlign = 'STRETCH'
+    secondFontFirstDesignerDescription.fontSize = 12
+    secondFontFirstDesignerDescription.fontName = {
+      family: fontElements[1].heading,
+      style: 'Regular'
+    }
+    secondFontFirstDesignerDescription.lineHeight = {
+      value: 160,
+      unit: 'PERCENT'
+    }
+    secondFontFirstDesignerDescription.fills = background
+    secondFontFirstDesignerDescription.fills = black
   }
-  secondFontFirstDesignerDescription.fills = background
-  secondFontFirstDesignerDescription.fills = black
-
   //////////второй дизайнер второго шрифта
 
   console.log(fontElements[1].texts[language].designers[1])
@@ -603,18 +584,26 @@ function renderFigmaTemplate(currentPairId, language) {
     secondFontSecondDesignerCompany.fills = black
 
     ////////////описание второго дизайнера второго шрифта
-    let secondFontSecondDesignerDescription = figma.createText()
-    console.log(fontElements[1].texts[language].designer)
-    secondFontSecondDesignerDescription.characters =
-      fontElements[1].texts[language].designers[1].descriptionHTML
-    secondFontSecondDesignerDescription.layoutAlign = 'STRETCH'
-    secondFontSecondDesignerDescription.fontSize = 12
-    secondFontSecondDesignerDescription.fontName = {
-      family: fontElements[1].heading,
-      style: 'Regular'
+    if (
+      fontElements[1].texts[language].designers[1].descriptionHTML.length > 0
+    ) {
+      let secondFontSecondDesignerDescription = figma.createText()
+      console.log(fontElements[1].texts[language].designer)
+      secondFontSecondDesignerDescription.characters =
+        fontElements[1].texts[language].designers[1].descriptionHTML
+      secondFontSecondDesignerDescription.layoutAlign = 'STRETCH'
+      secondFontSecondDesignerDescription.fontSize = 12
+      secondFontSecondDesignerDescription.fontName = {
+        family: fontElements[1].heading,
+        style: 'Regular'
+      }
+      secondFontSecondDesignerDescription.lineHeight = {
+        value: 160,
+        unit: 'PERCENT'
+      }
+      secondFontSecondDesignerDescription.fills = background
+      secondFontSecondDesignerDescription.fills = black
     }
-    secondFontSecondDesignerDescription.fills = background
-    secondFontSecondDesignerDescription.fills = black
   }
 
   ////копирайт
@@ -657,12 +646,24 @@ function renderFigmaTemplate(currentPairId, language) {
   let recomendationsListItemFirst = figma.createRectangle()
   recomendationsListItemFirst.resize(215.9, 115)
   recomendationsListItemFirst.cornerRadius = 7
+  recomendationsListItemFirst.fills = getNewFills(
+    imageRectangle,
+    imagesForExport.cover
+  )
   let recomendationsListItemSecond = figma.createRectangle()
   recomendationsListItemSecond.resize(215.9, 115)
   recomendationsListItemSecond.cornerRadius = 7
+  recomendationsListItemSecond.fills = getNewFills(
+    imageRectangle,
+    imagesForExport.cover
+  )
   let recomendationsListItemThird = figma.createRectangle()
   recomendationsListItemThird.resize(215.9, 115)
   recomendationsListItemThird.cornerRadius = 7
+  recomendationsListItemThird.fills = getNewFills(
+    imageRectangle,
+    imagesForExport.cover
+  )
 
   articleFrame.appendChild(topBarFrame)
   articleFrame.appendChild(pairInfoFrame)
@@ -691,7 +692,9 @@ function renderFigmaTemplate(currentPairId, language) {
   buttonExport.appendChild(buttonExportIcon)
   firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerFrameName)
   firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerInnerFrame)
-  firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerDescription)
+  if (fontElements[0].texts[language].designers[0].descriptionHTML.length > 0) {
+    firstFontFirstDesignerFrame.appendChild(firstFontFirstDesignerDescription)
+  }
   firstFontFirstDesignerInnerFrame.appendChild(firstFontFirstDesignerAvatar)
   firstFontFirstDesignerInnerFrame.appendChild(firstFontFirstDesignerNameFrame)
   firstFontFirstDesignerNameFrame.appendChild(firstFontFirstDesignerName)
@@ -699,7 +702,13 @@ function renderFigmaTemplate(currentPairId, language) {
   if (fontElements[0].texts[language].designers[1] !== undefined) {
     firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerFrameName)
     firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerInnerFrame)
-    firstFontSecondDesignerFrame.appendChild(firstFontSecondDesignerDescription)
+    if (
+      fontElements[0].texts[language].designers[1].descriptionHTML.length > 0
+    ) {
+      firstFontSecondDesignerFrame.appendChild(
+        firstFontSecondDesignerDescription
+      )
+    }
     firstFontSecondDesignerInnerFrame.appendChild(firstFontSecondDesignerAvatar)
     firstFontSecondDesignerInnerFrame.appendChild(
       firstFontSecondDesignerNameFrame
@@ -710,7 +719,9 @@ function renderFigmaTemplate(currentPairId, language) {
 
   secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerFrameName)
   secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerInnerFrame)
-  secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerDescription)
+  if (fontElements[1].texts[language].designers[0].descriptionHTML.length > 0) {
+    secondFontFirstDesignerFrame.appendChild(secondFontFirstDesignerDescription)
+  }
   secondFontFirstDesignerInnerFrame.appendChild(secondFontFirstDesignerAvatar)
   secondFontFirstDesignerInnerFrame.appendChild(
     secondFontFirstDesignerNameFrame
@@ -722,9 +733,13 @@ function renderFigmaTemplate(currentPairId, language) {
     secondFontSecondDesignerFrame.appendChild(
       secondFontSecondDesignerInnerFrame
     )
-    secondFontSecondDesignerFrame.appendChild(
-      secondFontSecondDesignerDescription
-    )
+    if (
+      fontElements[1].texts[language].designers[1].descriptionHTML.length > 0
+    ) {
+      secondFontSecondDesignerFrame.appendChild(
+        secondFontSecondDesignerDescription
+      )
+    }
     secondFontSecondDesignerInnerFrame.appendChild(
       secondFontSecondDesignerAvatar
     )
@@ -746,37 +761,4 @@ function renderFigmaTemplate(currentPairId, language) {
   nodes.push(articleFrame)
   figma.currentPage.selection = nodes
   figma.viewport.scrollAndZoomIntoView(nodes)
-}
-
-figma.ui.onmessage = msg => {
-  if (msg.type === 'get-font-list') {
-    let fontsPromise = figma.listAvailableFontsAsync()
-
-    fontsPromise.then(showFonts)
-  }
-}
-
-// josefin_sans_cardo
-// josefin_sans_abril_fatface
-figma.ui.onmessage = msg => {
-  let fontPairIds = []
-
-  pairs.forEach((pair, i) => {
-    fontPairIds.push(pair.id)
-  })
-
-  if (fontPairIds.includes(msg.type)) {
-    renderFigmaTemplate(msg.type, msg.language)
-  } else {
-    console.log('unknown message')
-  }
-
-  // if (msg.type === 'josefin_sans_cardo') {
-  //   console.log('josefin_sans_cardo')
-  //   renderFigmaTemplate(msg.type)
-  // } else if (msg.type === 'josefin_sans_abril_fatface') {
-  //   console.log('josefin_sans_abril_fatface')
-  // }
-
-  // figma.closePlugin()
 }

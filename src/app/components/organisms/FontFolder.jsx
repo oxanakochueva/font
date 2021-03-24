@@ -34,7 +34,7 @@ export default class FontFolder extends React.Component {
       closed: this.state.folderStatus === 'isClosed'
     })
     return (
-      <div className={classes}>
+      <div className={classes} id={folder}>
         {this.state.folderStatus === 'isOpened' ? (
           <>
             <div className="fontFolderName" style={{ fontFamily: folder }}>
