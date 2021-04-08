@@ -18,7 +18,11 @@ export default class PageNavigation extends React.Component {
       openPairsPageIndex,
       exportPageToFigma,
       currentPairId,
-      page
+      resetSearch,
+      page,
+      pairs,
+      findFont,
+      searchRequest
     } = this.props
     return (
       <div className="PageNavigation">
@@ -40,6 +44,15 @@ export default class PageNavigation extends React.Component {
                 rightIcon="exportIcon"
               />
             </div>
+          </div>
+        ) : page === 'index' ? (
+          <div className="buttonsSet">
+            <Search
+              fieldAction={findFont}
+              resetSearch={resetSearch}
+              pairs={pairs}
+              searchRequest={searchRequest}
+            />
           </div>
         ) : (
           ''

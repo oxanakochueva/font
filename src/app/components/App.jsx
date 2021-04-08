@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom'
 import * as styles from '../styles/ui.scss'
 
 import FontPairCard from './organisms/FontPairCard'
+import FontPairList from './organisms/FontPairList'
 import PairsPageShow from './pages/PairsPageShow'
 import PairsPageIndex from './pages/PairsPageIndex'
 
@@ -48,7 +49,10 @@ export default class App extends React.Component {
         serif: 'serif',
         mono: 'mono'
       },
-      dafaultView: 'letters'
+      dafaultView: 'letters',
+      filtered: 'no',
+      filteredPairs: [],
+      searchRequest: ''
     }
   }
 
@@ -82,6 +86,39 @@ export default class App extends React.Component {
     )
   }
 
+  findFont = e => {
+    let currentList = pairs
+    let newList = []
+    let filter = ''
+    console.log('hi')
+
+    if (e.target.value !== '') {
+      console.log(currentList)
+
+      currentList.filter(pair => {
+        const font = pair.heading.toLowerCase()
+        filter = e.target.value.toLowerCase()
+
+        if (font.includes(filter)) {
+          newList.push(pair)
+        }
+      })
+
+      this.setState({
+        filteredPairs: newList,
+        filtered: 'yes',
+        searchRequest: filter
+      })
+    }
+    console.log(newList)
+  }
+
+  resetSearch = () => {
+    this.setState({
+      filtered: 'no'
+    })
+  }
+
   changeCardView = (pairId, view) => {
     const { pairs } = this.state
     let nextPairs = []
@@ -101,17 +138,37 @@ export default class App extends React.Component {
 
   render() {
     console.log(fonts)
+    const { filteredPairs, searchRequest, filtered } = this.state
+    console.log(filteredPairs)
     return (
       <div>
         <div className="container">
           {this.state.page === 'pairs' ? (
-            <div>
-              <PairsPageIndex
-                pairs={pairs}
-                changeCardView={this.changeCardView}
-                openPairPage={this.openPairPage}
-              />
-            </div>
+            this.state.filtered === 'no' ? (
+              <div>
+                <PairsPageIndex
+                  pairs={pairs}
+                  changeCardView={this.changeCardView}
+                  openPairPage={this.openPairPage}
+                  findFont={this.findFont}
+                  filtered={filtered}
+                />
+              </div>
+            ) : this.state.filtered === 'yes' ? (
+              <div>
+                <PairsPageIndex
+                  pairs={filteredPairs}
+                  changeCardView={this.changeCardView}
+                  openPairPage={this.openPairPage}
+                  findFont={this.findFont}
+                  filtered={filtered}
+                  searchRequest={searchRequest}
+                  resetSearch={this.resetSearch}
+                />
+              </div>
+            ) : (
+              ''
+            )
           ) : this.state.page === 'article' ? (
             <div className="wrapper">
               <PairsPageShow
