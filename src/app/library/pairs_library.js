@@ -50,8 +50,6 @@ import montserrat_fira_sans_cover from '../assets/images/pairs/articles/4x/monts
 import montserrat_cabin_cover from '../assets/images/pairs/articles/4x/montserrat_cabin.png'
 import montserrat_hind_cover from '../assets/images/pairs/articles/4x/montserrat_hind.png'
 import montserrat_inconsolata_cover from '../assets/images/pairs/articles/4x/montserrat_inconsolata.png'
-import chevron_left from '../assets/chevron_left.png'
-import export_icon from '../assets/export_icon.png'
 
 const pairs = [
   {
@@ -60,12 +58,7 @@ const pairs = [
     heading: 'Josefin Sans + Cardo',
     fonts: ['josefin_sans', 'cardo'],
     languages: ['en'],
-    type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: josefin_sans_cardo_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_cardo_cover
   },
   {
     id: 'josefin_sans_abril_fatface',
@@ -74,11 +67,7 @@ const pairs = [
     fonts: ['josefin_sans', 'abril_fatface'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: josefin_sans_abril_fatface_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_abril_fatface_cover
   },
   {
     id: 'josefin_sans_yeseva_one',
@@ -87,11 +76,7 @@ const pairs = [
     fonts: ['josefin_sans', 'yeseva_one'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: josefin_sans_yeseva_one_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_yeseva_one_cover
   },
   {
     id: 'josefin_sans_lato',
@@ -100,11 +85,7 @@ const pairs = [
     fonts: ['josefin_sans', 'lato'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: josefin_sans_lato_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_lato_cover
   },
   {
     id: 'josefin_sans_playfair',
@@ -113,11 +94,7 @@ const pairs = [
     fonts: ['josefin_sans', 'playfair'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: josefin_sans_playfair_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_playfair_cover
   },
   {
     id: 'josefin_sans_fira_mono',
@@ -126,11 +103,7 @@ const pairs = [
     fonts: ['josefin_sans', 'fira_mono'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono'],
-    images: {
-      cover: josefin_sans_fira_mono_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: josefin_sans_fira_mono_cover
   },
   {
     id: 'lora_merriweather',
@@ -139,11 +112,7 @@ const pairs = [
     fonts: ['lora', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Serif'],
-    images: {
-      cover: lora_merriweather_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_merriweather_cover
   },
   {
     id: 'lora_source_sans_pro',
@@ -152,11 +121,7 @@ const pairs = [
     fonts: ['lora', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif'],
-    images: {
-      cover: lora_source_sans_pro_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_source_sans_pro_cover
   },
   {
     id: 'lora_roboto',
@@ -165,11 +130,7 @@ const pairs = [
     fonts: ['lora', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif'],
-    images: {
-      cover: lora_roboto_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_roboto_cover
   },
   {
     id: 'lora_ubuntu',
@@ -178,11 +139,7 @@ const pairs = [
     fonts: ['lora', 'ubuntu'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif'],
-    images: {
-      cover: lora_ubuntu_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_ubuntu_cover
   },
   {
     id: 'lora_alegreya',
@@ -191,11 +148,7 @@ const pairs = [
     fonts: ['lora', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Serif'],
-    images: {
-      cover: lora_alegreya_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_alegreya_cover
   },
   {
     id: 'lora_nunito',
@@ -204,11 +157,7 @@ const pairs = [
     fonts: ['lora', 'nunito'],
     languages: ['en', 'ru'],
     type: ['Serif', 'Sans Serif'],
-    images: {
-      cover: lora_nunito_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lora_nunito_cover
   },
   {
     id: 'ubuntu_lora',
@@ -217,11 +166,7 @@ const pairs = [
     fonts: ['ubuntu', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: ubuntu_lora_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_lora_cover
   },
   {
     id: 'ubuntu_kreon',
@@ -230,11 +175,7 @@ const pairs = [
     fonts: ['ubuntu', 'kreon'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: ubuntu_kreon_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_kreon_cover
   },
   {
     id: 'ubuntu_rokkitt',
@@ -243,11 +184,7 @@ const pairs = [
     fonts: ['ubuntu', 'rokkitt'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: ubuntu_rokkitt_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_rokkitt_cover
   },
   {
     id: 'ubuntu_cabin',
@@ -256,11 +193,7 @@ const pairs = [
     fonts: ['ubuntu', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: ubuntu_cabin_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_cabin_cover
   },
   {
     id: 'ubuntu_source_sans_pro',
@@ -269,11 +202,7 @@ const pairs = [
     fonts: ['ubuntu', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: ubuntu_source_sans_pro_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_source_sans_pro_cover
   },
   {
     id: 'ubuntu_prompt',
@@ -282,11 +211,7 @@ const pairs = [
     fonts: ['ubuntu', 'prompt'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: ubuntu_prompt_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: ubuntu_prompt_cover
   },
   {
     id: 'nunito_alegreya',
@@ -295,11 +220,7 @@ const pairs = [
     fonts: ['nunito', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: nunito_alegreya_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: nunito_alegreya_cover
   },
   {
     id: 'nunito_lora',
@@ -308,11 +229,7 @@ const pairs = [
     fonts: ['nunito', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: nunito_lora_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: nunito_lora_cover
   },
   {
     id: 'nunito_roboto',
@@ -321,11 +238,7 @@ const pairs = [
     fonts: ['nunito', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: nunito_roboto_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: nunito_roboto_cover
   },
   {
     id: 'nunito_open_sans',
@@ -334,11 +247,7 @@ const pairs = [
     fonts: ['nunito', 'open_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: nunito_open_sans_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: nunito_open_sans_cover
   },
   {
     id: 'source_sans_pro_ubuntu',
@@ -347,11 +256,7 @@ const pairs = [
     fonts: ['source_sans_pro', 'ubuntu'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: source_sans_pro_ubuntu_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: source_sans_pro_ubuntu_cover
   },
   {
     id: 'source_sans_pro_lora',
@@ -360,11 +265,7 @@ const pairs = [
     fonts: ['source_sans_pro', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: source_sans_pro_lora_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: source_sans_pro_lora_cover
   },
   {
     id: 'source_sans_pro_montserrat',
@@ -373,11 +274,7 @@ const pairs = [
     fonts: ['source_sans_pro', 'montserrat'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: source_sans_pro_montserrat_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: source_sans_pro_montserrat_cover
   },
   {
     id: 'source_sans_pro_alegreya',
@@ -386,11 +283,7 @@ const pairs = [
     fonts: ['source_sans_pro', 'alegreya'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: source_sans_pro_alegreya_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: source_sans_pro_alegreya_cover
   },
   {
     id: 'roboto_archivo',
@@ -399,11 +292,7 @@ const pairs = [
     fonts: ['roboto', 'archivo'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: roboto_archivo_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_archivo_cover
   },
   {
     id: 'roboto_lora',
@@ -412,11 +301,7 @@ const pairs = [
     fonts: ['roboto', 'lora'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: roboto_lora_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_lora_cover
   },
   {
     id: 'roboto_rokkitt',
@@ -425,11 +310,7 @@ const pairs = [
     fonts: ['roboto', 'rokkitt'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: roboto_rokkitt_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_rokkitt_cover
   },
   {
     id: 'roboto_nunito',
@@ -438,11 +319,7 @@ const pairs = [
     fonts: ['roboto', 'nunito'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: roboto_nunito_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_nunito_cover
   },
   {
     id: 'roboto_raleway',
@@ -451,11 +328,7 @@ const pairs = [
     fonts: ['roboto', 'raleway'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: roboto_raleway_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_raleway_cover
   },
   {
     id: 'roboto_space_mono',
@@ -464,11 +337,7 @@ const pairs = [
     fonts: ['roboto', 'space_mono'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono'],
-    images: {
-      cover: roboto_space_mono_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: roboto_space_mono_cover
   },
   {
     id: 'open_sans_montserrat',
@@ -477,11 +346,7 @@ const pairs = [
     fonts: ['open_sans', 'montserrat'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: open_sans_montserrat_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: open_sans_montserrat_cover
   },
   {
     id: 'open_sans_bitter',
@@ -490,11 +355,7 @@ const pairs = [
     fonts: ['open_sans', 'bitter'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: open_sans_bitter_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: open_sans_bitter_cover
   },
   {
     id: 'open_sans_domine',
@@ -503,11 +364,7 @@ const pairs = [
     fonts: ['open_sans', 'domine'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: open_sans_domine_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: open_sans_domine_cover
   },
   {
     id: 'open_sans_source_sans_pro',
@@ -516,11 +373,7 @@ const pairs = [
     fonts: ['open_sans', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: open_sans_source_sans_pro_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: open_sans_source_sans_pro_cover
   },
   {
     id: 'raleway_merriweather',
@@ -529,11 +382,7 @@ const pairs = [
     fonts: ['raleway', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: raleway_merriweather_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_merriweather_cover
   },
   {
     id: 'raleway_bitter',
@@ -542,11 +391,7 @@ const pairs = [
     fonts: ['raleway', 'bitter'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: raleway_bitter_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_bitter_cover
   },
   {
     id: 'raleway_cabin',
@@ -555,11 +400,7 @@ const pairs = [
     fonts: ['raleway', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: raleway_cabin_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_cabin_cover
   },
   {
     id: 'raleway_roboto',
@@ -568,11 +409,7 @@ const pairs = [
     fonts: ['raleway', 'roboto'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: raleway_roboto_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_roboto_cover
   },
   {
     id: 'raleway_open_sans',
@@ -581,11 +418,7 @@ const pairs = [
     fonts: ['raleway', 'open_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: raleway_open_sans_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_open_sans_cover
   },
   {
     id: 'raleway_pt_sans',
@@ -594,11 +427,7 @@ const pairs = [
     fonts: ['raleway', 'pt_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: raleway_pt_sans_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: raleway_pt_sans_cover
   },
   {
     id: 'lato_abril_fatface',
@@ -607,11 +436,7 @@ const pairs = [
     fonts: ['lato', 'abril_fatface'],
     languages: ['en'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: lato_abril_fatface_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lato_abril_fatface_cover
   },
   {
     id: 'lato_karla',
@@ -620,11 +445,7 @@ const pairs = [
     fonts: ['lato', 'karla'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: lato_karla_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lato_karla_cover
   },
   {
     id: 'lato_merriweather',
@@ -633,11 +454,7 @@ const pairs = [
     fonts: ['lato', 'merriweather'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: lato_merriweather_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lato_merriweather_cover
   },
   {
     id: 'lato_francois_one',
@@ -646,11 +463,7 @@ const pairs = [
     fonts: ['lato', 'francois_one'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Serif'],
-    images: {
-      cover: lato_francois_one_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: lato_francois_one_cover
   },
   {
     id: 'montserrat_source_sans_pro',
@@ -659,11 +472,7 @@ const pairs = [
     fonts: ['montserrat', 'source_sans_pro'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: montserrat_source_sans_pro_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_source_sans_pro_cover
   },
   {
     id: 'montserrat_karla',
@@ -672,11 +481,7 @@ const pairs = [
     fonts: ['montserrat', 'karla'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: montserrat_karla_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_karla_cover
   },
   {
     id: 'montserrat_fira_sans',
@@ -685,11 +490,7 @@ const pairs = [
     fonts: ['montserrat', 'fira_sans'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: montserrat_fira_sans_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_fira_sans_cover
   },
   {
     id: 'montserrat_cabin',
@@ -698,11 +499,7 @@ const pairs = [
     fonts: ['montserrat', 'cabin'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: montserrat_cabin_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_cabin_cover
   },
   {
     id: 'montserrat_hind',
@@ -711,11 +508,7 @@ const pairs = [
     fonts: ['montserrat', 'hind'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Sans Serif'],
-    images: {
-      cover: montserrat_hind_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_hind_cover
   },
   {
     id: 'montserrat_inconsolata',
@@ -724,11 +517,7 @@ const pairs = [
     fonts: ['montserrat', 'inconsolata'],
     languages: ['en', 'ru'],
     type: ['Sans Serif', 'Mono'],
-    images: {
-      cover: montserrat_inconsolata_cover,
-      left: chevron_left,
-      export: export_icon
-    }
+    cover: montserrat_inconsolata_cover
   }
 ]
 

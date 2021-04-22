@@ -10,10 +10,42 @@ export default class PairsPageShow extends React.Component {
     this.state = {}
   }
 
+  renderFont = (font, fontFamily) => {
+    const { paragraphs, designers } = this.props
+
+    let fontParagraphs = []
+    paragraphs.forEach((paragraph, i) => {
+      if (paragraph.font_id === font.id) {
+        fontParagraphs.push(paragraph)
+      }
+    })
+
+    let fontDesigners = []
+    font.designers.forEach((id, i) => {
+      designers.forEach((designer, i) => {
+        if (id === designer.id) {
+          fontDesigners.push(designer)
+        }
+      })
+    })
+
+    return (
+      <FontDescription
+        font={font}
+        paragraphs={fontParagraphs}
+        designers={fontDesigners}
+        fontFamily={fontFamily}
+        key={font.id}
+      />
+    )
+  }
+
   render() {
     const {
       fonts,
       pairs,
+      paragraphs,
+      designers,
       currentPairId,
       exportPageToFigma,
       openPairsPageIndex,
@@ -34,15 +66,32 @@ export default class PairsPageShow extends React.Component {
       }
     })
 
-    Object.keys(fonts).forEach((key, i) => {
-      console.log(key === fontList[0], key === fontList[1])
-      if (key === fontList[0] || key === fontList[1]) {
-        fontFamily.push(fonts[key].heading)
-        fontElements.push(
-          <FontDescription font={fonts[key]} fontFamily={fontFamily} key={i} />
-        )
+    console.log(fonts, pairs, paragraphs)
+
+    fonts.forEach((font, i) => {
+      if (font.id === fontList[0]) {
+        fontFamily.push(font.heading)
       }
     })
+
+    fonts.forEach((font, i) => {
+      if (font.id === fontList[1]) {
+        fontFamily.push(font.heading)
+      }
+    })
+
+    fonts.forEach((font, i) => {
+      if (font.id === fontList[0]) {
+        fontElements.push(this.renderFont(font, fontFamily))
+      }
+    })
+
+    fonts.forEach((font, i) => {
+      if (font.id === fontList[1]) {
+        fontElements.push(this.renderFont(font, fontFamily))
+      }
+    })
+
     console.log(fontElements)
     console.log(pairs)
 

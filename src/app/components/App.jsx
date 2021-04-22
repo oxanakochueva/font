@@ -10,6 +10,8 @@ import PairsPageIndex from './pages/PairsPageIndex'
 
 import { fonts } from '../library/fonts_library.js'
 import { pairs } from '../library/pairs_library.js'
+import { paragraphs } from '../library/paragraphs.js'
+import { designers } from '../library/designers.js'
 
 const selectContents = [
   {
@@ -39,16 +41,16 @@ export default class App extends React.Component {
       pairs: pairs,
       page: 'pairs',
       currentPairId: '',
-      search: {
-        input_text: 'what is now in input',
-        query: 'what you searched for'
-      },
+      // search: {
+      //   input_text: 'what is now in input',
+      //   query: 'what you searched for'
+      // },
       language: 'en',
-      font: {
-        serif: 'sans_serif',
-        serif: 'serif',
-        mono: 'mono'
-      },
+      // font: {
+      //   serif: 'sans_serif',
+      //   serif: 'serif',
+      //   mono: 'mono'
+      // },
       dafaultView: 'letters',
       filtered: 'no',
       filteredPairs: [],
@@ -143,6 +145,8 @@ export default class App extends React.Component {
     return (
       <div>
         <div className="container">
+          {this.state.page}
+          {this.state.filtered}
           {this.state.page === 'pairs' ? (
             this.state.filtered === 'no' ? (
               <div>
@@ -174,6 +178,8 @@ export default class App extends React.Component {
               <PairsPageShow
                 fonts={fonts}
                 pairs={pairs}
+                paragraphs={paragraphs}
+                designers={designers}
                 currentPairId={this.state.currentPairId}
                 exportPageToFigma={this.exportPageToFigma}
                 openPairsPageIndex={this.openPairsPageIndex}
