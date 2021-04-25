@@ -235,6 +235,24 @@ function renderMainFrame(background) {
   return frame
 }
 
+function renderPairInfoFrame(background) {
+  let frame = figma.createFrame()
+  frame.x = 44
+  frame.y = 97
+  frame.layoutMode = 'VERTICAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'FIXED'
+  frame.layoutAlign = 'STRETCH'
+  frame.itemSpacing = 60
+  frame.paddingTop = 20
+  frame.paddingRight = 40
+  frame.paddingBottom = 40
+  frame.paddingLeft = 40
+  frame.fills = background
+
+  return frame
+}
+
 function renderPairFrame(background) {
   ////фрейм пары
   // let frame = columnFixed()
@@ -263,6 +281,131 @@ function renderHeading(pair, black) {
   text.characters = pair.data.heading
 
   return text
+}
+
+function renderTopBarFrame(background) {
+  let frame = figma.createFrame()
+  frame.fills = background
+  frame.layoutMode = 'HORIZONTAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.counterAxisAlignItems = 'CENTER'
+  frame.primaryAxisAlignItems = 'SPACE_BETWEEN'
+  frame.itemSpacing = 6
+  frame.strokeWeight = 1
+  frame.resize(688, 36)
+
+  return frame
+}
+
+function renderButtonBack() {
+  let button = figma.createFrame()
+  button.cornerRadius = 7
+  button.layoutMode = 'HORIZONTAL'
+  button.primaryAxisSizingMode = 'AUTO'
+  button.counterAxisSizingMode = 'AUTO'
+  button.counterAxisAlignItems = 'CENTER'
+  button.itemSpacing = 6
+  button.paddingTop = 10
+  button.paddingRight = 10
+  button.paddingBottom = 10
+  button.paddingLeft = 10
+
+  return button
+}
+
+function textTobuttonBack(black) {
+  let text = figma.createText()
+  text.characters = 'Back'
+  text.fontSize = 14
+  text.fills = black
+
+  return text
+}
+
+function renderButtonExport() {
+  let button = figma.createFrame()
+  button.cornerRadius = 7
+  button.layoutMode = 'HORIZONTAL'
+  button.primaryAxisSizingMode = 'AUTO'
+  button.counterAxisSizingMode = 'AUTO'
+  button.counterAxisAlignItems = 'CENTER'
+  button.itemSpacing = 6
+  button.paddingTop = 10
+  button.paddingRight = 10
+  button.paddingBottom = 10
+  button.paddingLeft = 10
+
+  return button
+}
+
+function textTobuttonExport(black) {
+  let text = figma.createText()
+  text.characters = 'Export to artboard'
+  text.fontSize = 14
+  text.fills = black
+
+  return text
+}
+
+function renderPairImage() {
+  let image = figma.createRectangle()
+  image.resize(688, 367)
+  image.cornerRadius = 20
+  // imageRectangle.fills = getNewFills(imageRectangle, imagesForExport.cover)
+
+  return image
+}
+
+function renderFontName(heading) {
+  let text = figma.createText()
+  text.characters = heading
+  text.fontSize = 40
+  text.fontName = { family: heading, style: 'Bold' }
+  return text
+}
+
+function renderParagraph(font, paragraph, black) {
+  let text = figma.createText()
+  text.characters = paragraph.body
+  text.fontSize = 16
+  text.fills = black
+  text.fontName = {
+    family: font,
+    style: 'Regular'
+  }
+  text.lineHeight = {
+    value: 160,
+    unit: 'PERCENT'
+  }
+  text.layoutAlign = 'STRETCH'
+
+  return text
+}
+
+function designerHeading(font, black) {
+  let text = figma.createText()
+  text.characters = 'Designer'
+  text.fontSize = 20
+  text.fontName = {
+    family: font.heading,
+    style: 'Bold'
+  }
+  text.fills = black
+
+  return text
+}
+
+function renderDesignerFrame(background) {
+  let frame = figma.createFrame()
+  frame.layoutMode = 'VERTICAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.layoutAlign = 'STRETCH'
+  frame.itemSpacing = 15
+  frame.fills = background
+
+  return frame
 }
 
 function renderFigmaTemplate() {
@@ -304,18 +447,74 @@ function renderFigmaTemplate() {
 
   let pairFrames = []
   let pairHeading = renderHeading(currentPair, black)
+  let topBarFrame = renderTopBarFrame(background)
+  let buttonBack = renderButtonBack()
+  let buttonBackText = textTobuttonBack(black)
+  let buttonExport = renderButtonExport()
+  let buttonExportText = textTobuttonExport(black)
+  let pairInfoFrame = renderPairInfoFrame(background)
+  let pairImage = renderPairImage()
+  let fontPairNames = []
+  let arrayOfFontParagraphs = []
+  let arrayOfCurrentFontParagraphs = [[], []]
+  let fontDesigners = []
 
   fontElements.forEach((font, i) => {
     let pairFrame = renderPairFrame(background)
+    let fontName = renderFontName(font.heading)
 
+    console.log(fontElements)
+
+    let currentI = i
+
+    paragraphs.forEach((paragraph, i) => {
+      if (paragraph.font_id === font.id) {
+        // let pairParagraph = renderParagraph(font.heading, paragraph, black)
+        arrayOfFontParagraphs.push(paragraph)
+      }
+    })
+
+    arrayOfFontParagraphs.forEach((fontParagraph, i) => {
+      console.log('what', font, fontParagraph)
+      if (fontParagraph.font_id === font.id) {
+        let pairParagraph = renderParagraph(font.heading, fontParagraph, black)
+
+        arrayOfCurrentFontParagraphs[currentI].push(pairParagraph)
+      }
+    })
+
+    font.designers.forEach((fontDesigner, i) => {
+      designers.forEach((designer, i) => {
+        if (designer.id === fontDesigner) {
+          fontDesigners.push(fontDesigner)
+        }
+      })
+    })
+    console.log(fontDesigners)
+
+    fontPairNames.push(fontName)
     pairFrames.push(pairFrame)
   })
 
-  mainFrame.appendChild(pairHeading)
+  mainFrame.appendChild(topBarFrame)
+  mainFrame.appendChild(pairInfoFrame)
+  topBarFrame.appendChild(buttonBack)
+  topBarFrame.appendChild(buttonExport)
+  buttonBack.appendChild(buttonBackText)
+  buttonExport.appendChild(buttonExportText)
 
-  // pairFrames.forEach((pairFrame, i) => {
-  //   mainFrame.appendChild(pairFrame)
-  // })
+  pairInfoFrame.appendChild(pairHeading)
+  pairInfoFrame.appendChild(pairImage)
+
+  pairFrames.forEach((pairFrame, i) => {
+    pairFrame.appendChild(fontPairNames[i])
+
+    arrayOfCurrentFontParagraphs[i].forEach((fontParagraph, i) => {
+      pairFrame.appendChild(fontParagraph)
+    })
+
+    pairInfoFrame.appendChild(pairFrame)
+  })
 
   // ////фрейм верхнего блока с кнопками
   // let topBarFrame = rowCenterSpaceBetween()
