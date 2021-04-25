@@ -254,17 +254,9 @@ function renderPairInfoFrame(background) {
 }
 
 function renderPairFrame(background) {
-  ////фрейм пары
-  // let frame = columnFixed()
   let frame = figma.createFrame()
-  frame.x = 44
-  frame.y = 97
-  frame.itemSpacing = 60
-  frame.paddingTop = 20
-  frame.paddingRight = 40
-  frame.paddingBottom = 40
-  frame.paddingLeft = 40
   frame.layoutMode = 'VERTICAL'
+  frame.itemSpacing = 23
   frame.primaryAxisSizingMode = 'AUTO'
   frame.counterAxisSizingMode = 'FIXED'
   frame.layoutAlign = 'STRETCH'
@@ -383,12 +375,12 @@ function renderParagraph(font, paragraph, black) {
   return text
 }
 
-function designerHeading(font, black) {
+function renderDesignerHeading(font, black) {
   let text = figma.createText()
   text.characters = 'Designer'
   text.fontSize = 20
   text.fontName = {
-    family: font.heading,
+    family: font,
     style: 'Bold'
   }
   text.fills = black
@@ -407,6 +399,65 @@ function renderDesignerFrame(background) {
 
   return frame
 }
+
+function renderCurrentFontDesignerFrame(background) {
+  let frame = figma.createFrame()
+  frame.layoutMode = 'HORIZONTAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.counterAxisAlignItems = 'CENTER'
+  frame.itemSpacing = 6
+  frame.fills = background
+
+  return frame
+}
+
+function getCurrentFontDesignerImage() {
+  let avatar = figma.createEllipse()
+  avatar.resize(35, 35)
+
+  return avatar
+}
+
+function renderCurrentFontDesignerNameFrame(background) {
+  let frame = figma.createFrame()
+  frame.layoutMode = 'VERTICAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.layoutAlign = 'STRETCH'
+  frame.itemSpacing = 4
+  frame.fills = background
+
+  return frame
+}
+
+function renderCurrentFontDesignerName(designer, font, black) {
+  let text = figma.createText()
+  text.characters = designer
+  text.fontSize = 16
+  text.fontName = {
+    family: font,
+    style: 'Bold'
+  }
+  text.fills = black
+
+  return text
+}
+
+function renderCurrentFontDesignerCompany(company, font, black) {
+  let text = figma.createText()
+  text.characters = company
+  text.fontSize = 10
+  text.fontName = {
+    family: font,
+    style: 'Regular'
+  }
+  text.fills = black
+
+  return text
+}
+
+/////// template
 
 function renderFigmaTemplate() {
   console.log('started')
@@ -455,44 +506,65 @@ function renderFigmaTemplate() {
   let pairInfoFrame = renderPairInfoFrame(background)
   let pairImage = renderPairImage()
   let fontPairNames = []
-  let arrayOfFontParagraphs = []
-  let arrayOfCurrentFontParagraphs = [[], []]
-  let fontDesigners = []
+  let arrayOfFontParagraphs = [[], []]
+  let arrayOfFontDesigners = [[], []]
+  let test
 
   fontElements.forEach((font, i) => {
     let pairFrame = renderPairFrame(background)
     let fontName = renderFontName(font.heading)
-
-    console.log(fontElements)
+    fontPairNames.push(fontName)
 
     let currentI = i
 
     paragraphs.forEach((paragraph, i) => {
       if (paragraph.font_id === font.id) {
-        // let pairParagraph = renderParagraph(font.heading, paragraph, black)
-        arrayOfFontParagraphs.push(paragraph)
-      }
-    })
+        let pairParagraph = renderParagraph(font.heading, paragraph, black)
 
-    arrayOfFontParagraphs.forEach((fontParagraph, i) => {
-      console.log('what', font, fontParagraph)
-      if (fontParagraph.font_id === font.id) {
-        let pairParagraph = renderParagraph(font.heading, fontParagraph, black)
-
-        arrayOfCurrentFontParagraphs[currentI].push(pairParagraph)
+        arrayOfFontParagraphs[currentI].push(pairParagraph)
       }
     })
 
     font.designers.forEach((fontDesigner, i) => {
       designers.forEach((designer, i) => {
         if (designer.id === fontDesigner) {
-          fontDesigners.push(fontDesigner)
+          let designerFrame = renderDesignerFrame(background)
+          let currentFontDesignerFrame = renderCurrentFontDesignerFrame(
+            background
+          )
+          let designerHeading = renderDesignerHeading(font.heading, black)
+
+          let currentFontDesignerImage = getCurrentFontDesignerImage()
+
+          let currentFontDesignerNameFrame = renderCurrentFontDesignerNameFrame(
+            background
+          )
+
+          let currentFontDesignerName = renderCurrentFontDesignerName(
+            designer.name,
+            font.heading,
+            black
+          )
+
+          let currentFontDesignerCompany = renderCurrentFontDesignerCompany(
+            designer.company,
+            font.heading,
+            black
+          )
+
+          ////пробую запушить отсюда
+          designerFrame.appendChild(designerHeading)
+          designerFrame.appendChild(currentFontDesignerFrame)
+          currentFontDesignerFrame.appendChild(currentFontDesignerImage)
+          currentFontDesignerFrame.appendChild(currentFontDesignerNameFrame)
+          currentFontDesignerNameFrame.appendChild(currentFontDesignerName)
+          currentFontDesignerNameFrame.appendChild(currentFontDesignerCompany)
+
+          arrayOfFontDesigners[currentI].push(designerFrame)
         }
       })
     })
-    console.log(fontDesigners)
 
-    fontPairNames.push(fontName)
     pairFrames.push(pairFrame)
   })
 
@@ -509,8 +581,13 @@ function renderFigmaTemplate() {
   pairFrames.forEach((pairFrame, i) => {
     pairFrame.appendChild(fontPairNames[i])
 
-    arrayOfCurrentFontParagraphs[i].forEach((fontParagraph, i) => {
+    arrayOfFontParagraphs[i].forEach((fontParagraph, i) => {
       pairFrame.appendChild(fontParagraph)
+    })
+
+    arrayOfFontDesigners[i].forEach((fontDesignerFrame, i) => {
+      pairFrame.appendChild(fontDesignerFrame)
+      // fontDesignerFrame.appendChild(currentFontDesignerFrame)
     })
 
     pairInfoFrame.appendChild(pairFrame)
