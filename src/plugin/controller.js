@@ -31,11 +31,13 @@ figma.ui.onmessage = msg => {
         })
 
         // ///тут надо поменять на кавер и без ключей
-        // imagesForExportQuantity = Object.keys(pair.images).length
+        imagesForExportQuantity = 1
         //
         // Object.keys(pair.images).forEach((key, i) => {
         //   figma.ui.postMessage({ type: key, data: pair.images[key] })
         // })
+
+        figma.ui.postMessage({ type: pair, data: pair.cover })
         renderFigmaTemplate()
       }
     })
@@ -55,7 +57,7 @@ loadFonts()
 function saveImageDataOrExportToFigma(name, bytes) {
   imagesForExport[name] = bytes
 
-  console.log(Object.keys(imagesForExport).length, imagesForExportQuantity)
+  // console.log(Object.keys(imagesForExport).length, imagesForExportQuantity)
 
   if (Object.keys(imagesForExport).length >= imagesForExportQuantity) {
     renderFigmaTemplate()
@@ -105,118 +107,6 @@ function getNewPaint(paint, imageBytes) {
 
   return newPaint
 }
-//
-//
-//
-//
-//
-//
-function rowCenterSpaceBetween() {
-  let frame = figma.createFrame()
-  frame.fills = background
-  frame.layoutMode = 'HORIZONTAL'
-  frame.primaryAxisSizingMode = 'AUTO'
-  frame.counterAxisSizingMode = 'AUTO'
-  frame.counterAxisAlignItems = 'CENTER'
-  frame.primaryAxisAlignItems = 'SPACE_BETWEEN'
-  frame.itemSpacing = 6
-  return frame
-}
-
-////
-function rowCenterCenter() {
-  let frame = figma.createFrame()
-  // frame.cornerRadius = 7
-  frame.layoutMode = 'HORIZONTAL'
-  frame.primaryAxisSizingMode = 'AUTO'
-  frame.counterAxisSizingMode = 'AUTO'
-  frame.counterAxisAlignItems = 'CENTER'
-  frame.itemSpacing = 6
-  frame.fills = background
-  return frame
-}
-////
-function columnFixed() {
-  let frame = figma.createFrame()
-  // pairInfoFrame.x = 44
-  // pairInfoFrame.y = 97
-  frame.layoutMode = 'VERTICAL'
-  frame.primaryAxisSizingMode = 'AUTO'
-  frame.counterAxisSizingMode = 'FIXED'
-  frame.layoutAlign = 'STRETCH'
-  // pairInfoFrame.itemSpacing = 60 //не у всех
-  // pairInfoFrame.paddingTop = 20 //не у всех
-  // pairInfoFrame.paddingRight = 40 //не у всех
-  // pairInfoFrame.paddingBottom = 40 //не у всех
-  // pairInfoFrame.paddingLeft = 40 //не у всех
-  frame.fills = background
-  return frame
-}
-
-function columnAuto() {
-  let frame = figma.createFrame()
-  frame.layoutMode = 'VERTICAL'
-  frame.primaryAxisSizingMode = 'AUTO'
-  frame.counterAxisSizingMode = 'AUTO'
-  frame.layoutAlign = 'STRETCH'
-  frame.itemSpacing = 15
-  frame.fills = background
-  return frame
-}
-
-//////заголовок
-function headingText(heading) {
-  let name = figma.createText()
-  name.fontSize = 40
-  name.fontName = { family: fontElements[0].heading, style: 'Bold' }
-  name.fills = black
-  name.characters = heading
-  return name
-}
-//////подзаголовок
-function subheadingText(text) {
-  let name = figma.createText()
-  name.fontSize = 20
-  name.fontName = { family: fontElements[0].heading, style: 'Bold' }
-  name.fills = black
-  name.characters = text
-  return name
-}
-
-//////подпись
-function subText(text) {
-  let name = figma.createText()
-  name.fontSize = 10
-  name.fontName = { family: fontElements[1].heading, style: 'Regular' }
-  name.fills = black
-  name.characters = text
-  return name
-}
-
-//основной текст (добавить цикл)
-function mainText(text) {
-  paragraph = figma.createText()
-  paragraph.fontSize = 16
-  paragraph.fontName = {
-    family: fontElements[1].heading,
-    style: 'Regular'
-  }
-  paragraph.lineHeight = {
-    value: 160,
-    unit: 'PERCENT'
-  }
-  paragraph.layoutAlign = 'STRETCH'
-  paragraph.fills = black
-  paragraph.characters = text
-}
-
-//
-//
-//
-//
-//
-//
-//
 
 function renderMainFrame(background) {
   //фрейм самого экспорта
@@ -344,7 +234,7 @@ function renderPairImage() {
   let image = figma.createRectangle()
   image.resize(688, 367)
   image.cornerRadius = 20
-  // imageRectangle.fills = getNewFills(imageRectangle, imagesForExport.cover)
+  // image.fills = getNewFills(image, imagesForExport)
 
   return image
 }
@@ -457,6 +347,87 @@ function renderCurrentFontDesignerCompany(company, font, black) {
   return text
 }
 
+function renderCurrentFontDesignerDescription(description, font, black) {
+  let text = figma.createText()
+  text.characters = description
+  text.layoutAlign = 'STRETCH'
+  text.fontSize = 12
+  text.fontName = {
+    family: font,
+    style: 'Regular'
+  }
+  text.lineHeight = {
+    value: 160,
+    unit: 'PERCENT'
+  }
+  text.fills = black
+
+  return text
+}
+
+function renderRecomendationsFrame(background) {
+  let frame = figma.createFrame()
+  frame.layoutMode = 'VERTICAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.layoutAlign = 'STRETCH'
+  frame.itemSpacing = 15
+  frame.fills = background
+
+  return frame
+}
+
+function renderRecomendationsListFrame(background) {
+  let frame = figma.createFrame()
+  frame.layoutMode = 'HORIZONTAL'
+  frame.primaryAxisSizingMode = 'AUTO'
+  frame.counterAxisSizingMode = 'AUTO'
+  frame.primaryAxisAlignItems = 'SPACE_BETWEEN'
+  frame.itemSpacing = 20
+  frame.fills = background
+
+  return frame
+}
+
+function renderRecomendationsHeading(font, black) {
+  let text = figma.createText()
+  text.characters = 'Other pairings'
+  text.fontSize = 20
+  text.fontName = {
+    family: font.data.folder,
+    style: 'Bold'
+  }
+  text.fills = black
+
+  return text
+}
+
+function getRecomendationsImage() {
+  let image = figma.createRectangle()
+  image.resize(215.9, 115)
+  image.cornerRadius = 7
+  // image.fills = getNewFills(
+  //   imageRectangle,
+  //   imagesForExport.cover
+  // )
+
+  return image
+}
+
+function renderCopyrightText(font, grey) {
+  let text = figma.createText()
+  text.characters = 'Information from fonts.google.com'
+  text.fills = grey
+  text.fontSize = 12
+  text.fontName = {
+    family: font.data.folder,
+    style: 'Regular'
+  }
+  text.resize(688, 14)
+
+  return text
+}
+
 /////// template
 
 function renderFigmaTemplate() {
@@ -508,7 +479,23 @@ function renderFigmaTemplate() {
   let fontPairNames = []
   let arrayOfFontParagraphs = [[], []]
   let arrayOfFontDesigners = [[], []]
-  let test
+  let designerFrame
+  let designerHeading
+
+  let recomendationsFrame = renderRecomendationsFrame(background)
+  let recomendationsHeading = renderRecomendationsHeading(currentPair, black)
+  let recomendationsListFrame = renderRecomendationsListFrame(background)
+  let arrayOfRecomendationsImages = []
+  let recomendationsImageFirst = getRecomendationsImage()
+  let recomendationsImageSecond = getRecomendationsImage()
+  let recomendationsImageThird = getRecomendationsImage()
+  arrayOfRecomendationsImages.push(
+    recomendationsImageFirst,
+    recomendationsImageSecond,
+    recomendationsImageThird
+  )
+
+  let copyrightText = renderCopyrightText(currentPair, grey)
 
   fontElements.forEach((font, i) => {
     let pairFrame = renderPairFrame(background)
@@ -528,11 +515,9 @@ function renderFigmaTemplate() {
     font.designers.forEach((fontDesigner, i) => {
       designers.forEach((designer, i) => {
         if (designer.id === fontDesigner) {
-          let designerFrame = renderDesignerFrame(background)
           let currentFontDesignerFrame = renderCurrentFontDesignerFrame(
             background
           )
-          let designerHeading = renderDesignerHeading(font.heading, black)
 
           let currentFontDesignerImage = getCurrentFontDesignerImage()
 
@@ -552,9 +537,20 @@ function renderFigmaTemplate() {
             black
           )
 
+          let currentFontDesignerDescription = renderCurrentFontDesignerDescription(
+            designer.descriptionHTML,
+            font.heading,
+            black
+          )
+
+          designerFrame = renderDesignerFrame(background)
+
+          designerHeading = renderDesignerHeading(font.heading, black)
+
           ////пробую запушить отсюда
-          designerFrame.appendChild(designerHeading)
+          // designerFrame.appendChild(designerHeading)
           designerFrame.appendChild(currentFontDesignerFrame)
+          designerFrame.appendChild(currentFontDesignerDescription)
           currentFontDesignerFrame.appendChild(currentFontDesignerImage)
           currentFontDesignerFrame.appendChild(currentFontDesignerNameFrame)
           currentFontDesignerNameFrame.appendChild(currentFontDesignerName)
@@ -585,172 +581,25 @@ function renderFigmaTemplate() {
       pairFrame.appendChild(fontParagraph)
     })
 
+    pairFrame.appendChild(designerHeading)
+
     arrayOfFontDesigners[i].forEach((fontDesignerFrame, i) => {
       pairFrame.appendChild(fontDesignerFrame)
-      // fontDesignerFrame.appendChild(currentFontDesignerFrame)
     })
 
     pairInfoFrame.appendChild(pairFrame)
   })
 
-  // ////фрейм верхнего блока с кнопками
-  // let topBarFrame = rowCenterSpaceBetween()
-  // topBarFrame.strokeWeight = 1
-  // topBarFrame.resize(688, 36)
-  // //////фрейм кнопки назад
-  // let buttonBack = rowCenterCenter()
-  // buttonBack.paddingTop = 10
-  // buttonBack.paddingRight = 10
-  // buttonBack.paddingBottom = 10
-  // buttonBack.paddingLeft = 10
-  //
-  // ////////иконка кнопки назад
-  // let buttonBackIcon = figma.createRectangle()
-  // buttonBackIcon.resize(7, 8)
-  // buttonBackIcon.fills = getNewFills(buttonBackIcon, imagesForExport.left)
-  // // buttonBackIcon.fills = black
-  //
-  // ////////текст кнопки назад
-  // let buttonBackText = figma.createText()
-  // buttonBackText.characters = 'Back'
-  // buttonBackText.fontSize = 14
-  // buttonBackText.fills = black
-  // buttonBackText.family = 'PT Sans'
-  // //////фрейм кнопки экспорт
-  // let buttonExport = rowCenterCenter()
-  // buttonExport.cornerRadius = 7
-  // buttonExport.paddingTop = 10
-  // buttonExport.paddingRight = 10
-  // buttonExport.paddingBottom = 10
-  // buttonExport.paddingLeft = 10
-  //
-  // ////////текст кнопки экспорт
-  // let buttonExportText = figma.createText()
-  // buttonExportText.characters = 'Export to artboard'
-  // buttonExportText.fontSize = 14
-  // buttonExportText.fills = black
-  // buttonExportText.family = 'PT Sans'
-  // ////////иконка кнопки экспорт
-  // let buttonExportIcon = figma.createRectangle()
-  // buttonExportIcon.resize(8, 9)
-  // buttonExportIcon.fills = getNewFills(buttonExportIcon, imagesForExport.export)
+  pairInfoFrame.appendChild(recomendationsFrame)
+  recomendationsFrame.appendChild(recomendationsHeading)
+  recomendationsFrame.appendChild(recomendationsListFrame)
+  arrayOfRecomendationsImages.forEach((recomendationImage, i) => {
+    recomendationsListFrame.appendChild(recomendationImage)
+  })
 
-  //   //////картинка пары
-  //   let imageRectangle = figma.createRectangle()
-  //   imageRectangle.resize(688, 367)
-  //   imageRectangle.cornerRadius = 20
-  //   imageRectangle.fills = getNewFills(imageRectangle, imagesForExport.cover)
-  //
-  //   //////фрейм шрифта внутри пары
-  //   let fontInfoFrame = columnFixed()
-  //
-  //   // articleFrame.appendChild(topBarFrame)
-  //   articleFrame.appendChild(pairInfoFrame)
-  //   pairInfoFrame.appendChild(articleName)
-  //   pairInfoFrame.appendChild(imageRectangle)
-  //   pairInfoFrame.appendChild(fontInfoFrame)
-  //
-  //   let fontItemDesignerFrameName = subheadingText()
-  //   fontItemDesignerFrameName.characters = 'Designer'
-  //
-  //   fontElements.forEach((fontItem, i) => {
-  //     // let fontItemInfo = []
-  //
-  //     let fontItemName = headingText(fontItem.heading)
-  //     fontInfoFrame.appendChild(fontItemName)
-  //
-  //     let fontItemParagraphs = []
-  //     paragraphs.forEach((paragraph, i) => {
-  //       if (fontItem.id === paragraph.font_id) {
-  //         fontItemParagraphs.push(paragraph)
-  //       }
-  //     })
-  //     let fontItemDescription = []
-  //     fontItemParagraphs.forEach((fontItemParagraph, i) => {
-  //       fontItemParagraph = mainText(fontItemParagraph.body)
-  //       fontItemDescription.push(fontItemParagraph)
-  //     })
-  //     fontInfoFrame.appendChild(fontItemDescription)
-  //
-  //     let fontItemDesigners = []
-  //     fontItem.designers.forEach((fontItemDesigner, i) => {
-  //       designers.forEach((designer, i) => {
-  //         if (fontItemDesigner === designer.id) {
-  //           let fontItemDesignerFrame = columnAuto()
-  //
-  //           let fontItemDesignerInnerFrame = rowCenterCenter()
-  //
-  //           let fontItemDesignerAvatar = figma.createEllipse()
-  //           fontItemDesignerAvatar.resize(35, 35)
-  //
-  //           let fontItemDesignerNameFrame = columnAuto()
-  //           fontItemDesignerNameFrame.itemSpacing = 4
-  //
-  //           let fontItemDesignerName = subheadingText(designer.name)
-  //           firstFontFirstDesignerName.fontSize = 16
-  //
-  //           let fontItemDesignerCompany = subText(designer.company)
-  //
-  //           if (designer.descriptionHTML.length > 0) {
-  //             let fontItemDesignerDescription = mainText(designer.descriptionHTML)
-  //           }
-  //
-  //           fontItemDesigners.push(designer)
-  //
-  //           fontItemDesignerFrame.appendChild(fontItemDesignerInnerFrame)
-  //           fontItemDesignerFrame.appendChild(fontItemDesignerFrameName)
-  //           fontItemDesignerInnerFrame.appendChild(fontItemDesignerAvatar)
-  //           fontItemDesignerInnerFrame.appendChild(fontItemDesignerNameFrame)
-  //           fontItemDesignerNameFrame.appendChild(fontItemDesignerName)
-  //           fontItemDesignerNameFrame.appendChild(fontItemDesignerCompany)
-  //           fontItemDesignerNameFrame.appendChild(fontItemDesignerDescription)
-  //
-  //           ///или///
-  //           fontItemDesignerFrame.appendChild(fontItemDesigners)
-  //         }
-  //       })
-  //     })
-  //   })
-  //
-  //   ////копирайт
-  //   let copyright = figma.createText()
-  //   copyright.characters = 'Information from fonts.google.com'
-  //   copyright.fills = grey
-  //   copyright.fontSize = 12
-  //   copyright.fontName = {
-  //     family: fontElements[1].heading,
-  //     style: 'Regular'
-  //   }
-  //   copyright.resize(688, 14)
-  //
-  //   ////рекомендации пар
-  //   let recomendations = columnAuto()
-  //   //////заголовок
-  //   let recomendationsTitle = subheadingText()
-  //   //////ссылки на пары
-  //   let recomendationsList = rowCenterSpaceBetween()
-  //   recomendationsList.itemSpacing = 20
-  //   ////////  пары
-  //
-  //   for (var i = 0; i < 3; i++) {
-  //     let recomendationsListItem = figma.createRectangle()
-  //     recomendationsListItem.resize(215.9, 115)
-  //     recomendationsListItem.cornerRadius = 7
-  //     recomendationsListItem.fills = getNewFills(
-  //       imageRectangle,
-  //       imagesForExport.cover
-  //     )
-  //     recomendationsList.appendChild(recomendationsListItem)
-  //   }
-  //
-  //   pairInfoFrame.appendChild(recomendations)
-  //   pairInfoFrame.appendChild(copyright)
-  //
-  //   recomendations.appendChild(recomendationsTitle)
-  //   recomendations.appendChild(recomendationsList)
-  //   figma.currentPage.appendChild(articleFrame)
-  //
-  //   nodes.push(articleFrame)
-  //   figma.currentPage.selection = nodes
-  //   figma.viewport.scrollAndZoomIntoView(nodes)
+  pairInfoFrame.appendChild(copyrightText)
+
+  nodes.push(mainFrame)
+  figma.currentPage.selection = nodes
+  figma.viewport.scrollAndZoomIntoView(nodes)
 }
