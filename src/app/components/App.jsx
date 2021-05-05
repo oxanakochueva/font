@@ -51,10 +51,12 @@ export default class App extends React.Component {
       //   serif: 'serif',
       //   mono: 'mono'
       // },
-      dafaultView: 'letters',
+      defaultView: 'letters',
       filtered: 'no',
       filteredPairs: [],
-      searchRequest: ''
+      searchRequest: '',
+      selectViewOptions: ['letters', 'words', 'phrase'],
+      selectViewOpened: false
     }
   }
 
@@ -122,7 +124,7 @@ export default class App extends React.Component {
   }
 
   changeCardView = (pairId, view) => {
-    const { pairs } = this.state
+    const { pairs, defaultView } = this.state
     let nextPairs = []
 
     pairs.forEach((pair, i) => {
@@ -138,15 +140,60 @@ export default class App extends React.Component {
     })
   }
 
+  changeDefaultView = (type, pairs) => {
+    console.log('wait', type, this.state.defaultView)
+
+    pairs.forEach((pair, i) => {
+      pair.view = type
+    })
+
+    this.setState({
+      defaultView: type
+    })
+  }
+
+  //   toggleSelect(name) {
+  //   if (name == 'openedFrom') {
+  //     this.setState({
+  //       fromSelectOpen: true
+  //     })
+  //   }
+  //   if (name == 'openedTo') {
+  //     this.setState({
+  //       toSelectOpen: true
+  //     })
+  //   }
+  // }
+
+  toggleSelectView = () => {
+    console.log('hello')
+    let selectState = this.state.selectViewOpened
+    if (selectState == true) {
+      this.setState({
+        selectViewOpened: false
+      })
+    } else {
+      this.setState({
+        selectViewOpened: true
+      })
+    }
+  }
+
   render() {
     console.log(fonts)
-    const { filteredPairs, searchRequest, filtered } = this.state
+    const {
+      filteredPairs,
+      searchRequest,
+      filtered,
+      selectViewOpened,
+      selectViewOptions,
+      defaultView
+    } = this.state
     console.log(filteredPairs)
+    console.log(this.state.defaultView)
     return (
       <div>
         <div className="container">
-          {this.state.page}
-          {this.state.filtered}
           {this.state.page === 'pairs' ? (
             this.state.filtered === 'no' ? (
               <div>
@@ -156,6 +203,11 @@ export default class App extends React.Component {
                   openPairPage={this.openPairPage}
                   findFont={this.findFont}
                   filtered={filtered}
+                  defaultCardView={defaultView}
+                  changeDefaultView={this.changeDefaultView}
+                  selectViewOpened={selectViewOpened}
+                  toggleSelectView={this.toggleSelectView}
+                  selectViewOptions={selectViewOptions}
                 />
               </div>
             ) : this.state.filtered === 'yes' ? (
@@ -168,6 +220,11 @@ export default class App extends React.Component {
                   filtered={filtered}
                   searchRequest={searchRequest}
                   resetSearch={this.resetSearch}
+                  defaultCardView={defaultView}
+                  changeDefaultView={this.changeDefaultView}
+                  selectViewOpened={selectViewOpened}
+                  toggleSelectView={this.toggleSelectView}
+                  selectViewOptions={selectViewOptions}
                 />
               </div>
             ) : (

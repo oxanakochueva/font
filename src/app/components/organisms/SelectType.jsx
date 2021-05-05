@@ -1,9 +1,8 @@
 import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import FontPairList from './FontPairList'
 
-export default class FontFolder extends React.Component {
+export default class SelectType extends React.Component {
   constructor(props) {
     super(props)
 
@@ -27,13 +26,7 @@ export default class FontFolder extends React.Component {
   }
 
   render() {
-    const {
-      folder,
-      pairs,
-      changeCardView,
-      openPairPage,
-      defaultCardView
-    } = this.props
+    const { folder, pairs, changeCardView, openPairPage } = this.props
     const classes = classnames({
       fontFolder: true,
       open: this.state.folderStatus === 'isOpened',
@@ -52,7 +45,6 @@ export default class FontFolder extends React.Component {
               pairs={pairs}
               changeCardView={changeCardView}
               openPairPage={openPairPage}
-              defaultCardView={defaultCardView}
             />
           </>
         ) : (

@@ -21,7 +21,11 @@ export default class PairsPageIndex extends React.Component {
       findFont,
       filtered,
       searchRequest,
-      resetSearch
+      resetSearch,
+      defaultCardView,
+      selectViewOptions,
+      changeDefaultView,
+      toggleSelectView
     } = this.props
 
     let folders = [
@@ -47,6 +51,7 @@ export default class PairsPageIndex extends React.Component {
             pairs={pairs}
             changeCardView={changeCardView}
             openPairPage={openPairPage}
+            defaultCardView={defaultCardView}
             key={i}
           />
         )
@@ -73,6 +78,10 @@ export default class PairsPageIndex extends React.Component {
           findFont={findFont}
           page="index"
           searchRequest={searchRequest}
+          defaultCardView={defaultCardView}
+          changeDefaultView={changeDefaultView}
+          selectViewOptions={selectViewOptions}
+          toggleSelectView={toggleSelectView}
         />
         <div className="folder">{folderContent}</div>
       </>

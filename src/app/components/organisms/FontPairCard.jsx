@@ -19,7 +19,21 @@ export default class FontPairCard extends React.Component {
   }
 
   render() {
-    const { pair } = this.props
+    const { pair, defaultCardView } = this.props
+
+    // const classes = classnames({
+    //   fontPairCard: true,
+    //   letters: defaultCardView === 'letters',
+    //   words: defaultCardView === 'words',
+    //   phrase: defaultCardView === 'phrase'
+    // })
+    //
+    // const tabs = classnames({
+    //   cardViewTabs: true,
+    //   letters: defaultCardView === 'letters',
+    //   words: defaultCardView === 'words',
+    //   phrase: defaultCardView === 'phrase'
+    // })
 
     const classes = classnames({
       fontPairCard: true,
@@ -36,6 +50,7 @@ export default class FontPairCard extends React.Component {
     })
 
     // return <div className="cardBlock">{card}</div>
+    console.log('hi', defaultCardView)
     return (
       <div
         className={classes}
@@ -45,26 +60,30 @@ export default class FontPairCard extends React.Component {
         <div className="cardHeader">
           <div className="fontPairName">{pair.heading}</div>
         </div>
-        <FontPairCardImage pair={pair.id} folder={pair.folder} view="letters" />
+        <FontPairCardImage
+          pair={pair.id}
+          folder={pair.folder}
+          view={defaultCardView}
+        />
         <div className={tabs}>
           <div
             className="tab letters"
             onMouseOver={() => this.changeCardView('letters')}
-            onMouseOut={() => this.changeCardView('letters')}
+            onMouseOut={() => this.changeCardView(defaultCardView)}
           >
             Letters
           </div>
           <div
             className="tab words"
             onMouseOver={() => this.changeCardView('words')}
-            onMouseOut={() => this.changeCardView('letters')}
+            onMouseOut={() => this.changeCardView(defaultCardView)}
           >
             Words
           </div>
           <div
             className="tab phrase"
             onMouseOver={() => this.changeCardView('phrase')}
-            onMouseOut={() => this.changeCardView('letters')}
+            onMouseOut={() => this.changeCardView(defaultCardView)}
           >
             Phrase
           </div>

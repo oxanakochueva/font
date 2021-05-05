@@ -1,7 +1,10 @@
 .buttonsSet {
   display: flex;
+  position: absolute;
   justify-content: space-between;
-  width: 86%;
+  width: 89%;
+  top: -10px;
+  width: 89%;
   margin-bottom: 23px;
   .Button {
     display: flex;

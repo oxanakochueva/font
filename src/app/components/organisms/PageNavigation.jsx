@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom'
 import Search from '../atoms/Search'
 import Select from '../atoms/Select'
 import Button from '../atoms/Button'
+import SelectView from '../organisms/SelectView'
 
 export default class PageNavigation extends React.Component {
   constructor(props) {
     super(props)
+
+    // this.state = {
+    //   selectViewOpened: false
+    // }
   }
   exportPageToFigma = () => {
     const { currentPairId, exportPageToFigma } = this.props
@@ -22,7 +27,12 @@ export default class PageNavigation extends React.Component {
       page,
       pairs,
       findFont,
-      searchRequest
+      searchRequest,
+      defaultCardView,
+      selectViewOptions,
+      selectViewOpened,
+      toggleSelectView,
+      changeDefaultView
     } = this.props
     return (
       <div className="PageNavigation">
@@ -52,6 +62,14 @@ export default class PageNavigation extends React.Component {
               resetSearch={resetSearch}
               pairs={pairs}
               searchRequest={searchRequest}
+            />
+            <SelectView
+              defaultCardView={defaultCardView}
+              changeDefaultView={changeDefaultView}
+              pairs={pairs}
+              handleClick={toggleSelectView}
+              selectViewOpened={selectViewOpened}
+              selectViewOptions={selectViewOptions}
             />
           </div>
         ) : (
