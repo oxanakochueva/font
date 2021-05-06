@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: flex-end;
     box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
+    cursor: pointer;
+    z-index: 4;
 
     .chevron {
       background-image: url('../assets/images/chevrons/down.svg');
@@ -71,6 +73,11 @@
       align-items: center;
       cursor: pointer;
 
+      &.chosen {
+        font-weight: bold;
+        cursor: pointer;
+      }
+
       &:first-child {
         border-top-left-radius: 7px;
         border-top-right-radius: 0;
@@ -86,6 +93,7 @@
 
       &:hover {
         color: #aeaeae;
+        font-weight: 400;
       }
       //первый последний чайлд
     }

@@ -9,7 +9,10 @@ export default class PairsPageIndex extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      folderTest: [],
+      opened: false
+    }
   }
 
   render() {
@@ -27,6 +30,8 @@ export default class PairsPageIndex extends React.Component {
       changeDefaultView,
       toggleSelectView
     } = this.props
+
+    let { opened } = this.state
 
     let folders = [
       'Josefin Sans',
@@ -53,6 +58,7 @@ export default class PairsPageIndex extends React.Component {
             openPairPage={openPairPage}
             defaultCardView={defaultCardView}
             key={i}
+            opened={opened}
           />
         )
       })

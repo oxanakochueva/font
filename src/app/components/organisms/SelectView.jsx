@@ -48,6 +48,7 @@ export default class SelectView extends React.Component {
         <ViewList
           viewType={option}
           changeDefaultView={changeDefaultView}
+          defaultCardView={defaultCardView}
           pairs={pairs}
           key={i}
         />

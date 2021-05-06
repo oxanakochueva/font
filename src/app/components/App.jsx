@@ -12,6 +12,7 @@ import { fonts } from '../library/fonts_library.js'
 import { pairs } from '../library/pairs_library.js'
 import { paragraphs } from '../library/paragraphs.js'
 import { designers } from '../library/designers.js'
+import { notifications } from '../library/notifications.js'
 
 const selectContents = [
   {
@@ -214,12 +215,13 @@ export default class App extends React.Component {
               <div>
                 <PairsPageIndex
                   pairs={filteredPairs}
+                  searchRequest={searchRequest}
+                  resetSearch={this.resetSearch}
+                  pairs={pairs}
                   changeCardView={this.changeCardView}
                   openPairPage={this.openPairPage}
                   findFont={this.findFont}
                   filtered={filtered}
-                  searchRequest={searchRequest}
-                  resetSearch={this.resetSearch}
                   defaultCardView={defaultView}
                   changeDefaultView={this.changeDefaultView}
                   selectViewOpened={selectViewOpened}
