@@ -29,7 +29,7 @@
   }
 
   window.onmessage = async event => {
-    const bytes = event.data.pluginMessage.data
+    const bytes = event.data.pluginMessage.image
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     const imageData = await decode(canvas, ctx, bytes)
@@ -39,7 +39,7 @@
       {
         pluginMessage: {
           type: 'image-in-bytes',
-          name: event.data.pluginMessage.type,
+          id: event.data.pluginMessage.id,
           bytes: newBytes
         }
       },

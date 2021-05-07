@@ -66,7 +66,7 @@ export default class PairsPageShow extends React.Component {
       }
     })
 
-    console.log(fonts, pairs, paragraphs)
+    // console.log(fonts, pairs, paragraphs)
 
     fonts.forEach((font, i) => {
       if (font.id === fontList[0]) {
@@ -92,8 +92,8 @@ export default class PairsPageShow extends React.Component {
       }
     })
 
-    console.log(fontElements)
-    console.log(pairs)
+    // console.log(fontElements)
+    // console.log(pairs)
 
     return (
       <>

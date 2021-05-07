@@ -11,7 +11,7 @@ export default class Star extends React.Component {
 
   handleClick(e) {
     e.preventDefault()
-    console.log('click')
+    // console.log('click')
     this.props.handleClick(e)
   }
 

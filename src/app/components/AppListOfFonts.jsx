@@ -18,7 +18,7 @@ export default class App extends React.Component {
       const { type, message } = event.data.pluginMessage
 
       if (type === 'get-font-list') {
-        console.log('message inside componentDidMount', message)
+        // console.log('message inside componentDidMount', message)
 
         this.setState({
           fonts: message,
@@ -46,7 +46,7 @@ export default class App extends React.Component {
     let newList = []
 
     if (e.target.value !== '') {
-      console.log(currentList)
+      // console.log(currentList)
 
       currentList.filter(font => {
         const family = font.fontName.family.toLowerCase()
@@ -143,7 +143,7 @@ export default class App extends React.Component {
       background: 'orange'
     }
 
-    console.log(this.props.styles)
+    // console.log(this.props.styles)
 
     return (
       <div>

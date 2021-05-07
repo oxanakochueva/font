@@ -27,7 +27,7 @@ export default class FontDescription extends React.Component {
     let fontDesignersInfo = []
 
     designers.forEach((designer, i) => {
-      console.log(designer)
+      // console.log(designer)
       fontDesignersInfo.push(
         <FontDesigner
           name={designer.name}
@@ -40,7 +40,7 @@ export default class FontDescription extends React.Component {
       )
     })
 
-    console.log(fontFamily)
+    // console.log(fontFamily)
     return (
       <div className="fontInfo">
         <h1

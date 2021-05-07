@@ -9,7 +9,7 @@ export default class Search extends React.Component {
 
   render() {
     const { fieldAction, pairs, resetSearch, searchRequest } = this.props
-    console.log(searchRequest)
+    // console.log(searchRequest)
 
     const classes = classnames({
       closeIcon: true,

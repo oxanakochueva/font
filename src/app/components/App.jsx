@@ -62,6 +62,7 @@ export default class App extends React.Component {
     this.setState({
       page: 'article',
       currentPairId: pairId
+      // Add randomly chosen pairs
     })
   }
 
@@ -75,13 +76,14 @@ export default class App extends React.Component {
   backToPairsPage = () => {}
 
   exportPageToFigma = currentPairId => {
-    console.log(currentPairId)
+    // console.log(currentPairId)
     parent.postMessage(
       {
         pluginMessage: {
           type: 'font-pair-export',
           pair: currentPairId,
           language: this.state.language
+          // Randomly chosen pairs
         }
       },
       '*'
@@ -92,10 +94,10 @@ export default class App extends React.Component {
     let currentList = pairs
     let newList = []
     let filter = ''
-    console.log('hi')
+    // console.log('hi')
 
     if (e.target.value !== '') {
-      console.log(currentList)
+      // console.log(currentList)
 
       currentList.filter(pair => {
         const font = pair.heading.toLowerCase()
@@ -112,7 +114,7 @@ export default class App extends React.Component {
         searchRequest: filter
       })
     }
-    console.log(newList)
+    // console.log(newList)
   }
 
   resetSearch = () => {
@@ -139,9 +141,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(fonts)
+    // console.log(fonts)
     const { filteredPairs, searchRequest, filtered } = this.state
-    console.log(filteredPairs)
+    // console.log(filteredPairs)
     return (
       <div>
         <div className="container">

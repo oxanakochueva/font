@@ -1,10 +1,27 @@
-function saveImageDataOrExportToFigma(name, bytes) {
-  imagesForExport[name] = bytes
+import { getStoreImagesForExport } from './store'
+import { renderFigmaTemplate } from './render'
 
-  // console.log(Object.keys(imagesForExport).length, imagesForExportQuantity)
+function saveImageDataOrExportToFigma(id, bytes) {
+  let imagesForExport = getStoreImagesForExport()
+  let status = []
 
-  if (Object.keys(imagesForExport).length >= imagesForExportQuantity) {
-    renderFigmaTemplate()
+  imagesForExport.map(image => {
+    if (image.id === id) {
+      image.image = bytes
+      image.loaded = true
+    }
+
+    return image
+  })
+
+  imagesForExport.forEach((image, i) => {
+    status.push(image.loaded)
+  })
+
+  console.log('status', status, status.includes(false), !status.includes(false))
+
+  if (!status.includes(false)) {
+    renderFigmaTemplate(imagesForExport)
   }
 }
 
@@ -51,3 +68,5 @@ function getNewPaint(paint, imageBytes) {
 
   return newPaint
 }
+
+export { saveImageDataOrExportToFigma, getNewFills }

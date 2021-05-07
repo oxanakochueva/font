@@ -1,8 +1,23 @@
 import { fonts } from '../app/library/fonts_library.js'
 import { paragraphs } from '../app/library/paragraphs.js'
 import { designers } from '../app/library/designers.js'
+import { getStoreCurrentPair, getStoreImagesForExport } from './store'
+import { getNewFills } from './images'
 
-function mainFrame(background) {
+function getImageBytesFromImagesForExportById(id) {
+  const imagesForExport = getStoreImagesForExport()
+  let imageBytes
+
+  imagesForExport.forEach((image, i) => {
+    if (image.id === id) {
+      imageBytes = image.image
+    }
+  })
+
+  return imageBytes
+}
+
+function renderMainFrame(background) {
   //фрейм самого экспорта
   let frame = figma.createFrame()
   frame.x = figma.viewport.center.x
@@ -19,7 +34,7 @@ function mainFrame(background) {
   return frame
 }
 
-function pairInfoFrame(background) {
+function renderPairInfoFrame(background) {
   let frame = figma.createFrame()
   frame.x = 44
   frame.y = 97
@@ -37,7 +52,7 @@ function pairInfoFrame(background) {
   return frame
 }
 
-function pairFrame(background) {
+function renderPairFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'VERTICAL'
   frame.itemSpacing = 23
@@ -49,17 +64,17 @@ function pairFrame(background) {
   return frame
 }
 
-function heading(pair, black) {
+function renderHeading(pair, black) {
   let text = figma.createText()
   text.fontSize = 40
-  text.fontName = { family: pair.data.folder, style: 'Bold' }
+  text.fontName = { family: pair.folder, style: 'Bold' }
   text.fills = black
-  text.characters = pair.data.heading
+  text.characters = pair.heading
 
   return text
 }
 
-function topBarFrame(background) {
+function renderTopBarFrame(background) {
   let frame = figma.createFrame()
   frame.fills = background
   frame.layoutMode = 'HORIZONTAL'
@@ -74,7 +89,7 @@ function topBarFrame(background) {
   return frame
 }
 
-function buttonBack() {
+function renderButtonBack() {
   let button = figma.createFrame()
   button.cornerRadius = 7
   button.layoutMode = 'HORIZONTAL'
@@ -90,7 +105,7 @@ function buttonBack() {
   return button
 }
 
-function textToButtonBack(black) {
+function renderTextToButtonBack(black) {
   let text = figma.createText()
   text.characters = 'Back'
   text.fontSize = 14
@@ -99,7 +114,7 @@ function textToButtonBack(black) {
   return text
 }
 
-function buttonExport() {
+function renderButtonExport() {
   let button = figma.createFrame()
   button.cornerRadius = 7
   button.layoutMode = 'HORIZONTAL'
@@ -115,7 +130,7 @@ function buttonExport() {
   return button
 }
 
-function textToButtonExport(black) {
+function renderTextToButtonExport(black) {
   let text = figma.createText()
   text.characters = 'Export to artboard'
   text.fontSize = 14
@@ -124,16 +139,19 @@ function textToButtonExport(black) {
   return text
 }
 
-function pairImage() {
-  let image = figma.createRectangle()
-  image.resize(688, 367)
-  image.cornerRadius = 20
-  // image.fills = getNewFills(image, imagesForExport)
+function renderPairImage() {
+  const currentPair = getStoreCurrentPair()
+  const imageBytes = getImageBytesFromImagesForExportById(currentPair.id)
+  const rectangle = figma.createRectangle()
 
-  return image
+  rectangle.resize(688, 367)
+  rectangle.cornerRadius = 20
+  rectangle.fills = getNewFills(rectangle, imageBytes)
+
+  return rectangle
 }
 
-function fontName(heading) {
+function renderFontName(heading) {
   let text = figma.createText()
   text.characters = heading
   text.fontSize = 40
@@ -141,7 +159,7 @@ function fontName(heading) {
   return text
 }
 
-function paragraph(font, paragraph, black) {
+function renderParagraph(font, paragraph, black) {
   let text = figma.createText()
   text.characters = paragraph.body
   text.fontSize = 16
@@ -159,7 +177,7 @@ function paragraph(font, paragraph, black) {
   return text
 }
 
-function designerHeading(font, black) {
+function renderDesignerHeading(font, black) {
   let text = figma.createText()
   text.characters = 'Designer'
   text.fontSize = 20
@@ -172,7 +190,7 @@ function designerHeading(font, black) {
   return text
 }
 
-function designerFrame(background) {
+function renderDesignerFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'VERTICAL'
   frame.primaryAxisSizingMode = 'AUTO'
@@ -184,7 +202,7 @@ function designerFrame(background) {
   return frame
 }
 
-function currentFontDesignerFrame(background) {
+function renderCurrentFontDesignerFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'HORIZONTAL'
   frame.primaryAxisSizingMode = 'AUTO'
@@ -196,14 +214,17 @@ function currentFontDesignerFrame(background) {
   return frame
 }
 
-function getCurrentFontDesignerImage() {
-  let avatar = figma.createEllipse()
-  avatar.resize(35, 35)
+function renderCurrentFontDesignerImage(id) {
+  const imageBytes = getImageBytesFromImagesForExportById(id)
+  const ellips = figma.createEllipse()
 
-  return avatar
+  ellips.resize(35, 35)
+  ellips.fills = getNewFills(ellips, imageBytes)
+
+  return ellips
 }
 
-function currentFontDesignerNameFrame(background) {
+function renderCurrentFontDesignerNameFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'VERTICAL'
   frame.primaryAxisSizingMode = 'AUTO'
@@ -215,7 +236,7 @@ function currentFontDesignerNameFrame(background) {
   return frame
 }
 
-function currentFontDesignerName(designer, font, black) {
+function renderCurrentFontDesignerName(designer, font, black) {
   let text = figma.createText()
   text.characters = designer
   text.fontSize = 16
@@ -228,7 +249,7 @@ function currentFontDesignerName(designer, font, black) {
   return text
 }
 
-function currentFontDesignerCompany(company, font, black) {
+function renderCurrentFontDesignerCompany(company, font, black) {
   let text = figma.createText()
   text.characters = company
   text.fontSize = 10
@@ -241,7 +262,7 @@ function currentFontDesignerCompany(company, font, black) {
   return text
 }
 
-function currentFontDesignerDescription(description, font, black) {
+function renderCurrentFontDesignerDescription(description, font, black) {
   let text = figma.createText()
   text.characters = description
   text.layoutAlign = 'STRETCH'
@@ -259,7 +280,7 @@ function currentFontDesignerDescription(description, font, black) {
   return text
 }
 
-function recomendationsFrame(background) {
+function renderRecomendationsFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'VERTICAL'
   frame.primaryAxisSizingMode = 'AUTO'
@@ -271,7 +292,7 @@ function recomendationsFrame(background) {
   return frame
 }
 
-function recomendationsListFrame(background) {
+function renderRecomendationsListFrame(background) {
   let frame = figma.createFrame()
   frame.layoutMode = 'HORIZONTAL'
   frame.primaryAxisSizingMode = 'AUTO'
@@ -283,12 +304,12 @@ function recomendationsListFrame(background) {
   return frame
 }
 
-function recomendationsHeading(font, black) {
+function renderRecomendationsHeading(font, black) {
   let text = figma.createText()
   text.characters = 'Other pairings'
   text.fontSize = 20
   text.fontName = {
-    family: font.data.folder,
+    family: font.folder,
     style: 'Bold'
   }
   text.fills = black
@@ -296,25 +317,24 @@ function recomendationsHeading(font, black) {
   return text
 }
 
-function getRecomendationsImage() {
-  let image = figma.createRectangle()
-  image.resize(215.9, 115)
-  image.cornerRadius = 7
-  // image.fills = getNewFills(
-  //   imageRectangle,
-  //   imagesForExport.cover
-  // )
+function renderRecomendationsImage(id) {
+  const imageBytes = getImageBytesFromImagesForExportById(id)
+  const rectangle = figma.createRectangle()
 
-  return image
+  rectangle.resize(215.9, 115)
+  rectangle.cornerRadius = 7
+  rectangle.fills = getNewFills(rectangle, imageBytes)
+
+  return rectangle
 }
 
-function copyrightText(font, grey) {
+function renderCopyrightText(font, grey) {
   let text = figma.createText()
   text.characters = 'Information from fonts.google.com'
   text.fills = grey
   text.fontSize = 12
   text.fontName = {
-    family: font.data.folder,
+    family: font.folder,
     style: 'Regular'
   }
   text.resize(688, 14)
@@ -322,22 +342,20 @@ function copyrightText(font, grey) {
   return text
 }
 
-function renderFigmaTemplate() {
-  console.log('started')
-
+function renderFigmaTemplate(imagesForExport) {
+  const currentPair = getStoreCurrentPair()
   const { language } = currentPair
-  // const articleNameText = currentPair.data.heading
   const articleNameText = currentPair
   let fontElements = []
 
   fonts.forEach((font, i) => {
-    if (font.id === currentPair.data.fonts[0]) {
+    if (font.id === currentPair.fonts[0]) {
       fontElements.push(font)
     }
   })
 
   fonts.forEach((font, i) => {
-    if (font.id === currentPair.data.fonts[1]) {
+    if (font.id === currentPair.fonts[1]) {
       fontElements.push(font)
     }
   })
@@ -375,9 +393,9 @@ function renderFigmaTemplate() {
   let recomendationsHeading = renderRecomendationsHeading(currentPair, black)
   let recomendationsListFrame = renderRecomendationsListFrame(background)
   let arrayOfRecomendationsImages = []
-  let recomendationsImageFirst = getRecomendationsImage()
-  let recomendationsImageSecond = getRecomendationsImage()
-  let recomendationsImageThird = getRecomendationsImage()
+  let recomendationsImageFirst = renderRecomendationsImage()
+  let recomendationsImageSecond = renderRecomendationsImage()
+  let recomendationsImageThird = renderRecomendationsImage()
 
   let copyrightText = renderCopyrightText(currentPair, grey)
 
@@ -406,7 +424,9 @@ function renderFigmaTemplate() {
             background
           )
 
-          let currentFontDesignerImage = getCurrentFontDesignerImage()
+          let currentFontDesignerImage = renderCurrentFontDesignerImage(
+            designer.id
+          )
 
           let currentFontDesignerNameFrame = renderCurrentFontDesignerNameFrame(
             background
