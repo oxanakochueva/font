@@ -506,27 +506,18 @@ function renderFigmaTemplate(imagesForExport) {
             black
           )
 
-          let currentFontDesignerDescription = renderCurrentFontDesignerDescription(
-            designer.descriptionHTML,
-            secondFontFontFamily,
-            black
-          )
-
           designerFrame = renderDesignerFrame(background)
 
           designerHeading = renderDesignerHeading(firstFontFontFamily, black)
 
+          designerFrame.appendChild(designerHeading)
+
           designerFrame.appendChild(currentFontDesignerFrame)
-          console.log(
-            'empty',
-            currentFontDesignerDescription,
-            designer.descriptionHTML.length
-          )
           if (designer.descriptionHTML.length > 0) {
-            console.log(
-              'empty',
-              currentFontDesignerDescription,
-              currentFontDesignerDescription.length
+            let currentFontDesignerDescription = renderCurrentFontDesignerDescription(
+              designer.descriptionHTML,
+              secondFontFontFamily,
+              black
             )
             designerFrame.appendChild(currentFontDesignerDescription)
           }
@@ -549,8 +540,8 @@ function renderFigmaTemplate(imagesForExport) {
   topBarFrame.appendChild(buttonExport)
   buttonBack.appendChild(buttonBackIcon)
   buttonBack.appendChild(buttonBackText)
-  buttonExport.appendChild(buttonExportIcon)
   buttonExport.appendChild(buttonExportText)
+  buttonExport.appendChild(buttonExportIcon)
 
   pairInfoFrame.appendChild(pairHeading)
   pairInfoFrame.appendChild(pairImage)
@@ -561,8 +552,6 @@ function renderFigmaTemplate(imagesForExport) {
     arrayOfFontParagraphs[i].forEach((fontParagraph, i) => {
       pairFrame.appendChild(fontParagraph)
     })
-
-    pairFrame.appendChild(designerHeading)
 
     arrayOfFontDesigners[i].forEach((fontDesignerFrame, i) => {
       pairFrame.appendChild(fontDesignerFrame)
@@ -578,9 +567,6 @@ function renderFigmaTemplate(imagesForExport) {
   arrayOfRecomendationsImages.forEach((recomendationImage, i) => {
     recomendationsListFrame.appendChild(recomendationImage)
   })
-  // recomendationsListFrame.appendChild(recomendationsImageFirst)
-  // recomendationsListFrame.appendChild(recomendationsImageSecond)
-  // recomendationsListFrame.appendChild(recomendationsImageThird)
 
   pairInfoFrame.appendChild(copyrightText)
 

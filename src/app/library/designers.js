@@ -1,4 +1,4 @@
-import no_image from '../assets/none.png'
+import no_image from '../assets/images/none.svg'
 import santiago_orozco from '../assets/images/designers/santiago_orozco.png'
 import type_together from '../assets/images/designers/type_together.png'
 import jovanny_lemonad from '../assets/images/designers/jovanny_lemonad.png'
