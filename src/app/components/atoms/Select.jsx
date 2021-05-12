@@ -11,7 +11,6 @@ export default class Select extends React.Component {
 
   render() {
     let { selectContents } = this.props
-    console.log({ selectContents })
     let selectContentType = selectContents.map((selectContent, i) => (
       <div key={i} className="selectType">
         {selectContent.selectType} <div className="chevron"></div>

@@ -50,7 +50,8 @@ export default class PairsPageShow extends React.Component {
       exportPageToFigma,
       openPairsPageIndex,
       pairsInCurrentFolder,
-      openPairPage
+      openPairPage,
+      recomendationList
     } = this.props
     let fontList = []
     let fontElements = []
@@ -66,8 +67,6 @@ export default class PairsPageShow extends React.Component {
       }
     })
 
-    console.log(fonts, pairs, paragraphs)
-
     fonts.forEach((font, i) => {
       if (font.id === fontList[0]) {
         fontFamily.push(font.heading)
@@ -91,9 +90,6 @@ export default class PairsPageShow extends React.Component {
         fontElements.push(this.renderFont(font, fontFamily))
       }
     })
-
-    console.log(fontElements)
-    console.log(pairs)
 
     return (
       <>
@@ -125,6 +121,7 @@ export default class PairsPageShow extends React.Component {
               pairs={pairs}
               currentPairId={currentPairId}
               openPairPage={openPairPage}
+              recomendationList={recomendationList}
             />
           </div>
           <div className="copyright">

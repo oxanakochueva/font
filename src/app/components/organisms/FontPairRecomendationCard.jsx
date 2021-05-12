@@ -20,7 +20,10 @@ export default class FontPairRecomendationCard extends React.Component {
   }
 
   render() {
-    const { pair, openPairPage } = this.props
+    const { pair, openPairPage, recomendationList } = this.props
+
+    recomendationList.push(pair.id)
+
     return (
       <div
         className="FontPairRecomendationCard"

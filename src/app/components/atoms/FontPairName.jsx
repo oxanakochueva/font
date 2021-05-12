@@ -9,7 +9,6 @@ export default class FontPairName extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let { fontPairs } = this.props
 
     let pairName = fontPairs.map((fontPair, i) => (

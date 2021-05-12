@@ -7,52 +7,48 @@ export default class FontFolder extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      folderStatus: 'isClosed'
-    }
-  }
+    this.state = {}
 
-  openFolder = opened => {
-    this.setState({
-      folderStatus: 'isOpened'
-    })
-    this.setState({
-      opened: true
-    })
-  }
-  closeFolder = () => {
-    this.setState({
-      folderStatus: 'isClosed'
-    })
+    let folderStatus = 'isClosed'
   }
 
   render() {
     const {
       folder,
+      folders,
       pairs,
       changeCardView,
       openPairPage,
       defaultCardView,
-      opened
+      openFolder,
+      closeFolder,
+      test
+      // openedFolders
     } = this.props
 
-    console.log(opened)
+    let { folderStatus, openedFolders } = this.props
+    console.log(openedFolders)
+    openedFolders.forEach((openedFolder, i) => {
+      if (openedFolder === folder) {
+        folderStatus = 'isOpened'
+      }
+    })
 
     const classes = classnames({
       fontFolder: true,
-      opened: this.state.folderStatus === 'isOpened',
-      closed: this.state.folderStatus === 'isClosed'
+      opened: folderStatus === 'isOpened',
+      closed: folderStatus === 'isClosed'
     })
 
     return (
       <div className={classes} id={folder}>
-        {this.state.folderStatus === 'isOpened' ? (
+        {folderStatus === 'isOpened' ? (
           <>
             <div className="fontFolderName" style={{ fontFamily: folder }}>
               {folder}
               <div
                 className="chevron up"
-                onClick={() => this.closeFolder()}
+                onClick={() => closeFolder(folder)}
               ></div>
             </div>
             <FontPairList
@@ -69,7 +65,7 @@ export default class FontFolder extends React.Component {
               {folder}
               <div
                 className="chevron down"
-                onClick={() => this.openFolder(opened)}
+                onClick={() => openFolder(folder)}
               ></div>
             </div>
           </>

@@ -9,42 +9,30 @@ export default class PairsPageIndex extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      folderTest: [],
-      opened: false
-    }
+    this.state = {}
+    let folderStatus = 'isClosed'
   }
 
   render() {
     const {
-      folder,
       pairs,
+      folders,
       changeCardView,
       openPairPage,
       findFont,
       filtered,
-      searchRequest,
-      resetSearch,
       defaultCardView,
-      selectViewOptions,
       changeDefaultView,
-      toggleSelectView
+      selectViewOpened,
+      toggleSelectView,
+      selectViewOptions,
+      openFolder,
+      closeFolder,
+      openedFolders,
+      resetSearch,
+      searchRequest,
+      test
     } = this.props
-
-    let { opened } = this.state
-
-    let folders = [
-      'Josefin Sans',
-      'Lora',
-      'Ubuntu',
-      'Nunito',
-      'Source Sans Pro',
-      'Roboto',
-      'Open Sans',
-      'Raleway',
-      'Lato',
-      'Montserrat'
-    ]
 
     let folderContent = []
 
@@ -53,12 +41,16 @@ export default class PairsPageIndex extends React.Component {
         folderContent.push(
           <FontFolder
             folder={folder}
+            folders={folders}
             pairs={pairs}
             changeCardView={changeCardView}
             openPairPage={openPairPage}
             defaultCardView={defaultCardView}
             key={i}
-            opened={opened}
+            openFolder={openFolder}
+            closeFolder={closeFolder}
+            openedFolders={openedFolders}
+            test={test}
           />
         )
       })
@@ -72,9 +64,6 @@ export default class PairsPageIndex extends React.Component {
         />
       )
     }
-
-    console.log(folderContent)
-    console.log(folders)
 
     return (
       <>

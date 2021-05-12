@@ -14,21 +14,6 @@ import { paragraphs } from '../library/paragraphs.js'
 import { designers } from '../library/designers.js'
 import { notifications } from '../library/notifications.js'
 
-const selectContents = [
-  {
-    selectType: 'language',
-    selectTypeList: ['Cyrillic', 'Latin']
-  },
-  {
-    selectType: 'font',
-    selectTypeList: ['Serif', 'Sans Serif', 'Mono']
-  },
-  {
-    selectType: 'view',
-    selectTypeList: ['Letters', 'Words', 'Phrase']
-  }
-]
-
 export default class App extends React.Component {
   constructor(params) {
     super(params)
@@ -42,22 +27,28 @@ export default class App extends React.Component {
       pairs: pairs,
       page: 'pairs',
       currentPairId: '',
-      // search: {
-      //   input_text: 'what is now in input',
-      //   query: 'what you searched for'
-      // },
       language: 'en',
-      // font: {
-      //   serif: 'sans_serif',
-      //   serif: 'serif',
-      //   mono: 'mono'
-      // },
       defaultView: 'letters',
       filtered: 'no',
       filteredPairs: [],
       searchRequest: '',
       selectViewOptions: ['letters', 'words', 'phrase'],
-      selectViewOpened: false
+      selectViewOpened: false,
+      folders: [
+        'Josefin Sans',
+        'Lora',
+        'Ubuntu',
+        'Nunito',
+        'Source Sans Pro',
+        'Roboto',
+        'Open Sans',
+        'Raleway',
+        'Lato',
+        'Montserrat'
+      ],
+      recomendationList: [],
+      openedFolders: [],
+      test: false
     }
   }
 
@@ -78,13 +69,13 @@ export default class App extends React.Component {
   backToPairsPage = () => {}
 
   exportPageToFigma = currentPairId => {
-    console.log(currentPairId)
     parent.postMessage(
       {
         pluginMessage: {
           type: 'font-pair-export',
           pair: currentPairId,
-          language: this.state.language
+          language: this.state.language,
+          recomendationList: this.state.recomendationList
         }
       },
       '*'
@@ -95,11 +86,8 @@ export default class App extends React.Component {
     let currentList = pairs
     let newList = []
     let filter = ''
-    console.log('hi')
 
     if (e.target.value !== '') {
-      console.log(currentList)
-
       currentList.filter(pair => {
         const font = pair.heading.toLowerCase()
         filter = e.target.value.toLowerCase()
@@ -180,18 +168,51 @@ export default class App extends React.Component {
     }
   }
 
+  openFolder = folder => {
+    let { folders, openedFolders, test } = this.state
+
+    folders.forEach((fold, i) => {
+      if (fold === folder) {
+        openedFolders.push(fold)
+        this.setState({
+          test: true
+        })
+      }
+
+      // console.log(openedFolders)
+    })
+  }
+
+  closeFolder = folder => {
+    let { folders, openedFolders } = this.state
+
+    openedFolders.forEach((fold, i) => {
+      console.log(folder)
+      if (fold === folder) {
+        openedFolders.splice(i, 1)
+        this.setState({
+          test: false
+        })
+      }
+    })
+  }
+
   render() {
     console.log(fonts)
     const {
+      pairs,
+      folders,
       filteredPairs,
       searchRequest,
       filtered,
       selectViewOpened,
       selectViewOptions,
-      defaultView
+      defaultView,
+      recomendationList,
+      openedFolders,
+      test
     } = this.state
-    console.log(filteredPairs)
-    console.log(this.state.defaultView)
+
     return (
       <div>
         <div className="container">
@@ -200,6 +221,7 @@ export default class App extends React.Component {
               <div>
                 <PairsPageIndex
                   pairs={pairs}
+                  folders={folders}
                   changeCardView={this.changeCardView}
                   openPairPage={this.openPairPage}
                   findFont={this.findFont}
@@ -209,12 +231,17 @@ export default class App extends React.Component {
                   selectViewOpened={selectViewOpened}
                   toggleSelectView={this.toggleSelectView}
                   selectViewOptions={selectViewOptions}
+                  openFolder={this.openFolder}
+                  closeFolder={this.closeFolder}
+                  openedFolders={openedFolders}
+                  test={test}
                 />
               </div>
             ) : this.state.filtered === 'yes' ? (
               <div>
                 <PairsPageIndex
                   pairs={filteredPairs}
+                  folders={folders}
                   searchRequest={searchRequest}
                   resetSearch={this.resetSearch}
                   pairs={pairs}
@@ -227,6 +254,7 @@ export default class App extends React.Component {
                   selectViewOpened={selectViewOpened}
                   toggleSelectView={this.toggleSelectView}
                   selectViewOptions={selectViewOptions}
+                  openedFolders={openedFolders}
                 />
               </div>
             ) : (
@@ -243,6 +271,7 @@ export default class App extends React.Component {
                 exportPageToFigma={this.exportPageToFigma}
                 openPairsPageIndex={this.openPairsPageIndex}
                 openPairPage={this.openPairPage}
+                recomendationList={recomendationList}
               />
             </div>
           ) : (

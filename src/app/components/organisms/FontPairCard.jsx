@@ -50,7 +50,7 @@ export default class FontPairCard extends React.Component {
     })
 
     // return <div className="cardBlock">{card}</div>
-    console.log('hi', defaultCardView)
+    // console.log('hi', defaultCardView)
     return (
       <div
         className={classes}
