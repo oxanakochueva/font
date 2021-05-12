@@ -44,12 +44,13 @@ export default class FontFolder extends React.Component {
       <div className={classes} id={folder}>
         {folderStatus === 'isOpened' ? (
           <>
-            <div className="fontFolderName" style={{ fontFamily: folder }}>
+            <div
+              className="fontFolderName"
+              style={{ fontFamily: folder }}
+              onClick={() => closeFolder(folder)}
+            >
               {folder}
-              <div
-                className="chevron up"
-                onClick={() => closeFolder(folder)}
-              ></div>
+              <div className="chevron up"></div>
             </div>
             <FontPairList
               folder={folder}
@@ -61,12 +62,13 @@ export default class FontFolder extends React.Component {
           </>
         ) : (
           <>
-            <div className="fontFolderName" style={{ fontFamily: folder }}>
+            <div
+              className="fontFolderName"
+              style={{ fontFamily: folder }}
+              onClick={() => openFolder(folder)}
+            >
               {folder}
-              <div
-                className="chevron down"
-                onClick={() => openFolder(folder)}
-              ></div>
+              <div className="chevron down"></div>
             </div>
           </>
         )}

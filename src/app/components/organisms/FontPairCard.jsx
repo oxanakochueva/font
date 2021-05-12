@@ -13,9 +13,17 @@ export default class FontPairCard extends React.Component {
     changeCardView(pair.id, view)
   }
 
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto'
+    })
+  }
+
   openPairPage = () => {
     const { pair, openPairPage } = this.props
     openPairPage(pair.id)
+    this.scrollToTop()
   }
 
   render() {
