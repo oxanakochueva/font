@@ -106,7 +106,24 @@ function renderButtonBack() {
   return button
 }
 
-function renderTextToButtonBack(black) {
+function renderButtonBackIcon(black) {
+  const vector = figma.createVector()
+  vector.resize(6, 10)
+  vector.fills = black
+  vector.strokes = []
+
+  vector.vectorPaths = [
+    {
+      windingRule: 'EVENODD',
+      data:
+        'M 4.35355 0.646447 C 4.54882 0.841709 4.54882 1.15829 4.35355 1.35355 L 1.70711 4 L 4.35355 6.64645 C 4.54882 6.84171 4.54882 7.15829 4.35355 7.35355 C 4.15829 7.54882 3.84171 7.54882 3.64645 7.35355 L 0.646446 4.35355 C 0.451184 4.15829 0.451184 3.84171 0.646446 3.64645 L 3.64645 0.646447 C 3.84171 0.451184 4.15829 0.451184 4.35355 0.646447 Z'
+    }
+  ]
+
+  return vector
+}
+
+function renderButtonBackText(black) {
   let text = figma.createText()
   text.characters = 'Back'
   text.fontSize = 14
@@ -131,7 +148,29 @@ function renderButtonExport() {
   return button
 }
 
-function renderTextToButtonExport(black) {
+function renderButtonExportIcon(black) {
+  const vector = figma.createVector()
+  vector.resize(6, 10)
+  vector.fills = black
+  vector.strokes = []
+
+  vector.vectorPaths = [
+    {
+      windingRule: 'EVENODD',
+      data:
+        'M 1 4.99902 C 1.27614 4.99902 1.5 5.22288 1.5 5.49902 L 1.5 8.4992 L 7.50037 8.4992 L 7.50037 5.49902 C 7.50037 5.22288 7.72423 4.99902 8.00037 4.99902 C 8.27651 4.99902 8.50037 5.22288 8.50037 5.49902 L 8.50037 8.4992 C 8.50037 9.0515 8.05265 9.4992 7.50037 9.4992 L 1.5 9.4992 C 0.947724 9.4992 0.5 9.0515 0.5 8.4992 L 0.5 5.49902 C 0.5 5.22288 0.723858 4.99902 1 4.99902 Z'
+    },
+    {
+      windingRule: 'EVENODD',
+      data:
+        'M 4.83023 0.624038 C 4.79516 0.593212 4.75661 0.56804 4.71585 0.548623 C 4.70175 0.541883 4.68741 0.53585 4.67289 0.53052 C 4.64255 0.519378 4.61084 0.511092 4.57806 0.505989 C 4.55234 0.501976 4.5264 0.499987 4.50049 0.5 C 4.4746 0.499988 4.44867 0.501978 4.42296 0.505989 C 4.37815 0.512979 4.33255 0.52679 4.29039 0.54617 C 4.28816 0.547197 4.28739 0.547561 4.28517 0.548623 C 4.24441 0.568039 4.20586 0.593212 4.1708 0.624038 L 2.07691 2.40067 C 1.86635 2.57932 1.84049 2.89485 2.01915 3.10541 C 2.1978 3.31597 2.51333 3.34183 2.72389 3.16317 L 4.00051 2.07998 L 4.00051 5.90026 C 4.00051 6.1764 4.22437 6.40026 4.50051 6.40026 C 4.77665 6.40026 5.00051 6.1764 5.00051 5.90026 L 5.00051 2.07998 L 6.27713 3.16317 C 6.48769 3.34183 6.80322 3.31597 6.98188 3.10541 C 7.16053 2.89485 7.13467 2.57932 6.92411 2.40067 L 4.83023 0.624038 Z'
+    }
+  ]
+
+  return vector
+}
+
+function renderButtonExportText(black) {
   let text = figma.createText()
   text.characters = 'Export to artboard'
   text.fontSize = 14
@@ -350,18 +389,19 @@ function renderFigmaTemplate(imagesForExport) {
   let fontElements = []
   let listOfRecomendations = []
 
+  // Вынести в одну функцию это и
   fonts.forEach((font, i) => {
     if (font.id === currentPair.fonts[0]) {
       fontElements.push(font)
     }
   })
-
+  // это
   fonts.forEach((font, i) => {
     if (font.id === currentPair.fonts[1]) {
       fontElements.push(font)
     }
   })
-
+  // а это в другую
   pairs.forEach((pair, i) => {
     currentPair.recomendationList.forEach((recomendation, i) => {
       if (pair.id === recomendation) {
@@ -379,17 +419,20 @@ function renderFigmaTemplate(imagesForExport) {
   const firstFontFontFamily = fontElements[0].heading
   const secondFontFontFamily = fontElements[0].heading
 
-  let mainFrame = renderMainFrame(background)
+  const mainFrame = renderMainFrame(background)
 
-  let pairFrames = []
-  let pairHeading = renderHeading(currentPair, black)
-  let topBarFrame = renderTopBarFrame(background)
-  let buttonBack = renderButtonBack()
-  let buttonBackText = renderTextToButtonBack(black)
-  let buttonExport = renderButtonExport()
-  let buttonExportText = renderTextToButtonExport(black)
-  let pairInfoFrame = renderPairInfoFrame(background)
-  let pairImage = renderPairImage()
+  const pairFrames = []
+  const pairHeading = renderHeading(currentPair, black)
+  const topBarFrame = renderTopBarFrame(background)
+  const buttonBack = renderButtonBack()
+  const buttonBackIcon = renderButtonBackIcon(black)
+  const buttonBackText = renderButtonBackText(black)
+  const buttonExport = renderButtonExport()
+  const buttonExportIcon = renderButtonExportIcon(black)
+  const buttonExportText = renderButtonExportText(black)
+  const pairInfoFrame = renderPairInfoFrame(background)
+  const pairImage = renderPairImage()
+
   let fontPairNames = []
   let arrayOfFontParagraphs = [[], []]
   let arrayOfFontDesigners = [[], []]
@@ -419,6 +462,7 @@ function renderFigmaTemplate(imagesForExport) {
     recomendationsImageThird
   )
 
+  // лучше тоже вынести в функцию
   fontElements.forEach((font, fontIndex) => {
     let pairFrame = renderPairFrame(background)
     let fontName = renderFontName(font.heading, firstFontFontFamily)
@@ -503,7 +547,9 @@ function renderFigmaTemplate(imagesForExport) {
   mainFrame.appendChild(pairInfoFrame)
   topBarFrame.appendChild(buttonBack)
   topBarFrame.appendChild(buttonExport)
+  buttonBack.appendChild(buttonBackIcon)
   buttonBack.appendChild(buttonBackText)
+  buttonExport.appendChild(buttonExportIcon)
   buttonExport.appendChild(buttonExportText)
 
   pairInfoFrame.appendChild(pairHeading)
