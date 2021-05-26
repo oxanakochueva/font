@@ -8,7 +8,9 @@ export default class ViewList extends React.Component {
   }
 
   render() {
-    const { viewType, changeDefaultView, pairs, defaultCardView } = this.props
+    const { viewType, pairs, actions, defaultValues } = this.props
+    const { defaultCardView } = defaultValues
+    const { changeDefaultView } = actions
 
     const classes = classnames({
       selectViewItem: true,

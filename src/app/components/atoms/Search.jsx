@@ -8,7 +8,9 @@ export default class Search extends React.Component {
   }
 
   render() {
-    const { fieldAction, pairs, resetSearch, searchRequest } = this.props
+    const { actions, pairs, defaultValues } = this.props
+    const { searchRequest } = defaultValues
+    const { findFont, resetSearch } = actions
 
     const classes = classnames({
       closeIcon: true,
@@ -21,7 +23,7 @@ export default class Search extends React.Component {
         <input
           type="text"
           placeholder="I'm looking for..."
-          onChange={fieldAction}
+          onChange={findFont}
         ></input>
         <button className={classes} type="reset" onClick={resetSearch}></button>
       </form>

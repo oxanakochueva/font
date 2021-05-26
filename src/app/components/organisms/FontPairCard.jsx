@@ -8,40 +8,10 @@ export default class FontPairCard extends React.Component {
     super(props)
   }
 
-  changeCardView = view => {
-    const { pair, changeCardView } = this.props
-    changeCardView(pair.id, view)
-  }
-
-  scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto'
-    })
-  }
-
-  openPairPage = () => {
-    const { pair, openPairPage } = this.props
-    openPairPage(pair.id)
-    this.scrollToTop()
-  }
-
   render() {
-    const { pair, defaultCardView } = this.props
-
-    // const classes = classnames({
-    //   fontPairCard: true,
-    //   letters: defaultCardView === 'letters',
-    //   words: defaultCardView === 'words',
-    //   phrase: defaultCardView === 'phrase'
-    // })
-    //
-    // const tabs = classnames({
-    //   cardViewTabs: true,
-    //   letters: defaultCardView === 'letters',
-    //   words: defaultCardView === 'words',
-    //   phrase: defaultCardView === 'phrase'
-    // })
+    const { folder, pair, actions, defaultValues } = this.props
+    const { defaultCardView } = defaultValues
+    const { openPairPage, changeCardView } = actions
 
     const classes = classnames({
       fontPairCard: true,
@@ -57,13 +27,11 @@ export default class FontPairCard extends React.Component {
       phrase: pair.view === 'phrase'
     })
 
-    // return <div className="cardBlock">{card}</div>
-    // console.log('hi', defaultCardView)
     return (
       <div
         className={classes}
         id={pair.folder}
-        onClick={() => this.openPairPage()}
+        onClick={() => openPairPage(pair.id)}
       >
         <div className="cardHeader">
           <div className="fontPairName">{pair.heading}</div>
@@ -76,22 +44,22 @@ export default class FontPairCard extends React.Component {
         <div className={tabs}>
           <div
             className="tab letters"
-            onMouseOver={() => this.changeCardView('letters')}
-            onMouseOut={() => this.changeCardView(defaultCardView)}
+            onMouseOver={() => changeCardView(pair.id, 'letters')}
+            onMouseOut={() => changeCardView(pair.id, defaultCardView)}
           >
             Letters
           </div>
           <div
             className="tab words"
-            onMouseOver={() => this.changeCardView('words')}
-            onMouseOut={() => this.changeCardView(defaultCardView)}
+            onMouseOver={() => changeCardView(pair.id, 'words')}
+            onMouseOut={() => changeCardView(pair.id, defaultCardView)}
           >
             Words
           </div>
           <div
             className="tab phrase"
-            onMouseOver={() => this.changeCardView('phrase')}
-            onMouseOut={() => this.changeCardView(defaultCardView)}
+            onMouseOver={() => changeCardView(pair.id, 'phrase')}
+            onMouseOut={() => changeCardView(pair.id, defaultCardView)}
           >
             Phrase
           </div>

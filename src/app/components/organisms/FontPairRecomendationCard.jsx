@@ -14,13 +14,14 @@ export default class FontPairRecomendationCard extends React.Component {
   }
 
   openPairPage = () => {
-    const { pair, openPairPage } = this.props
-    openPairPage(pair.id)
+    const { pair, actions } = this.props
+    actions.openPairPage(pair.id)
     this.scrollToTop()
   }
 
   render() {
-    const { pair, openPairPage, recomendationList } = this.props
+    const { pair, actions, defaultValues } = this.props
+    const { recomendationList } = defaultValues
 
     recomendationList.push(pair.id)
 

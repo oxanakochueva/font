@@ -1,4 +1,14 @@
-.selectView {
+.type {
+  width: 165px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  font-size: 13px;
+  font-family: 'PT Sans';
+  color: #aeaeae;
+}
+.selectType {
   &.opened {
     display: flex;
     flex-direction: column;
@@ -17,9 +27,11 @@
       transform: rotate(180deg);
     }
 
-    .selectViewName {
+    .selectTypeName {
+      width: 75px;
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       color: #2a2921;
       background: #ffffff;
       font-size: 13px;
@@ -35,9 +47,11 @@
   }
 
   &.closed {
-    .selectViewName {
+    .selectTypeName {
+      width: 75px;
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       color: #2a2921;
       background: #ffffff;
       font-size: 13px;
@@ -58,10 +72,15 @@
     }
   }
 
-  .ViewList {
+  .TypeList {
     display: flex;
+    flex-direction: column;
+    color: #2a2921;
+    font-size: 13px;
+    font-family: 'PT Sans';
 
-    .selectViewItem {
+    .selectTypeItem {
+      width: 75px;
       display: flex;
       flex-direction: row;
       color: #2a2921;
@@ -89,6 +108,11 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 7px;
         border-bottom-left-radius: 0;
+        color: #aeaeae;
+        &:hover {
+          color: #d7d7d4;
+          font-weight: 400;
+        }
       }
 
       &:hover {

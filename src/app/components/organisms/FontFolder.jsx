@@ -8,26 +8,17 @@ export default class FontFolder extends React.Component {
     super(props)
 
     this.state = {}
-
-    let folderStatus = 'isClosed'
   }
 
   render() {
-    const {
-      folder,
-      folders,
-      pairs,
-      changeCardView,
-      openPairPage,
-      defaultCardView,
-      openFolder,
-      closeFolder,
-      test
-      // openedFolders
-    } = this.props
+    const { folder, folders, pairs, actions, defaultValues } = this.props
 
-    let { folderStatus, openedFolders } = this.props
-    console.log(openedFolders)
+    let folderStatus = 'isClosed'
+
+    const { changeCardView, openPairPage, openFolder, closeFolder } = actions
+
+    const { openedFolders, defaultCardView } = defaultValues
+
     openedFolders.forEach((openedFolder, i) => {
       if (openedFolder === folder) {
         folderStatus = 'isOpened'
@@ -55,9 +46,8 @@ export default class FontFolder extends React.Component {
             <FontPairList
               folder={folder}
               pairs={pairs}
-              changeCardView={changeCardView}
-              openPairPage={openPairPage}
-              defaultCardView={defaultCardView}
+              actions={actions}
+              defaultValues={defaultValues}
             />
           </>
         ) : (

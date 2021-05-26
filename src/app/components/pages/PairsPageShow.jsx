@@ -10,118 +10,75 @@ export default class PairsPageShow extends React.Component {
     this.state = {}
   }
 
-  renderFont = (font, fontFamily) => {
-    const { paragraphs, designers } = this.props
-
-    let fontParagraphs = []
-    paragraphs.forEach((paragraph, i) => {
-      if (paragraph.font_id === font.id) {
-        fontParagraphs.push(paragraph)
-      }
-    })
-
-    let fontDesigners = []
-    font.designers.forEach((id, i) => {
-      designers.forEach((designer, i) => {
-        if (id === designer.id) {
-          fontDesigners.push(designer)
-        }
-      })
-    })
-
-    return (
-      <FontDescription
-        font={font}
-        paragraphs={fontParagraphs}
-        designers={fontDesigners}
-        fontFamily={fontFamily}
-        key={font.id}
-      />
-    )
-  }
-
   render() {
     const {
       fonts,
       pairs,
       paragraphs,
       designers,
-      currentPairId,
-      exportPageToFigma,
-      openPairsPageIndex,
-      pairsInCurrentFolder,
-      openPairPage,
-      recomendationList
+      actions,
+      defaultValues,
+      currentPairInfo,
+      fontElements
     } = this.props
-    let fontList = []
-    let fontElements = []
-    let pairHeader = ''
-    let fontStyle = ''
-    let fontFamily = []
 
-    pairs.forEach((pair, i) => {
-      if (pair.id === currentPairId) {
-        fontList = pair.fonts
-        pairHeader = pair.heading
-        fontStyle = pair.folder
-      }
-    })
+    const {
+      primaryFontFamily,
+      secondaryFontFamily,
+      fontList,
+      pairHeader
+    } = currentPairInfo
 
-    fonts.forEach((font, i) => {
-      if (font.id === fontList[0]) {
-        fontFamily.push(font.heading)
-      }
-    })
+    const { openPairsPageIndex, exportPageToFigma, openPairPage } = actions
+    const { currentPairId, recomendationList } = defaultValues
 
-    fonts.forEach((font, i) => {
-      if (font.id === fontList[1]) {
-        fontFamily.push(font.heading)
-      }
-    })
+    let fontFamilyOfPairs = []
+    fontFamilyOfPairs.push(
+      fontElements.firstFont.fontFamily,
+      fontElements.secondFont.fontFamily
+    )
 
-    fonts.forEach((font, i) => {
-      if (font.id === fontList[0]) {
-        fontElements.push(this.renderFont(font, fontFamily))
-      }
-    })
-
-    fonts.forEach((font, i) => {
-      if (font.id === fontList[1]) {
-        fontElements.push(this.renderFont(font, fontFamily))
-      }
-    })
+    console.log('hello from show', this.props.currentPairInfo)
 
     return (
       <>
         <PageNavigation
-          openPairsPageIndex={openPairsPageIndex}
-          exportPageToFigma={exportPageToFigma}
-          currentPairId={currentPairId}
+          actions={actions}
+          defaultValues={defaultValues}
           page="show"
         />
 
         <div className="pairContainer">
           <div
             className="pairHeader"
-            style={{ fontFamily: fontFamily[0], fontWeight: 600 }}
+            style={{ fontFamily: fontFamilyOfPairs[0], fontWeight: 600 }}
           >
             {pairHeader}
           </div>
-
           <img
             className="pairCover"
             src={require(`../../assets/images/pairs/articles/4x/${currentPairId}.png`)}
           />
-          {fontElements}
+          <FontDescription
+            font={fontElements.firstFont.font}
+            paragraphs={fontElements.firstFont.fontParagraphs}
+            designers={fontElements.firstFont.fontDesigners}
+            fontFamily={fontFamilyOfPairs}
+          />
+          <FontDescription
+            font={fontElements.secondFont.font}
+            paragraphs={fontElements.secondFont.fontParagraphs}
+            designers={fontElements.secondFont.fontDesigners}
+            fontFamily={fontFamilyOfPairs}
+          />
           <div className="otherPairings">
-            <h2 style={{ fontFamily: fontFamily[0], fontWeight: 600 }}>
+            <h2 style={{ fontFamily: fontFamilyOfPairs[0], fontWeight: 600 }}>
               Other pairings
             </h2>
             <FontPairRecomendation
               pairs={pairs}
-              currentPairId={currentPairId}
-              openPairPage={openPairPage}
-              recomendationList={recomendationList}
+              actions={actions}
+              defaultValues={defaultValues}
             />
           </div>
           <div className="copyright">

@@ -14,71 +14,93 @@ export default class PairsPageIndex extends React.Component {
   }
 
   render() {
+    const { pairs, folders, actions, defaultValues } = this.props
+
     const {
-      pairs,
-      folders,
       changeCardView,
       openPairPage,
-      findFont,
-      filtered,
-      defaultCardView,
-      changeDefaultView,
-      selectViewOpened,
-      toggleSelectView,
-      selectViewOptions,
       openFolder,
       closeFolder,
-      openedFolders,
       resetSearch,
+      findFont
+    } = actions
+
+    const {
+      defaultCardView,
+      currentTypeOption,
+      openedFolders,
       searchRequest,
-      test
-    } = this.props
+      selectViewOptions,
+      selectTypeOptions,
+      selectTypeOpened,
+      pairsLeft,
+      pairsRight,
+      pairsNew,
+      from,
+      to,
+      filtered,
+      currentPairId
+    } = defaultValues
 
     let folderContent = []
 
-    if (filtered === 'no') {
-      folders.sort().forEach((folder, i) => {
-        folderContent.push(
-          <FontFolder
-            folder={folder}
-            folders={folders}
-            pairs={pairs}
-            changeCardView={changeCardView}
-            openPairPage={openPairPage}
-            defaultCardView={defaultCardView}
-            key={i}
-            openFolder={openFolder}
-            closeFolder={closeFolder}
-            openedFolders={openedFolders}
-            test={test}
-          />
-        )
-      })
-    } else if (filtered === 'yes') {
+    folders.sort().forEach((folder, i) => {
       folderContent.push(
-        <SearchFolder
+        <FontFolder
+          folder={folder}
+          folders={folders}
           pairs={pairs}
-          changeCardView={changeCardView}
-          openPairPage={openPairPage}
-          searchRequest={searchRequest}
+          actions={actions}
+          defaultValues={defaultValues}
+          key={i}
         />
       )
-    }
+    })
+
+    // if (filtered === 'no') {
+    //   console.log(folders)
+    //   // folders.sort().forEach((folder, i) => {
+    //   folders.forEach((folder, i) => {
+    //     folderContent.push(
+    //       <FontFolder
+    //         folder={folder}
+    //         folders={folders}
+    //         pairs={pairs}
+    //         actions={actions}
+    //         defaultValues={defaultValues}
+    //         key={i}
+    //       />
+    //     )
+    //   })
+    // } else if (filtered === 'yes') {
+    //   folderContent.push(
+    //     <SearchFolder
+    //       pairs={pairs}
+    //       actions={actions}
+    //       defaultValues={defaultValues}
+    //     />
+    //   )
+    // }
 
     return (
       <>
         <PageNavigation
           pairs={pairs}
-          resetSearch={resetSearch}
-          findFont={findFont}
           page="index"
-          searchRequest={searchRequest}
-          defaultCardView={defaultCardView}
-          changeDefaultView={changeDefaultView}
-          selectViewOptions={selectViewOptions}
-          toggleSelectView={toggleSelectView}
+          actions={actions}
+          defaultValues={defaultValues}
         />
-        <div className="folder">{folderContent}</div>
+
+        <div className="folder">
+          {filtered === 'yes' ? (
+            <div className="fontFolderName" style={{ fontFamily: 'PT Sans' }}>
+              {pairs.length} results for «{searchRequest}»
+            </div>
+          ) : (
+            ''
+          )}
+          {folderContent}
+        </div>
       </>
     )
   }

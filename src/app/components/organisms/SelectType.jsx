@@ -2,59 +2,47 @@ import classnames from 'classnames'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import SelectTypeDropdown from '../organisms/SelectTypeDropdown'
+
 export default class SelectType extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      folderStatus: 'isClosed'
-    }
-  }
-
-  openFolder = () => {
-    // const { pair, openPairPage } = this.props
-    // openPairPage(pair.id)
-    // console.log(folder)
-    this.setState({
-      folderStatus: 'isOpened'
-    })
-  }
-  closeFolder = () => {
-    this.setState({
-      folderStatus: 'isClosed'
-    })
   }
 
   render() {
-    const { folder, pairs, changeCardView, openPairPage } = this.props
-    const classes = classnames({
-      fontFolder: true,
-      open: this.state.folderStatus === 'isOpened',
-      closed: this.state.folderStatus === 'isClosed'
-    })
+    const { pairs, actions, defaultValues } = this.props
+    const { toggleSelectType, changeDefaultType } = actions
+    const {
+      selectTypeOptions,
+      currentTypeOption,
+      selectTypeOpened,
+      pairsLeft,
+      pairsRight,
+      from,
+      to
+    } = defaultValues
+
     return (
-      <div className={classes} id={folder}>
-        {this.state.folderStatus === 'isOpened' ? (
-          <>
-            <div className="fontFolderName" style={{ fontFamily: folder }}>
-              {folder}
-              <div className="chevron up" onClick={this.closeFolder}></div>
-            </div>
-            <FontPairList
-              folder={folder}
-              pairs={pairs}
-              changeCardView={changeCardView}
-              openPairPage={openPairPage}
-            />
-          </>
-        ) : (
-          <>
-            <div className="fontFolderName" style={{ fontFamily: folder }}>
-              {folder}
-              <div className="chevron down" onClick={this.openFolder}></div>
-            </div>
-          </>
-        )}
+      <div className="type">
+        <SelectTypeDropdown
+          pairs={pairs}
+          dropdown={pairsLeft}
+          select={from}
+          actions={actions}
+          handleClick={toggleSelectType}
+          defaultValues={defaultValues}
+          primary={'primary'}
+        />
+        +
+        <SelectTypeDropdown
+          pairs={pairs}
+          actions={actions}
+          handleClick={toggleSelectType}
+          defaultValues={defaultValues}
+          dropdown={pairsRight}
+          select={to}
+          primary={'secondary'}
+        />
       </div>
     )
   }

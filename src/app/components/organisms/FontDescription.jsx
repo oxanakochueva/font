@@ -12,19 +12,16 @@ export default class FontDescription extends React.Component {
   //   return { __html: designer.texts.en.designer.description }
   // }
 
-  renderParagraphs = () => {
-    const { paragraphs } = this.props
-    let paragraphElements = []
-    paragraphs.forEach((paragraph, i) => {
-      paragraphElements.push(<FontParagraph paragraph={paragraph} key={i} />)
-    })
-    return paragraphElements
-  }
-
   render() {
-    const { font, fontFamily, designers } = this.props
+    const { font, fontFamily, designers, paragraphs, actions } = this.props
 
     let fontDesignersInfo = []
+    let paragraphElements = []
+
+    paragraphs.forEach((paragraph, i) => {
+      console.log(paragraph)
+      paragraphElements.push(<FontParagraph paragraph={paragraph} key={i} />)
+    })
 
     designers.forEach((designer, i) => {
       fontDesignersInfo.push(
@@ -48,7 +45,7 @@ export default class FontDescription extends React.Component {
           {font.heading}
         </h1>
         <div className="aboutFont" style={{ fontFamily: fontFamily[1] }}>
-          {this.renderParagraphs()}
+          {paragraphElements}
         </div>
         <h2 style={{ fontFamily: fontFamily[0], fontWeight: 600 }}>Designer</h2>
         {fontDesignersInfo}

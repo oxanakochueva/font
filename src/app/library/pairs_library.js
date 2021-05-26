@@ -58,6 +58,7 @@ const pairs = [
     heading: 'Josefin Sans + Cardo',
     fonts: ['josefin_sans', 'cardo'],
     languages: ['en'],
+    type: ['Sans Serif', 'Serif'],
     cover: josefin_sans_cardo_cover
   },
   {

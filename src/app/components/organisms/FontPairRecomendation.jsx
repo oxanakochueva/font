@@ -8,7 +8,8 @@ export default class FontPairRecomendation extends React.Component {
   }
 
   render() {
-    const { pairs, currentPairId, openPairPage, recomendationList } = this.props
+    const { pairs, currentPairId, actions, defaultValues } = this.props
+    const { recomendationList } = defaultValues
     let pairsRecomendation = []
 
     pairs.forEach((pair, i) => {
@@ -16,9 +17,9 @@ export default class FontPairRecomendation extends React.Component {
         pairsRecomendation.push(
           <FontPairRecomendationCard
             pair={pair}
-            openPairPage={openPairPage}
+            actions={actions}
+            defaultValues={defaultValues}
             key={i}
-            recomendationList={recomendationList}
           />
         )
       }

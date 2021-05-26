@@ -4,6 +4,7 @@ import Search from '../atoms/Search'
 import Select from '../atoms/Select'
 import Button from '../atoms/Button'
 import SelectView from '../organisms/SelectView'
+import SelectType from '../organisms/SelectType'
 
 export default class PageNavigation extends React.Component {
   constructor(props) {
@@ -14,26 +15,26 @@ export default class PageNavigation extends React.Component {
     // }
   }
   exportPageToFigma = () => {
-    const { currentPairId, exportPageToFigma } = this.props
-    exportPageToFigma(currentPairId)
+    const { defaultValues, actions } = this.props
+    actions.exportPageToFigma(defaultValues.currentPairId)
+    console.log(defaultValues.currentPairId)
   }
 
   render() {
-    let {
+    const { page, pairs, actions, defaultValues } = this.props
+
+    const {
       openPairsPageIndex,
-      exportPageToFigma,
-      currentPairId,
-      resetSearch,
-      page,
-      pairs,
-      findFont,
-      searchRequest,
-      defaultCardView,
-      selectViewOptions,
-      selectViewOpened,
+      toggleSelectType,
+      changeDefaultLeftType,
+      changeDefaultRightType,
+      changeDefaultView,
       toggleSelectView,
-      changeDefaultView
-    } = this.props
+      resetSearch
+    } = actions
+
+    const { searchRequest } = defaultValues
+
     return (
       <div className="PageNavigation">
         {page === 'show' ? (
@@ -58,18 +59,39 @@ export default class PageNavigation extends React.Component {
         ) : page === 'index' ? (
           <div className="buttonsSet">
             <Search
-              fieldAction={findFont}
-              resetSearch={resetSearch}
+              // fieldAction={actions.findFont}
+              // resetSearch={resetSearch}
               pairs={pairs}
-              searchRequest={searchRequest}
+              // searchRequest={searchRequest}
+              actions={actions}
+              defaultValues={defaultValues}
             />
+            <SelectType
+              // selectTypeOptions={selectTypeOptions}
+              pairs={pairs}
+              // currentTypeOption={currentTypeOption}
+              // selectTypeOpened={selectTypeOpened}
+              // handleClick={toggleSelectType}
+              // pairsLeft={pairsLeft}
+              // pairsRight={pairsRight}
+              // pairsNew={pairsNew}
+              // changeDefaultLeftType={changeDefaultLeftType}
+              // changeDefaultRightType={changeDefaultRightType}
+              // from={from}
+              // to={to}
+              actions={actions}
+              defaultValues={defaultValues}
+            />
+
             <SelectView
-              defaultCardView={defaultCardView}
-              changeDefaultView={changeDefaultView}
+              // defaultCardView={defaultCardView}
+              // changeDefaultView={changeDefaultView}
               pairs={pairs}
               handleClick={toggleSelectView}
-              selectViewOpened={selectViewOpened}
-              selectViewOptions={selectViewOptions}
+              // selectViewOpened={selectViewOpened}
+              // selectViewOptions={selectViewOptions}
+              actions={actions}
+              defaultValues={defaultValues}
             />
           </div>
         ) : (

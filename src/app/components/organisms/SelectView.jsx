@@ -25,15 +25,8 @@ export default class SelectView extends React.Component {
   }
 
   render() {
-    const {
-      defaultCardView,
-      changeDefaultView,
-      pairs,
-      handleClick,
-      selectViewOpened,
-      selectViewOptions,
-      toggleSelectView
-    } = this.props
+    const { pairs, handleClick, actions, defaultValues } = this.props
+    const { selectViewOptions, defaultCardView } = defaultValues
 
     const classes = classnames({
       selectView: true,
@@ -47,9 +40,11 @@ export default class SelectView extends React.Component {
       viewOptions.push(
         <ViewList
           viewType={option}
-          changeDefaultView={changeDefaultView}
-          defaultCardView={defaultCardView}
+          // changeDefaultView={changeDefaultView}
+          // defaultCardView={defaultCardView}
           pairs={pairs}
+          actions={actions}
+          defaultValues={defaultValues}
           key={i}
         />
       )

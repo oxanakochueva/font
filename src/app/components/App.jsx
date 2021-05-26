@@ -14,9 +14,18 @@ import { paragraphs } from '../library/paragraphs.js'
 import { designers } from '../library/designers.js'
 import { notifications } from '../library/notifications.js'
 
+onmessage = msg => {
+  // if (msg.type === 'get-storage') {
+  console.log('message', msg)
+  // }
+}
+
 export default class App extends React.Component {
   constructor(params) {
     super(params)
+
+    this.getFromStorage()
+    this.setToStorage('some id')
 
     pairs.map((pair, i) => {
       pair.view = 'letters'
@@ -24,7 +33,6 @@ export default class App extends React.Component {
     })
 
     this.state = {
-      pairs: pairs,
       page: 'pairs',
       currentPairId: '',
       language: 'en',
@@ -34,28 +42,133 @@ export default class App extends React.Component {
       searchRequest: '',
       selectViewOptions: ['letters', 'words', 'phrase'],
       selectViewOpened: false,
-      folders: [
-        'Josefin Sans',
-        'Lora',
-        'Ubuntu',
-        'Nunito',
-        'Source Sans Pro',
-        'Roboto',
-        'Open Sans',
-        'Raleway',
-        'Lato',
-        'Montserrat'
-      ],
       recomendationList: [],
       openedFolders: [],
-      test: false
+      test: false,
+      pairsFilteredByType: [],
+
+      selectTypeOptions: ['Serif', 'Sans Serif', 'Mono', 'Clear'],
+      currentTypeOption: [],
+      selectTypeOpened: false,
+
+      pairsLeft: 'pairsLeft',
+      pairsRight: 'pairsRight',
+      from: 'Select',
+      to: 'Select',
+      pairsNew: [],
+      leftParameter: [],
+      rightParameter: [],
+      newPairs: pairs,
+      pairInfo: {},
+      fontElementsOfPair: []
     }
   }
 
+  getFromStorage = () => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'get-storage'
+        }
+      },
+      '*'
+    )
+  }
+  setToStorage = id => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'set-storage',
+          id: id
+        }
+      },
+      '*'
+    )
+  }
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto'
+    })
+  }
+
   openPairPage = pairId => {
+    let currentPairInfo
+
+    let firstFontParagraphs = []
+    let secondFontParagraphs = []
+
+    let firstFontDesigners = []
+    let secondFontDesigners = []
+
+    pairs.forEach((pair, i) => {
+      if (pair.id === pairId) {
+        let fontList = pair.fonts
+        let pairHeader = pair.heading
+        let fontStyle = pair.folder
+        fontList.forEach((fontListItem, i) => {
+          this.renderFontDescription(fontListItem)
+        })
+
+        currentPairInfo = {
+          fontList: pair.fonts,
+          pairHeader: pair.heading,
+          fontStyle: pair.folder,
+          primaryFontFamily: fontList[0],
+          secondaryFontFamily: fontList[1]
+        }
+      }
+    })
+
     this.setState({
       page: 'article',
-      currentPairId: pairId
+      currentPairId: pairId,
+      pairInfo: currentPairInfo
+    })
+    this.scrollToTop()
+  }
+
+  renderFontDescription = fontDescription => {
+    console.log('hola', fontDescription)
+
+    let fontParagraphs = []
+    let fontDesigners = []
+    let fontFamily
+
+    fonts.forEach((font, i) => {
+      if (font.id === fontDescription) {
+        fontFamily = font.heading
+        font.designers.forEach((id, i) => {
+          designers.forEach((designer, i) => {
+            if (id === designer.id) {
+              fontDesigners.push(designer)
+            }
+          })
+        })
+        paragraphs.forEach((paragraph, i) => {
+          if (paragraph.font_id === fontDescription) {
+            fontParagraphs.push(paragraph)
+          }
+        })
+
+        let info = {
+          font: font,
+          fontDesigners: fontDesigners,
+          fontParagraphs: fontParagraphs,
+          fontFamily: fontFamily
+        }
+
+        let { fontElementsOfPair } = this.state
+
+        fontElementsOfPair.push(info)
+        console.log('from render', info)
+        // return info
+
+        // this.setState({
+        //   pairInfo: info
+        // })
+      }
     })
   }
 
@@ -113,7 +226,7 @@ export default class App extends React.Component {
   }
 
   changeCardView = (pairId, view) => {
-    const { pairs, defaultView } = this.state
+    const { defaultView } = this.state
     let nextPairs = []
 
     pairs.forEach((pair, i) => {
@@ -140,19 +253,156 @@ export default class App extends React.Component {
       defaultView: type
     })
   }
+  changeDefaultLeftType = (type, dropdown) => {
+    let { leftParameter, rightParameter, pairs } = this.state
 
-  //   toggleSelect(name) {
-  //   if (name == 'openedFrom') {
-  //     this.setState({
-  //       fromSelectOpen: true
-  //     })
-  //   }
-  //   if (name == 'openedTo') {
-  //     this.setState({
-  //       toSelectOpen: true
-  //     })
-  //   }
-  // }
+    // console.log('left', type)
+
+    pairs.forEach((pair, i) => {
+      if (pair.type[0] === type) {
+        // leftParameter.length = 0
+        leftParameter.push(pair)
+        this.setState({
+          from: type
+        })
+      }
+    })
+
+    if (type === 'Clear') {
+      leftParameter = pairs
+      this.setState({
+        from: 'Select',
+        selectTypeOpened: false
+      })
+    }
+
+    // this.renderPairsSortedByType()
+
+    // console.log('pairs with left type', leftParameter)
+  }
+
+  changeDefaultRightType = (type, dropdown) => {
+    let { leftParameter, rightParameter, pairs } = this.state
+
+    // console.log('right', type)
+
+    pairs.forEach((pair, i) => {
+      if (pair.type[1] === type) {
+        // rightParameter.length = 0
+        rightParameter.push(pair)
+        this.setState({
+          to: type,
+          selectTypeOpened: false
+        })
+      }
+    })
+
+    if (type === 'Clear') {
+      rightParameter = pairs
+      this.setState({
+        to: 'Select'
+      })
+    }
+  }
+
+  changeDefaultType = (type, dropdown, primary) => {
+    let {
+      leftParameter,
+      rightParameter,
+      pairs,
+      newPairs,
+      from,
+      to
+    } = this.state
+
+    console.log(primary)
+    let pairsForNew = []
+
+    pairs.forEach((pair, i) => {
+      if (primary === 'primary') {
+        if (pair.type[0] === type) {
+          leftParameter.push(pair)
+
+          this.setState({
+            from: type,
+            selectTypeOpened: false
+          })
+        }
+        if (type === 'Clear') {
+          rightParameter = pairs
+          this.setState({
+            from: 'Select'
+          })
+        }
+      } else if (primary === 'secondary') {
+        if (pair.type[1] === type) {
+          rightParameter.push(pair)
+          this.setState({
+            to: type,
+            selectTypeOpened: false
+          })
+        }
+        if (type === 'Clear') {
+          rightParameter = pairs
+          this.setState({
+            to: 'Select'
+          })
+        }
+      }
+    })
+
+    setTimeout(() => {
+      this.renderPairsSortedByType()
+    }, 1)
+  }
+
+  renderPairsSortedByType = () => {
+    let {
+      leftParameter,
+      rightParameter,
+      newPairs,
+      pairs,
+      from,
+      to
+    } = this.state
+
+    let sorted = []
+
+    let pairsForNew = leftParameter.concat(rightParameter)
+
+    pairsForNew.forEach((pair, i) => {
+      if (pair.type[0] === from && pair.type[1] === to) {
+        sorted.push(pair)
+      }
+    })
+
+    let uniquePairs = sorted.filter(
+      (set => sortedItem => !set.has(sortedItem.id) && set.add(sortedItem.id))(
+        new Set()
+      )
+    )
+    this.setState({
+      newPairs: [...uniquePairs]
+    })
+
+    console.log(from, to)
+
+    console.log(sorted, uniquePairs, newPairs)
+  }
+
+  toggleSelectType = () => {
+    console.log('hello type')
+    let selectState = this.state.selectTypeOpened
+    if (selectState == true) {
+      this.setState({
+        selectTypeOpened: false
+      })
+    } else {
+      this.setState({
+        selectTypeOpened: true
+      })
+    }
+  }
 
   toggleSelectView = () => {
     console.log('hello')
@@ -169,17 +419,11 @@ export default class App extends React.Component {
   }
 
   openFolder = folder => {
-    let { folders, openedFolders, test } = this.state
+    let { openedFolders, test } = this.state
 
-    folders.forEach((fold, i) => {
-      if (fold === folder) {
-        openedFolders.push(fold)
-        this.setState({
-          test: true
-        })
-      }
-
-      // console.log(openedFolders)
+    openedFolders.push(folder)
+    this.setState({
+      test: true
     })
   }
 
@@ -198,80 +442,114 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(fonts)
-    const {
-      pairs,
-      folders,
-      filteredPairs,
-      searchRequest,
-      filtered,
-      selectViewOpened,
-      selectViewOptions,
-      defaultView,
-      recomendationList,
-      openedFolders,
-      test
-    } = this.state
+    // const { pairs, folders, filteredPairs, fontElementsOfPair } = this.state
+    const { filteredPairs, fontElementsOfPair } = this.state
+
+    let fontElements = {
+      firstFont: fontElementsOfPair[0],
+      secondFont: fontElementsOfPair[1]
+    }
+    console.log('fontElements', fontElements)
+
+    const actions = {
+      changeCardView: this.changeCardView,
+      openPairPage: this.openPairPage,
+      findFont: this.findFont,
+      changeDefaultView: this.changeDefaultView,
+      toggleSelectView: this.toggleSelectView,
+      openFolder: this.openFolder,
+      closeFolder: this.closeFolder,
+      toggleSelectType: this.toggleSelectType,
+      changeDefaultType: this.changeDefaultType,
+      exportPageToFigma: this.exportPageToFigma,
+      openPairsPageIndex: this.openPairsPageIndex,
+      resetSearch: this.resetSearch,
+      findFont: this.findFont
+    }
+
+    const defaultValues = {
+      filtered: this.state.filtered,
+      defaultCardView: this.state.defaultView,
+      selectViewOpened: this.state.selectViewOpened,
+      selectViewOptions: this.state.selectViewOptions,
+      openedFolders: this.state.openedFolders,
+      selectTypeOptions: this.state.selectTypeOptions,
+      currentTypeOption: this.state.currentTypeOption,
+      selectTypeOpened: this.state.selectTypeOpened,
+      pairsLeft: this.state.pairsLeft,
+      pairsRight: this.state.pairsRight,
+      pairsNew: this.state.pairsNew,
+      from: this.state.from,
+      to: this.state.to,
+      searchRequest: this.state.searchRequest,
+      recomendationList: this.state.recomendationList,
+      currentPairId: this.state.currentPairId
+    }
+
+    /// filteredPairs папки
+
+    let allFolders = []
+    // let
+
+    pairs.forEach((pair, i) => {
+      if (this.state.filtered === 'no') {
+        allFolders.push(pair)
+      } else if (this.state.filtered === 'yes') {
+        filteredPairs.forEach((filteredPair, i) => {
+          allFolders.push(filteredPair)
+        })
+      }
+    })
+    console.log(allFolders)
+
+    let uniqueFolders = allFolders.filter(
+      (set => sortedItem =>
+        !set.has(sortedItem.folder) && set.add(sortedItem.folder))(new Set())
+    )
+
+    let newFolders = []
+
+    uniqueFolders.forEach((folder, i) => {
+      newFolders.push(folder.folder)
+    })
+
+    let uniquePairsTest = allFolders.filter(
+      (set => sortedItem => !set.has(sortedItem.id) && set.add(sortedItem.id))(
+        new Set()
+      )
+    )
+
+    let newPairsTest = []
+
+    uniquePairsTest.forEach((pair, i) => {
+      newPairsTest.push(pair)
+    })
+
+    console.log('allFolders', allFolders, 'newPairsTest', newPairsTest)
 
     return (
       <div>
         <div className="container">
           {this.state.page === 'pairs' ? (
-            this.state.filtered === 'no' ? (
-              <div>
-                <PairsPageIndex
-                  pairs={pairs}
-                  folders={folders}
-                  changeCardView={this.changeCardView}
-                  openPairPage={this.openPairPage}
-                  findFont={this.findFont}
-                  filtered={filtered}
-                  defaultCardView={defaultView}
-                  changeDefaultView={this.changeDefaultView}
-                  selectViewOpened={selectViewOpened}
-                  toggleSelectView={this.toggleSelectView}
-                  selectViewOptions={selectViewOptions}
-                  openFolder={this.openFolder}
-                  closeFolder={this.closeFolder}
-                  openedFolders={openedFolders}
-                  test={test}
-                />
-              </div>
-            ) : this.state.filtered === 'yes' ? (
-              <div>
-                <PairsPageIndex
-                  pairs={filteredPairs}
-                  folders={folders}
-                  searchRequest={searchRequest}
-                  resetSearch={this.resetSearch}
-                  pairs={pairs}
-                  changeCardView={this.changeCardView}
-                  openPairPage={this.openPairPage}
-                  findFont={this.findFont}
-                  filtered={filtered}
-                  defaultCardView={defaultView}
-                  changeDefaultView={this.changeDefaultView}
-                  selectViewOpened={selectViewOpened}
-                  toggleSelectView={this.toggleSelectView}
-                  selectViewOptions={selectViewOptions}
-                  openedFolders={openedFolders}
-                />
-              </div>
-            ) : (
-              ''
-            )
+            <div>
+              <PairsPageIndex
+                pairs={newPairsTest}
+                folders={newFolders}
+                actions={actions}
+                defaultValues={defaultValues}
+              />
+            </div>
           ) : this.state.page === 'article' ? (
             <div className="wrapper">
               <PairsPageShow
                 fonts={fonts}
                 pairs={pairs}
+                currentPairInfo={this.state.pairInfo}
+                fontElements={fontElements}
                 paragraphs={paragraphs}
                 designers={designers}
-                currentPairId={this.state.currentPairId}
-                exportPageToFigma={this.exportPageToFigma}
-                openPairsPageIndex={this.openPairsPageIndex}
-                openPairPage={this.openPairPage}
-                recomendationList={recomendationList}
+                actions={actions}
+                defaultValues={defaultValues}
               />
             </div>
           ) : (

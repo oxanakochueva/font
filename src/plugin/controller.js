@@ -83,6 +83,12 @@ figma.ui.onmessage = msg => {
     newCurrentImages.forEach((image, i) => {
       figma.ui.postMessage({ id: image.id, image: image.image })
     })
+  } else if (msg.type === 'set-storage') {
+    figma.clientStorage.setAsync('test', { something: msg.id })
+  } else if (msg.type === 'get-storage') {
+    const test = figma.clientStorage.getAsync('test')
+    console.log('from controller', test)
+    figma.ui.postMessage({ type: 'get-storage', data: test })
   } else {
     console.log('unknown message')
   }
