@@ -59,15 +59,13 @@ export default class PageNavigation extends React.Component {
         ) : page === 'index' ? (
           <div className="buttonsSet">
             <Search
-              // fieldAction={actions.findFont}
-              // resetSearch={resetSearch}
-              pairs={pairs}
-              // searchRequest={searchRequest}
-              actions={actions}
+              handleInputChange={actions.setSearchRequest}
+              handleResetSearch={actions.resetSearch}
               defaultValues={defaultValues}
             />
+
             <SelectType
-              // selectTypeOptions={selectTypeOptions}
+              // typeOptions={typeOptions}
               pairs={pairs}
               // currentTypeOption={currentTypeOption}
               // selectTypeOpened={selectTypeOpened}
@@ -89,7 +87,7 @@ export default class PageNavigation extends React.Component {
               pairs={pairs}
               handleClick={toggleSelectView}
               // selectViewOpened={selectViewOpened}
-              // selectViewOptions={selectViewOptions}
+              // viewOptions={viewOptions}
               actions={actions}
               defaultValues={defaultValues}
             />

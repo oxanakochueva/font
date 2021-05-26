@@ -9,9 +9,9 @@ export default class FontPairCard extends React.Component {
   }
 
   render() {
-    const { folder, pair, actions, defaultValues } = this.props
+    const { pair, actions, defaultValues } = this.props
     const { defaultCardView } = defaultValues
-    const { openPairPage, changeCardView } = actions
+    const { openPairsPageShow, changeCardView } = actions
 
     const classes = classnames({
       fontPairCard: true,
@@ -31,7 +31,7 @@ export default class FontPairCard extends React.Component {
       <div
         className={classes}
         id={pair.folder}
-        onClick={() => openPairPage(pair.id)}
+        onClick={() => openPairsPageShow(pair.id)}
       >
         <div className="cardHeader">
           <div className="fontPairName">{pair.heading}</div>

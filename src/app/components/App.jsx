@@ -33,34 +33,17 @@ export default class App extends React.Component {
     })
 
     this.state = {
-      page: 'pairs',
-      currentPairId: '',
+      page: 'index',
+      currentPairId: null,
+      searchRequest: '',
       language: 'en',
       defaultView: 'letters',
-      filtered: 'no',
-      filteredPairs: [],
-      searchRequest: '',
-      selectViewOptions: ['letters', 'words', 'phrase'],
       selectViewOpened: false,
-      recomendationList: [],
       openedFolders: [],
-      test: false,
-      pairsFilteredByType: [],
-
-      selectTypeOptions: ['Serif', 'Sans Serif', 'Mono', 'Clear'],
-      currentTypeOption: [],
-      selectTypeOpened: false,
-
-      pairsLeft: 'pairsLeft',
-      pairsRight: 'pairsRight',
       from: 'Select',
       to: 'Select',
-      pairsNew: [],
       leftParameter: [],
-      rightParameter: [],
-      newPairs: pairs,
-      pairInfo: {},
-      fontElementsOfPair: []
+      rightParameter: []
     }
   }
 
@@ -74,6 +57,7 @@ export default class App extends React.Component {
       '*'
     )
   }
+
   setToStorage = id => {
     parent.postMessage(
       {
@@ -93,7 +77,7 @@ export default class App extends React.Component {
     })
   }
 
-  openPairPage = pairId => {
+  openPairsPageShow = pairId => {
     let currentPairInfo
 
     let firstFontParagraphs = []
@@ -122,7 +106,7 @@ export default class App extends React.Component {
     })
 
     this.setState({
-      page: 'article',
+      page: 'show',
       currentPairId: pairId,
       pairInfo: currentPairInfo
     })
@@ -195,33 +179,20 @@ export default class App extends React.Component {
     )
   }
 
-  findFont = e => {
-    let currentList = pairs
-    let newList = []
-    let filter = ''
-
-    if (e.target.value !== '') {
-      currentList.filter(pair => {
-        const font = pair.heading.toLowerCase()
-        filter = e.target.value.toLowerCase()
-
-        if (font.includes(filter)) {
-          newList.push(pair)
-        }
-      })
-
+  // убрать filtered
+  setSearchRequest = request => {
+    if (request !== '') {
       this.setState({
-        filteredPairs: newList,
-        filtered: 'yes',
-        searchRequest: filter
+        searchRequest: request,
+        filtered: true
       })
     }
-    console.log(newList)
   }
 
   resetSearch = () => {
     this.setState({
-      filtered: 'no'
+      searchRequest: '',
+      filtered: false
     })
   }
 
@@ -253,6 +224,7 @@ export default class App extends React.Component {
       defaultView: type
     })
   }
+
   changeDefaultLeftType = (type, dropdown) => {
     let { leftParameter, rightParameter, pairs } = this.state
 
@@ -434,105 +406,110 @@ export default class App extends React.Component {
     })
   }
 
-  render() {
-    // const { pairs, folders, filteredPairs, fontElementsOfPair } = this.state
-    const { filteredPairs, fontElementsOfPair } = this.state
+  //
+  //
+  //
+  filterPairs = () => {
+    const { searchRequest } = this.state
 
-    let fontElements = {
-      firstFont: fontElementsOfPair[0],
-      secondFont: fontElementsOfPair[1]
+    console.log('searchRequest', searchRequest)
+
+    if (searchRequest === '') {
+      return pairs
+    } else {
+      const filter = searchRequest.toLowerCase()
+      let filteredPairs = []
+
+      // возможно, как map обновляет сам массив
+      pairs.filter(pair => {
+        const font = pair.heading.toLowerCase()
+
+        if (font.includes(filter)) {
+          filteredPairs.push(pair)
+        }
+      })
+
+      return filteredPairs
     }
-    console.log('fontElements', fontElements)
+  }
 
-    const actions = {
-      changeCardView: this.changeCardView,
-      openPairPage: this.openPairPage,
-      findFont: this.findFont,
-      changeDefaultView: this.changeDefaultView,
-      toggleSelectView: this.toggleSelectView,
-      openFolder: this.openFolder,
-      closeFolder: this.closeFolder,
-      toggleSelectType: this.toggleSelectType,
-      changeDefaultType: this.changeDefaultType,
-      exportPageToFigma: this.exportPageToFigma,
-      openPairsPageIndex: this.openPairsPageIndex,
-      resetSearch: this.resetSearch,
-      findFont: this.findFont
-    }
+  filterFolders = () => {
+    const filteredPairs = this.filterPairs()
+    let folders = []
 
-    const defaultValues = {
-      filtered: this.state.filtered,
-      defaultCardView: this.state.defaultView,
-      selectViewOpened: this.state.selectViewOpened,
-      selectViewOptions: this.state.selectViewOptions,
-      openedFolders: this.state.openedFolders,
-      selectTypeOptions: this.state.selectTypeOptions,
-      currentTypeOption: this.state.currentTypeOption,
-      selectTypeOpened: this.state.selectTypeOpened,
-      pairsLeft: this.state.pairsLeft,
-      pairsRight: this.state.pairsRight,
-      pairsNew: this.state.pairsNew,
-      from: this.state.from,
-      to: this.state.to,
-      searchRequest: this.state.searchRequest,
-      recomendationList: this.state.recomendationList,
-      currentPairId: this.state.currentPairId
-    }
+    filteredPairs.forEach((pair, i) => {
+      const folderNames = folders.map(folder => {
+        return folder.name
+      })
 
-    /// filteredPairs папки
-
-    let allFolders = []
-    // let
-
-    pairs.forEach((pair, i) => {
-      if (this.state.filtered === 'no') {
-        allFolders.push(pair)
-      } else if (this.state.filtered === 'yes') {
-        filteredPairs.forEach((filteredPair, i) => {
-          allFolders.push(filteredPair)
+      if (folderNames.includes(pair.folder)) {
+        folders.forEach((folder, i) => {
+          if (folder.name === pair.folder) {
+            folder.pairs.push(pair)
+          }
+        })
+      } else {
+        folders.push({
+          name: pair.folder,
+          pairs: [pair]
         })
       }
     })
-    console.log(allFolders)
 
-    let uniqueFolders = allFolders.filter(
-      (set => sortedItem =>
-        !set.has(sortedItem.folder) && set.add(sortedItem.folder))(new Set())
-    )
+    return folders
+  }
+  //
+  //
+  //
 
-    let newFolders = []
+  render() {
+    const actions = {
+      openPairsPageShow: this.openPairsPageShow,
+      openPairsPageIndex: this.openPairsPageIndex,
+      //
+      //
+      //
+      changeCardView: this.changeCardView,
+      changeDefaultView: this.changeDefaultView,
+      toggleSelectView: this.toggleSelectView,
+      openFolder: this.openFolder, // переписать в toggle folder
+      closeFolder: this.closeFolder, // переписать в toggle folder
+      toggleSelectType: this.toggleSelectType,
+      changeDefaultType: this.changeDefaultType,
+      exportPageToFigma: this.exportPageToFigma,
+      setSearchRequest: this.setSearchRequest,
+      resetSearch: this.resetSearch
+    }
 
-    uniqueFolders.forEach((folder, i) => {
-      newFolders.push(folder.folder)
-    })
+    const defaultValues = {
+      viewOptions: this.props.viewOptions,
+      typeOptions: this.props.typeOptions,
+      //
+      //
+      //
+      filtered: this.state.filtered, // в рендер
+      defaultCardView: this.state.defaultView,
+      selectViewOpened: this.state.selectViewOpened,
+      openedFolders: this.state.openedFolders,
+      currentTypeOption: this.state.currentTypeOption,
+      selectTypeOpened: this.state.selectTypeOpened, // переписать на два отдельных селекта
+      pairsLeft: this.state.pairsLeft, // убрать в рендер
+      pairsRight: this.state.pairsRight, // убрать в рендер
+      from: this.state.from, // переименовать (это что=то типа selected option)
+      to: this.state.to, // переименовать (это что=то типа selected option)
+      searchRequest: this.state.searchRequest,
+      recomendationList: this.state.recomendationList, // в рендер и в общий файл с переменными
+      currentPairId: this.state.currentPairId
+    }
 
-    let uniquePairsTest = allFolders.filter(
-      (set => sortedItem => !set.has(sortedItem.id) && set.add(sortedItem.id))(
-        new Set()
-      )
-    )
+    const folders = this.filterFolders()
 
-    let newPairsTest = []
-
-    uniquePairsTest.forEach((pair, i) => {
-      newPairsTest.push(pair)
-    })
-
-    console.log('allFolders', allFolders, 'newPairsTest', newPairsTest)
+    console.log('folders', folders)
 
     return (
       <div>
         <div className="container">
-          {this.state.page === 'pairs' ? (
-            <div>
-              <PairsPageIndex
-                pairs={newPairsTest}
-                folders={newFolders}
-                actions={actions}
-                defaultValues={defaultValues}
-              />
-            </div>
-          ) : this.state.page === 'article' ? (
+          {this.state.page === 'show' ? (
             <div className="wrapper">
               <PairsPageShow
                 fonts={fonts}
@@ -546,7 +523,13 @@ export default class App extends React.Component {
               />
             </div>
           ) : (
-            ''
+            <div>
+              <PairsPageIndex
+                folders={folders}
+                actions={actions}
+                defaultValues={defaultValues}
+              />
+            </div>
           )}
         </div>
       </div>

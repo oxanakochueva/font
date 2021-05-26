@@ -36,7 +36,7 @@ export default class SelectTypeDropdown extends React.Component {
     } = this.props
 
     const { changeDefaultType, currentTypeOption } = actions
-    const { selectTypeOptions } = defaultValues
+    const { typeOptions } = defaultValues
 
     const classes = classnames({
       selectType: true,
@@ -44,10 +44,10 @@ export default class SelectTypeDropdown extends React.Component {
       closed: this.state.status === 'closed'
     })
 
-    const typeOptions = []
+    const localTypeOptions = []
 
-    selectTypeOptions.forEach((option, i) => {
-      typeOptions.push(
+    typeOptions.forEach((option, i) => {
+      localTypeOptions.push(
         <TypeList
           type={option}
           pairs={pairs}
@@ -68,7 +68,7 @@ export default class SelectTypeDropdown extends React.Component {
               {select}
               <div className="chevron up"></div>
             </div>
-            <div className="TypeList">{typeOptions}</div>
+            <div className="TypeList">{localTypeOptions}</div>
           </>
         ) : this.state.status === 'closed' ? (
           <>
@@ -83,7 +83,7 @@ export default class SelectTypeDropdown extends React.Component {
               {select}
               <div className="chevron up"></div>
             </div>
-            <div className="TypeList">{typeOptions}</div>
+            <div className="TypeList">{localTypeOptions}</div>
           </>
         )}
       </div>

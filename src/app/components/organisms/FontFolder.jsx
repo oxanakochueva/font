@@ -11,16 +11,21 @@ export default class FontFolder extends React.Component {
   }
 
   render() {
-    const { folder, folders, pairs, actions, defaultValues } = this.props
+    const { folder, pairs, actions, defaultValues } = this.props
 
     let folderStatus = 'isClosed'
 
-    const { changeCardView, openPairPage, openFolder, closeFolder } = actions
+    const {
+      changeCardView,
+      openPairsPageShow,
+      openFolder,
+      closeFolder
+    } = actions
 
     const { openedFolders, defaultCardView } = defaultValues
 
     openedFolders.forEach((openedFolder, i) => {
-      if (openedFolder === folder) {
+      if (openedFolder === folder.name) {
         folderStatus = 'isOpened'
       }
     })
@@ -37,15 +42,14 @@ export default class FontFolder extends React.Component {
           <>
             <div
               className="fontFolderName"
-              style={{ fontFamily: folder }}
-              onClick={() => closeFolder(folder)}
+              style={{ fontFamily: folder.name }}
+              onClick={() => closeFolder(folder.name)}
             >
-              {folder}
+              {folder.name}
               <div className="chevron up"></div>
             </div>
             <FontPairList
               folder={folder}
-              pairs={pairs}
               actions={actions}
               defaultValues={defaultValues}
             />
@@ -54,10 +58,10 @@ export default class FontFolder extends React.Component {
           <>
             <div
               className="fontFolderName"
-              style={{ fontFamily: folder }}
-              onClick={() => openFolder(folder)}
+              style={{ fontFamily: folder.name }}
+              onClick={() => openFolder(folder.name)}
             >
-              {folder}
+              {folder.name}
               <div className="chevron down"></div>
             </div>
           </>

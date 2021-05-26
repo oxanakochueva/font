@@ -16,7 +16,7 @@ export default class SearchFolder extends React.Component {
       folder,
       pairs,
       changeCardView,
-      openPairPage,
+      openPairsPageShow,
       searchRequest
     } = this.props
 
@@ -27,7 +27,7 @@ export default class SearchFolder extends React.Component {
         <FontPairCard
           pair={pair}
           changeCardView={changeCardView}
-          openPairPage={openPairPage}
+          openPairsPageShow={openPairsPageShow}
           key={i}
         />
       )

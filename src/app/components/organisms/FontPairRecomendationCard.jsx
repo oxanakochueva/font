@@ -13,9 +13,9 @@ export default class FontPairRecomendationCard extends React.Component {
     })
   }
 
-  openPairPage = () => {
+  openPairsPageShow = () => {
     const { pair, actions } = this.props
-    actions.openPairPage(pair.id)
+    actions.openPairsPageShow(pair.id)
     this.scrollToTop()
   }
 
@@ -28,7 +28,7 @@ export default class FontPairRecomendationCard extends React.Component {
     return (
       <div
         className="FontPairRecomendationCard"
-        onClick={() => this.openPairPage()}
+        onClick={() => this.openPairsPageShow()}
         title={pair.heading}
       >
         <img

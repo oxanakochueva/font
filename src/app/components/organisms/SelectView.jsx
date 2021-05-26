@@ -26,7 +26,7 @@ export default class SelectView extends React.Component {
 
   render() {
     const { pairs, handleClick, actions, defaultValues } = this.props
-    const { selectViewOptions, defaultCardView } = defaultValues
+    const { viewOptions, defaultCardView } = defaultValues
 
     const classes = classnames({
       selectView: true,
@@ -34,10 +34,10 @@ export default class SelectView extends React.Component {
       closed: this.state.selectStatus === 'isClosed'
     })
 
-    const viewOptions = []
+    const localViewOptions = []
 
-    selectViewOptions.forEach((option, i) => {
-      viewOptions.push(
+    viewOptions.forEach((option, i) => {
+      localViewOptions.push(
         <ViewList
           viewType={option}
           // changeDefaultView={changeDefaultView}
@@ -58,7 +58,7 @@ export default class SelectView extends React.Component {
               {defaultCardView[0].toUpperCase() + defaultCardView.substring(1)}
               <div className="chevron up"></div>
             </div>
-            <div className="ViewList">{viewOptions}</div>
+            <div className="ViewList">{localViewOptions}</div>
           </>
         ) : this.state.selectStatus === 'isClosed' ? (
           <>
@@ -73,7 +73,7 @@ export default class SelectView extends React.Component {
               Letters
               <div className="chevron up"></div>
             </div>
-            <div className="ViewList">{viewOptions}</div>
+            <div className="ViewList">{localViewOptions}</div>
           </>
         )}
       </div>

@@ -8,21 +8,18 @@ import PageNavigation from '../organisms/PageNavigation'
 export default class PairsPageIndex extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {}
-    let folderStatus = 'isClosed'
   }
 
   render() {
-    const { pairs, folders, actions, defaultValues } = this.props
+    const { folders, actions, defaultValues } = this.props
 
     const {
       changeCardView,
-      openPairPage,
+      openPairsPageShow,
       openFolder,
       closeFolder,
       resetSearch,
-      findFont
+      setSearchRequest
     } = actions
 
     const {
@@ -30,8 +27,8 @@ export default class PairsPageIndex extends React.Component {
       currentTypeOption,
       openedFolders,
       searchRequest,
-      selectViewOptions,
-      selectTypeOptions,
+      viewOptions,
+      typeOptions,
       selectTypeOpened,
       pairsLeft,
       pairsRight,
@@ -44,12 +41,11 @@ export default class PairsPageIndex extends React.Component {
 
     let folderContent = []
 
-    folders.sort().forEach((folder, i) => {
+    // перенести наверх и добавить сортировку по name
+    folders.forEach((folder, i) => {
       folderContent.push(
         <FontFolder
           folder={folder}
-          folders={folders}
-          pairs={pairs}
           actions={actions}
           defaultValues={defaultValues}
           key={i}
@@ -57,44 +53,25 @@ export default class PairsPageIndex extends React.Component {
       )
     })
 
-    // if (filtered === 'no') {
-    //   console.log(folders)
-    //   // folders.sort().forEach((folder, i) => {
-    //   folders.forEach((folder, i) => {
-    //     folderContent.push(
-    //       <FontFolder
-    //         folder={folder}
-    //         folders={folders}
-    //         pairs={pairs}
-    //         actions={actions}
-    //         defaultValues={defaultValues}
-    //         key={i}
-    //       />
-    //     )
-    //   })
-    // } else if (filtered === 'yes') {
-    //   folderContent.push(
-    //     <SearchFolder
-    //       pairs={pairs}
-    //       actions={actions}
-    //       defaultValues={defaultValues}
-    //     />
-    //   )
-    // }
+    let length = 0
+
+    if (folders.length > 0) {
+      length = folders[0].pairs.length
+    }
 
     return (
       <>
         <PageNavigation
-          pairs={pairs}
           page="index"
           actions={actions}
           defaultValues={defaultValues}
         />
 
-        <div className="folder">
-          {filtered === 'yes' ? (
+        <div className="foldersWrapper">
+          {filtered === true ? (
+            // перенести в компонент FontFolder
             <div className="fontFolderName" style={{ fontFamily: 'PT Sans' }}>
-              {pairs.length} results for «{searchRequest}»
+              {length} results for «{searchRequest}»
             </div>
           ) : (
             ''

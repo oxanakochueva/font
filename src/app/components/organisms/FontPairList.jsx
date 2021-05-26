@@ -10,24 +10,21 @@ export default class FontPairList extends React.Component {
   }
 
   render() {
-    const { folder, pairs, actions, defaultValues } = this.props
+    const { folder, actions, defaultValues } = this.props
 
-    const { changeCardView, openPairPage } = actions
+    const { changeCardView, openPairsPageShow } = actions
     const { defaultCardView } = defaultValues
     let cards = []
 
-    pairs.forEach((pair, i) => {
-      if (pair.folder === folder) {
-        cards.push(
-          <FontPairCard
-            folder={folder}
-            pair={pair}
-            actions={actions}
-            defaultValues={defaultValues}
-            key={i}
-          />
-        )
-      }
+    folder.pairs.forEach((pair, i) => {
+      cards.push(
+        <FontPairCard
+          pair={pair}
+          actions={actions}
+          defaultValues={defaultValues}
+          key={i}
+        />
+      )
     })
     return <div className="FontPairList">{cards}</div>
   }

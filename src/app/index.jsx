@@ -2,4 +2,10 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import App from './components/App'
 
-ReactDOM.render(<App />, document.getElementById('react-page'))
+const viewOptions = ['letters', 'words', 'phrase']
+const typeOptions = ['Serif', 'Sans Serif', 'Mono', 'Clear']
+
+ReactDOM.render(
+  <App viewOptions={viewOptions} typeOptions={typeOptions} />,
+  document.getElementById('react-page')
+)

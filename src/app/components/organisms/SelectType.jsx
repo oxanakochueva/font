@@ -13,7 +13,7 @@ export default class SelectType extends React.Component {
     const { pairs, actions, defaultValues } = this.props
     const { toggleSelectType, changeDefaultType } = actions
     const {
-      selectTypeOptions,
+      typeOptions,
       currentTypeOption,
       selectTypeOpened,
       pairsLeft,

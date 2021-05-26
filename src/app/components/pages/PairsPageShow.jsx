@@ -29,7 +29,7 @@ export default class PairsPageShow extends React.Component {
       pairHeader
     } = currentPairInfo
 
-    const { openPairsPageIndex, exportPageToFigma, openPairPage } = actions
+    const { openPairsPageIndex, exportPageToFigma, openPairsPageShow } = actions
     const { currentPairId, recomendationList } = defaultValues
 
     let fontFamilyOfPairs = []

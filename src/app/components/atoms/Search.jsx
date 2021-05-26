@@ -5,16 +5,22 @@ import classnames from 'classnames'
 export default class Search extends React.Component {
   constructor(props) {
     super(props)
+    this.input = React.createRef()
+  }
+
+  handleInputChange = () => {
+    const { handleInputChange } = this.props
+    console.log('value', this.input.current.value)
+    handleInputChange(this.input.current.value)
   }
 
   render() {
-    const { actions, pairs, defaultValues } = this.props
+    const { defaultValues, handleResetSearch } = this.props
     const { searchRequest } = defaultValues
-    const { findFont, resetSearch } = actions
 
     const classes = classnames({
       closeIcon: true,
-      none: searchRequest === undefined
+      none: searchRequest === ''
       // visible: searchRequest.length > 1
     })
 
@@ -23,9 +29,16 @@ export default class Search extends React.Component {
         <input
           type="text"
           placeholder="I'm looking for..."
-          onChange={findFont}
+          value={searchRequest}
+          ref={this.input}
+          onChange={this.handleInputChange}
         ></input>
-        <button className={classes} type="reset" onClick={resetSearch}></button>
+
+        <button
+          className={classes}
+          type="reset"
+          onClick={handleResetSearch}
+        ></button>
       </form>
     )
   }
