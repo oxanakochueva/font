@@ -306,14 +306,7 @@ export default class App extends React.Component {
   }
 
   changeDefaultType = (type, dropdown, primary) => {
-    let {
-      leftParameter,
-      rightParameter,
-      pairs,
-      newPairs,
-      from,
-      to
-    } = this.state
+    let { leftParameter, rightParameter, newPairs, from, to } = this.state
 
     console.log(primary)
     let pairsForNew = []
