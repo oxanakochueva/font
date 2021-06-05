@@ -1,0 +1,27 @@
+.M_Select {
+  display: flex;
+  flex-direction: column;
+  width: 94px;
+  border-radius: 6px;
+  background: var(--white);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 6px 15px rgba(36, 37, 38, 0.08);
+
+    .A_SelectButton {
+      &::after {
+        background-image: url('../../assets/images/icons/chevron-small-top.svg');
+      }
+    }
+
+    .C_SelectOptions {
+      display: block;
+    }
+  }
+
+  .C_SelectOptions {
+    display: none;
+    width: 100%;
+  }
+}

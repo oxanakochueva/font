@@ -1,0 +1,13 @@
+.T_PairsIndex {
+  padding: 24px 38px;
+
+  .S_FilterBar {
+    margin-bottom: 12px;
+  }
+
+  .C_FolderList {
+    .S_Folder:not(:last-child) {
+      margin-bottom: 14px;
+    }
+  }
+}

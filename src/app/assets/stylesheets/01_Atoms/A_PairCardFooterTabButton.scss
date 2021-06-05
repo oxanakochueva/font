@@ -1,0 +1,13 @@
+.A_PairCardFooterTabButton {
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 20px;
+  color: var(--grey);
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}

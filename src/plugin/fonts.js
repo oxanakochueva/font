@@ -1,4 +1,4 @@
-import { fontsToLoad } from '../app/library/load_fonts.js'
+import { fontsToLoad } from '../libraries/fonts_to_load.js'
 
 function loadFonts() {
   fontsToLoad.forEach((fontToLoad, i) => {

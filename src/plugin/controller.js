@@ -1,8 +1,8 @@
 import regeneratorRuntime from 'regenerator-runtime'
 
-import { pairs } from '../app/library/pairs_library.js'
-import { fonts } from '../app/library/fonts_library.js'
-import { designers } from '../app/library/designers.js'
+import { pairs } from '../libraries/pairs.js'
+import { fonts } from '../libraries/fonts.js'
+import { designers } from '../libraries/designers.js'
 
 import { renderFigmaTemplate } from './render'
 import { loadFonts } from './fonts'

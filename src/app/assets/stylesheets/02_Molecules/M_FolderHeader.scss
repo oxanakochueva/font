@@ -1,0 +1,17 @@
+.M_FolderHeader {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    top: 24px;
+    right: 20px;
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-image: url('../../assets/images/icons/chevron-bottom.svg');
+    background-size: cover;
+  }
+}

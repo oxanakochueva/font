@@ -1,7 +1,7 @@
-import { fonts } from '../app/library/fonts_library.js'
-import { pairs } from '../app/library/pairs_library.js'
-import { paragraphs } from '../app/library/paragraphs.js'
-import { designers } from '../app/library/designers.js'
+import { fonts } from '../libraries/fonts.js'
+import { pairs } from '../libraries/pairs.js'
+import { paragraphs } from '../libraries/paragraphs.js'
+import { designers } from '../libraries/designers.js'
 import { getStoreCurrentPair, getStoreImagesForExport } from './store'
 import { getNewFills } from './images'
 
