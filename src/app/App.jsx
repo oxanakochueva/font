@@ -406,34 +406,28 @@ export default class App extends React.Component {
     const folders = this.filterFolders()
 
     return (
-      <div>
-        <div className="container">
-          {this.state.page === 'show' ? (
-            <div className="wrapper">
-              {
-                // <PairsPageShow
-                //   fonts={fonts}
-                //   pairs={pairs}
-                //   currentPairInfo={this.state.pairInfo}
-                //   fontElements={fontElements}
-                //   paragraphs={paragraphs}
-                //   designers={designers}
-                //   actions={actions}
-                //   defaultValues={defaultValues}
-                // />
-              }
-            </div>
-          ) : (
-            <div>
-              <T_PairsIndex
-                folders={folders}
-                actions={actions}
-                defaultValues={defaultValues}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+      <>
+        {this.state.page === 'show' ? (
+          {
+            // <PairsPageShow
+            //   fonts={fonts}
+            //   pairs={pairs}
+            //   currentPairInfo={this.state.pairInfo}
+            //   fontElements={fontElements}
+            //   paragraphs={paragraphs}
+            //   designers={designers}
+            //   actions={actions}
+            //   defaultValues={defaultValues}
+            // />
+          }
+        ) : (
+          <T_PairsIndex
+            folders={folders}
+            actions={actions}
+            defaultValues={defaultValues}
+          />
+        )}
+      </>
     )
   }
 }
