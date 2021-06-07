@@ -27,7 +27,7 @@ export default class App extends React.Component {
     super(params)
 
     this.getFromStorage()
-    this.setToStorage('some id')
+    // this.setToStorage('some id')
 
     this.state = {
       page: 'index',
@@ -367,6 +367,9 @@ export default class App extends React.Component {
   //
   //
   //
+  saveToStorage = () => {
+    this.setToStorage('changed with button click')
+  }
 
   render() {
     const actions = {
