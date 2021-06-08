@@ -134,13 +134,13 @@ const fonts = [
   {
     id: 'domine',
     type: 'sans_serif',
-    heading: 'Open Sans',
+    heading: 'Domine',
     designers: ['impallari_type']
   },
   {
     id: 'open_sans',
     type: 'sans_serif',
-    heading: 'Domine',
+    heading: 'Open Sans',
     designers: ['steve_matteson']
   },
   {
