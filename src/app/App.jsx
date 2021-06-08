@@ -1,8 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { getRandom } from '../plugin/utilities'
 
 import T_PairsIndex from './components/05_Templates/T_PairsIndex'
-// import T_PairsShow from './components/05_Templates/T_PairsShow'
+import T_PairsShow from './components/05_Templates/T_PairsShow'
 
 onmessage = msg => {
   // if (msg.type === 'get-storage') {
@@ -26,27 +27,22 @@ export default class App extends React.Component {
   constructor(params) {
     super(params)
 
-    this.getFromStorage()
-    // this.setToStorage('some id')
-
     this.state = {
       page: 'index',
+      currentPairId: null,
       searchRequest: '',
       language: '',
       primaryFont: '',
       secondaryFont: '',
       defaultView: 'letters',
       openedFolders: [],
-      //
-      //
-      //
-      currentPairId: null,
-      selectViewOpened: false,
-      from: 'Select',
-      to: 'Select',
-      leftParameter: [],
-      rightParameter: []
+      recommendedPairs: []
     }
+  }
+
+  componentDidMount() {
+    this.getFromStorage()
+    // this.setToStorage('some id')
   }
 
   getFromStorage = () => {
@@ -108,181 +104,45 @@ export default class App extends React.Component {
       [`${id}`]: option
     })
   }
-  //
-  //
-  //
-  //
 
-  changeDefaultView = value => {
-    this.setState({
-      defaultView: value
-    })
-  }
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+  openPage = id => {
+    if (id === '') {
+      this.setState({
+        page: 'index',
+        currentPairId: ''
+      })
+    } else {
+      const { pairs } = this.props
 
-  openPairsPageShow = pairId => {
-    const { pairs } = this.props
-    let currentPairInfo
-
-    pairs.forEach((pair, i) => {
-      if (pair.id === pairId) {
-        const { fonts, heading, folder } = pair
-
-        fonts.forEach((font, i) => {
-          this.renderFontDescription(font)
-        })
-
-        currentPairInfo = {
-          fontList: fonts,
-          pairHeader: heading,
-          fontStyle: folder,
-          primaryFontFamily: fonts[0],
-          secondaryFontFamily: fonts[1]
+      pairs.map(pair => {
+        if (pair.id != id) {
+          return pair
         }
-      }
-    })
+      })
 
-    this.setState({
-      page: 'show',
-      currentPairId: pairId,
-      pairInfo: currentPairInfo
-    })
+      const recommendedPairs = getRandom(pairs, 3)
+
+      console.log(recommendedPairs)
+
+      this.setState({
+        page: 'show',
+        currentPairId: id,
+        recommendedPairs: recommendedPairs
+      })
+    }
 
     this.scrollToTop()
   }
 
-  // renderFontDescription = fontDescription => {
-  //   // TODO: Refactor this
-  //   const { fonts } = this.props
-  //   const fontParagraphs = []
-  //   const fontDesigners = []
-  //   let fontFamily
-  //
-  //   fonts.forEach((font, i) => {
-  //     if (font.id === fontDescription) {
-  //       fontFamily = font.heading
-  //
-  //       font.designers.forEach((id, i) => {
-  //         designers.forEach((designer, i) => {
-  //           if (id === designer.id) {
-  //             fontDesigners.push(designer)
-  //           }
-  //         })
-  //       })
-  //
-  //       paragraphs.forEach((paragraph, i) => {
-  //         if (paragraph.font_id === fontDescription) {
-  //           fontParagraphs.push(paragraph)
-  //         }
-  //       })
-  //
-  //       const info = {
-  //         font: font,
-  //         fontDesigners: fontDesigners,
-  //         fontParagraphs: fontParagraphs,
-  //         fontFamily: fontFamily
-  //       }
-  //
-  //       const { fontElementsOfPair } = this.state
-  //
-  //       fontElementsOfPair.push(info)
-  //       console.log('from render', info)
-  //       // return info
-  //
-  //       // this.setState({
-  //       //   pairInfo: info
-  //       // })
-  //     }
-  //   })
-  // }
-
-  // TODO: Сделать одну функцию роутер
-  openPairsPageIndex = () => {
-    this.setState({
-      page: 'pairs',
-      currentPairId: ''
-    })
-  }
-
-  // TODO: Сделать одну функцию роутер
-  backToPairsPage = () => {}
-
-  exportPageToFigma = currentPairId => {
-    const { language, recomendationList } = this.state
-
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'font-pair-export',
-          pair: currentPairId,
-          language: language,
-          recomendationList: recomendationList
-        }
-      },
-      '*'
-    )
-  }
-
-  renderPairsSortedByType = () => {
-    let {
-      leftParameter,
-      rightParameter,
-      newPairs,
-      pairs,
-      from,
-      to
-    } = this.state
-
-    let sorted = []
-
-    let pairsForNew = leftParameter.concat(rightParameter)
-
-    pairsForNew.forEach((pair, i) => {
-      if (pair.type[0] === from && pair.type[1] === to) {
-        sorted.push(pair)
-      }
-    })
-
-    let uniquePairs = sorted.filter(
-      (set => sortedItem => !set.has(sortedItem.id) && set.add(sortedItem.id))(
-        new Set()
-      )
-    )
-    this.setState({
-      newPairs: [...uniquePairs]
-    })
-
-    console.log(from, to)
-
-    console.log(sorted, uniquePairs, newPairs)
-  }
-
-  //
-  //
-  //
-  // добавить сортировку по name
   filterPairs = () => {
     const { pairs } = this.props
     const { searchRequest, language, primaryFont, secondaryFont } = this.state
-
     let filteredPairs = [...pairs]
 
     if (searchRequest != '') {
       const searchFilter = searchRequest.toLowerCase()
       const localFilteredPairs = []
 
-      // возможно, как map обновляет сам массив
       pairs.filter(pair => {
         const font = pair.heading.toLowerCase()
 
@@ -309,7 +169,6 @@ export default class App extends React.Component {
     if (primaryFont != '') {
       const localFilteredPairs = []
 
-      // возможно, как map обновляет сам массив
       filteredPairs.filter(pair => {
         const type = pair.type[0]
 
@@ -324,7 +183,6 @@ export default class App extends React.Component {
     if (secondaryFont != '') {
       const localFilteredPairs = []
 
-      // возможно, как map обновляет сам массив
       filteredPairs.filter(pair => {
         const type = pair.type[1]
 
@@ -364,31 +222,89 @@ export default class App extends React.Component {
 
     return folders
   }
-  //
-  //
-  //
+
+  filterCurrentPair = () => {
+    const { pairs } = this.props
+    const { currentPairId } = this.state
+
+    const pairInfo = {
+      fonts: [],
+      families: []
+    }
+
+    pairs.forEach(pair => {
+      if (pair.id === currentPairId) {
+        pairInfo.info = pair
+
+        pair.fonts.forEach(fontId => {
+          console.log('FONT ID', fontId)
+          const fontInfo = this.collectFontInfo(fontId)
+          console.log('FONT INFO 2', fontInfo)
+          pairInfo.fonts.push(fontInfo)
+          pairInfo.families.push(fontInfo.fontFamily)
+        })
+      }
+    })
+
+    return pairInfo
+  }
+
+  collectFontInfo = id => {
+    const { fonts, designers, paragraphs } = this.props
+    const fontParagraphs = []
+    const fontDesigners = []
+    let fontInfo
+
+    fonts.forEach(font => {
+      if (font.id === id) {
+        font.designers.forEach(designerId => {
+          designers.forEach(designer => {
+            if (designer.id === designerId) {
+              fontDesigners.push(designer)
+            }
+          })
+        })
+
+        paragraphs.forEach(paragraph => {
+          if (paragraph.fontId === id) {
+            fontParagraphs.push(paragraph)
+          }
+        })
+
+        fontInfo = {
+          font: font,
+          fontDesigners: fontDesigners,
+          fontParagraphs: fontParagraphs,
+          fontFamily: font.heading
+        }
+      }
+    })
+
+    return fontInfo
+  }
+
+  exportPageToFigma = currentPairId => {
+    const { language, recomendationList } = this.state
+
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'font-pair-export',
+          pair: currentPairId,
+          language: language,
+          recomendationList: recomendationList
+        }
+      },
+      '*'
+    )
+  }
+
   saveToStorage = () => {
     this.setToStorage('changed with button click')
   }
 
   render() {
-    const actions = {
-      toggleFolder: this.toggleFolder,
-      setSearchRequest: this.setSearchRequest,
-      setFilterValue: this.setFilterValue,
-      //
-      //
-      //
-      //
-      openPairsPageShow: this.openPairsPageShow,
-      openPairsPageIndex: this.openPairsPageIndex,
-      //
-      //
-      exportPageToFigma: this.exportPageToFigma
-    }
-
     const defaultValues = {
-      // Filters
       searchRequest: this.state.searchRequest,
       languageOptions: this.props.languageOptions,
       typeOptions: this.props.typeOptions,
@@ -397,32 +313,37 @@ export default class App extends React.Component {
       primaryFont: this.state.primaryFont,
       secondaryFont: this.state.secondaryFont,
       defaultView: this.state.defaultView,
-      // Folders
       openedFolders: this.state.openedFolders,
-      //
-      //
-      //
-      recomendationList: this.state.recomendationList, // в рендер и в общий файл с переменными
-      currentPairId: this.state.currentPairId
+      currentPairId: this.state.currentPairId,
+      recommendedPairs: this.state.recommendedPairs
     }
 
+    const actions = {
+      toggleFolder: this.toggleFolder,
+      setSearchRequest: this.setSearchRequest,
+      setFilterValue: this.setFilterValue,
+      openPage: this.openPage,
+      //
+      //
+      //
+      //
+      //
+      //
+      exportPageToFigma: this.exportPageToFigma
+    }
+
+    const { page } = this.state
     const folders = this.filterFolders()
+    const pair = this.filterCurrentPair()
 
     return (
       <>
-        {this.state.page === 'show' ? (
-          {
-            // <PairsPageShow
-            //   fonts={fonts}
-            //   pairs={pairs}
-            //   currentPairInfo={this.state.pairInfo}
-            //   fontElements={fontElements}
-            //   paragraphs={paragraphs}
-            //   designers={designers}
-            //   actions={actions}
-            //   defaultValues={defaultValues}
-            // />
-          }
+        {page === 'show' ? (
+          <T_PairsShow
+            pair={pair}
+            actions={actions}
+            defaultValues={defaultValues}
+          />
         ) : (
           <T_PairsIndex
             folders={folders}

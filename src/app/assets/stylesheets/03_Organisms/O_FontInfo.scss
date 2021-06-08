@@ -1,0 +1,15 @@
+.O_FontInfo {
+  .W_FontDescription {
+    .A_Text {
+      margin-bottom: 10px;
+    }
+
+    .C_FontDescriptionText {
+      .A_Text {
+        &.p {
+          margin-bottom: 16px;
+        }
+      }
+    }
+  }
+}

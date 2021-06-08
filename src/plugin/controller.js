@@ -12,7 +12,7 @@ import { setStoreCurrentPair, setStoreImagesForExport } from './store'
 figma.showUI(__html__)
 figma.ui.resize(668, 628)
 
-figma.ui.onmessage = async msg => {
+figma.ui.onmessage = msg => {
   console.log('FIGMA JUST GOT A MESSAGE, YO', msg)
 
   if (msg.type === 'image-in-bytes') {
@@ -86,11 +86,15 @@ figma.ui.onmessage = async msg => {
   } else if (msg.type === 'set-storage') {
     figma.clientStorage.setAsync('test', { something: msg.id })
   } else if (msg.type === 'get-storage') {
-    let test = await figma.clientStorage.getAsync('test') //.then(test => {
-    console.log('from controller', test)
-    //   // post(test)
-    figma.ui.postMessage({ type: 'get-storage', data: test })
-    // })
+    figma.clientStorage.getAsync('test').then(test => {
+      console.log('from controller', test)
+      figma.ui.postMessage({ type: 'get-storage', data: test })
+    })
+    // let test = await figma.clientStorage.getAsync('test') //.then(test => {
+    // console.log('from controller', test)
+    // //   // post(test)
+    // figma.ui.postMessage({ type: 'get-storage', data: test })
+    // // })
   } else {
     console.log('unknown message')
   }

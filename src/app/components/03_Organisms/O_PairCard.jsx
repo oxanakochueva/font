@@ -14,7 +14,7 @@ export default class O_PairCard extends React.Component {
   render() {
     const { pair, defaultValues, actions } = this.props
     const { id, heading } = pair
-    const { openPairsPageShow, changeCardView } = actions
+    const { openPage } = actions
     const { defaultView } = defaultValues
     const tabNames = ['letters', 'words', 'phrase']
     const pairCardFooterTabElements = []
@@ -35,7 +35,7 @@ export default class O_PairCard extends React.Component {
     })
 
     return (
-      <div className="O_PairCard" id={id} onClick={() => openPairsPageShow(id)}>
+      <div className="O_PairCard" id={id} onClick={() => openPage(id)}>
         <div className="W_PairCardHeader">
           <A_PairCardPairName name={heading} />
         </div>
