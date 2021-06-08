@@ -9,5 +9,16 @@
     .S_Folder:not(:last-child) {
       margin-bottom: 14px;
     }
+
+    .A_Text {
+      &.h3 {
+        letter-spacing: 0.02em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--grey);
+      }
+    }
   }
 }

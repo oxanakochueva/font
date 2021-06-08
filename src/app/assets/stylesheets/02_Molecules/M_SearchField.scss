@@ -1,25 +1,25 @@
 .M_SearchField {
   position: relative;
   width: 190px;
-  height: 26px;
+  height: 30px;
   background: var(--white);
   border-radius: 6px;
 
   input {
     position: absolute;
-    top: 5px;
+    top: 7px;
     left: 12px;
     width: 150px;
     height: 14px;
     font-size: 12px;
-    line-height: 26px;
+    line-height: 30px;
     outline: none;
     border: none;
   }
 
   .A_IconButton {
     position: absolute;
-    top: 8px;
+    top: 10px;
     right: 12px;
   }
 }
