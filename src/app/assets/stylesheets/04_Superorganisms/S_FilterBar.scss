@@ -8,8 +8,32 @@
     top: 0;
   }
 
+  .A_ToggleButton {
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-size: 16px 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/images/icons/star-initial.svg');
+    background-color: var(--white);
+
+    &:hover {
+      background-image: url('../../assets/images/icons/star-hover.svg');
+    }
+
+    &.toggle {
+      background-image: url('../../assets/images/icons/star-active.svg');
+    }
+  }
+
+  .M_SearchField {
+    left: 38px;
+  }
+
   & > .M_Select {
-    &:nth-child(2) {
+    &:nth-child(3) {
       left: 196px;
     }
 

@@ -9,6 +9,23 @@
   border-radius: 12px;
   cursor: pointer;
 
+  .A_ToggleButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    background-image: url('../../assets/images/icons/star-initial.svg');
+
+    &:hover {
+      background-image: url('../../assets/images/icons/star-hover.svg');
+    }
+
+    &.toggle {
+      background-image: url('../../assets/images/icons/star-active.svg');
+    }
+  }
+
   .C_PairCardFooter {
     position: absolute;
     left: 11px;

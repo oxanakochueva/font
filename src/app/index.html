@@ -29,23 +29,35 @@
   }
 
   window.onmessage = async event => {
-    const bytes = event.data.pluginMessage.image
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    const imageData = await decode(canvas, ctx, bytes)
-    const newBytes = await encode(canvas, ctx, imageData)
+    if (event.data.pluginMessage.type === 'get-storage') {
+      console.log('message', event.data.pluginMessage)
+      let favourites = []
 
-    window.parent.postMessage(
-      {
-        pluginMessage: {
-          type: 'image-in-bytes',
-          id: event.data.pluginMessage.id,
-          bytes: newBytes
-        }
-      },
-      '*'
-    )
+      if (event.data.pluginMessage.favourites != undefined) {
+        favourites = event.data.pluginMessage.favourites
+      }
+
+      const reactWrapper = document.getElementById('react-page')
+      reactWrapper.setAttribute('data-favourites', JSON.stringify(favourites))
+    } else {
+      const bytes = event.data.pluginMessage.image
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      const imageData = await decode(canvas, ctx, bytes)
+      const newBytes = await encode(canvas, ctx, imageData)
+
+      window.parent.postMessage(
+        {
+          pluginMessage: {
+            type: 'image-in-bytes',
+            id: event.data.pluginMessage.id,
+            bytes: newBytes
+          }
+        },
+        '*'
+      )
+    }
   }
 </script>
 
-<div id="react-page"></div>
+<div id="react-page" data-favourites=""></div>

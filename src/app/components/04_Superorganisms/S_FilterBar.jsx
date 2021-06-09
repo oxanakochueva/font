@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import A_ToggleButton from '../01_Atoms/A_ToggleButton'
 import M_SearchField from '../02_Molecules/M_searchField'
 import M_Select from '../02_Molecules/M_Select'
 import O_MultiSelect from '../03_Organisms/O_MultiSelect'
@@ -18,11 +19,18 @@ export default class S_FilterBar extends React.PureComponent {
       viewOptions,
       languageOptions,
       defaultView,
-      language
+      language,
+      showFavourites
     } = defaultValues
 
     return (
       <div className="S_FilterBar">
+        <A_ToggleButton
+          type="favourites"
+          toggle={showFavourites}
+          handleClick={() => setFilterValue('showFavourites', !showFavourites)}
+        />
+
         <M_SearchField defaultValues={defaultValues} actions={actions} />
 
         <M_Select

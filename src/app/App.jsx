@@ -7,12 +7,6 @@ import { getRandom } from '../plugin/utilities'
 import T_PairsIndex from './components/05_Templates/T_PairsIndex'
 import T_PairsShow from './components/05_Templates/T_PairsShow'
 
-// onmessage = msg => {
-//   // if (msg.type === 'get-storage') {
-//   console.log('message', msg)
-//   // }
-// }
-
 Array.prototype.remove = function() {
   // prettier-ignore
   var what, a = arguments, L = a.length, ax;
@@ -38,13 +32,32 @@ export default class App extends React.Component {
       secondaryFont: '',
       defaultView: 'letters',
       openedFolders: [],
-      recommendedPairs: []
+      recommendedPairs: [],
+      favourites: [],
+      showFavourites: false
     }
   }
 
   componentDidMount() {
     this.getFromStorage()
-    this.setToStorage('some id')
+    this.loadFavourites()
+  }
+
+  loadFavourites = () => {
+    const { favourites } = this.state
+    let favouritesFromHTML = this.getFavouritesFromHTML()
+
+    if (favouritesFromHTML === '') {
+      setTimeout(this.loadFavourites, 300)
+    } else {
+      this.setState({
+        favourites: JSON.parse(favouritesFromHTML)
+      })
+    }
+  }
+
+  getFavouritesFromHTML = () => {
+    return document.getElementById('react-page').dataset.favourites
   }
 
   getFromStorage = () => {
@@ -58,12 +71,12 @@ export default class App extends React.Component {
     )
   }
 
-  setToStorage = id => {
+  setToStorage = favourites => {
     parent.postMessage(
       {
         pluginMessage: {
           type: 'set-storage',
-          id: id
+          favourites: favourites
         }
       },
       '*'
@@ -146,14 +159,35 @@ export default class App extends React.Component {
 
   filterPairs = () => {
     const { pairs } = this.props
-    const { searchRequest, language, primaryFont, secondaryFont } = this.state
+
+    const {
+      searchRequest,
+      language,
+      primaryFont,
+      secondaryFont,
+      favourites,
+      showFavourites
+    } = this.state
+
     let filteredPairs = [...pairs]
 
-    if (searchRequest != '') {
-      const searchFilter = searchRequest.toLowerCase()
+    if (showFavourites) {
       const localFilteredPairs = []
 
       pairs.filter(pair => {
+        if (favourites.includes(pair.id)) {
+          localFilteredPairs.push(pair)
+        }
+      })
+
+      filteredPairs = [...localFilteredPairs]
+    }
+
+    if (searchRequest != '') {
+      const localFilteredPairs = []
+      const searchFilter = searchRequest.toLowerCase()
+
+      filteredPairs.filter(pair => {
         const font = pair.heading.toLowerCase()
 
         if (font.includes(searchFilter)) {
@@ -308,8 +342,20 @@ export default class App extends React.Component {
     )
   }
 
-  saveToStorage = () => {
-    this.setToStorage('changed with button click')
+  favouritePair = id => {
+    let { favourites } = this.state
+
+    if (favourites.includes(id)) {
+      favourites.remove(id)
+    } else {
+      favourites.push(id)
+    }
+
+    this.setState({
+      favourites: favourites
+    })
+
+    this.setToStorage(favourites)
   }
 
   render() {
@@ -324,7 +370,9 @@ export default class App extends React.Component {
       defaultView: this.state.defaultView,
       openedFolders: this.state.openedFolders,
       currentPairId: this.state.currentPairId,
-      recommendedPairs: this.state.recommendedPairs
+      recommendedPairs: this.state.recommendedPairs,
+      favourites: this.state.favourites,
+      showFavourites: this.state.showFavourites
     }
 
     const actions = {
@@ -332,12 +380,7 @@ export default class App extends React.Component {
       setSearchRequest: this.setSearchRequest,
       setFilterValue: this.setFilterValue,
       openPage: this.openPage,
-      //
-      //
-      //
-      //
-      //
-      //
+      favouritePair: this.favouritePair,
       exportPageToFigma: this.exportPageToFigma
     }
 

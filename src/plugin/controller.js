@@ -19,7 +19,7 @@ import {
 figma.showUI(__html__)
 figma.ui.resize(668, 628)
 
-figma.ui.onmessage = msg => {
+figma.ui.onmessage = async msg => {
   console.log('FIGMA JUST GOT A MESSAGE, YO', msg)
 
   if (msg.type === 'image-in-bytes') {
@@ -72,27 +72,16 @@ figma.ui.onmessage = msg => {
     setStoreImagesForExport(newCurrentImages)
 
     newCurrentImages.forEach(image => {
-      figma.ui.postMessage({ id: image.id, image: image.image })
+      figma.ui.postMessage({ type: 'image', id: image.id, image: image.image })
     })
   } else if (msg.type === 'set-storage') {
-    figma.clientStorage.setAsync('test', { something: msg.id })
+    figma.clientStorage.setAsync('favourites', msg.favourites)
   } else if (msg.type === 'get-storage') {
-    figma.clientStorage.getAsync('test').then(test => {
-      console.log('from controller', test)
-      figma.ui.postMessage({ type: 'get-storage', data: test })
-    })
-    // let test = await figma.clientStorage.getAsync('test') //.then(test => {
-    // console.log('from controller', test)
-    // //   // post(test)
-    // figma.ui.postMessage({ type: 'get-storage', data: test })
-    // // })
+    const favourites = await figma.clientStorage.getAsync('favourites')
+    figma.ui.postMessage({ type: 'get-storage', favourites: favourites })
   } else {
     console.log('unknown message')
   }
 }
-
-// function post(data) {
-//   figma.ui.postMessage({ type: 'get-storage', data: data })
-// }
 
 loadFonts()
