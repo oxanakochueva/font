@@ -12,7 +12,7 @@ import App from './App'
 
 const languageOptions = ['latin', 'cyrillic']
 const viewOptions = ['letters', 'words', 'phrase']
-const typeOptions = ['Serif', 'Sans Serif', 'Mono', 'Clear']
+const typeOptions = ['Serif', 'Sans Serif', 'Mono', 'Reset']
 
 pairs.map((pair, i) => {
   pair.view = 'letters'

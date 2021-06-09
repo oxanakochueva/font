@@ -111,7 +111,7 @@ export default class App extends React.Component {
   }
 
   setFilterValue = (id, option) => {
-    if (option === 'Clear') {
+    if (option === 'Reset') {
       option = ''
     }
 
