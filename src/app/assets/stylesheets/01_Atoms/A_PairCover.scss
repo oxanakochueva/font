@@ -1,0 +1,21 @@
+.A_PairCover {
+  background-size: cover;
+
+  &.pageCover {
+    width: 592px;
+    height: 315px;
+    border-radius: 20px;
+  }
+
+  &.recomedationCover {
+    width: 188px;
+    height: 100px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 1px 6px 12px rgba(215, 214, 212, 0.3);
+      transform: scale(1.1);
+    }
+  }
+}

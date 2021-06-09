@@ -1,0 +1,40 @@
+.A_Text {
+  &.h1 {
+    font-size: 34px;
+    line-height: 34px;
+    font-weight: bold;
+  }
+
+  &.h2 {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+  }
+
+  &.h3 {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+
+  &.h4 {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: bold;
+  }
+
+  &.p {
+    font-size: 15px;
+    line-height: 180%;
+
+    a {
+      text-decoration: none;
+      color: var(--blue);
+    }
+  }
+
+  &.small {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

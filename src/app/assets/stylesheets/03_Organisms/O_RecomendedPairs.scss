@@ -1,0 +1,10 @@
+.O_RecomendedPairs {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    .A_PairCover.recomedationCover {
+      cursor: pointer;
+    }
+  }
+}

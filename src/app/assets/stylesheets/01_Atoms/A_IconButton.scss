@@ -1,0 +1,14 @@
+.A_IconButton {
+  width: 10px;
+  height: 10px;
+  background-size: cover;
+  cursor: pointer;
+
+  &.cross {
+    background-image: url('../../assets/images/icons/cross-initial.svg');
+
+    &:hover {
+      background-image: url('../../assets/images/icons/cross-hover.svg');
+    }
+  }
+}

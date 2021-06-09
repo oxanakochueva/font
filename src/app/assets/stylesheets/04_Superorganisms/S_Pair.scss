@@ -1,0 +1,24 @@
+.S_Pair {
+  & > .A_Text {
+    &.h1 {
+      margin-bottom: 14px;
+    }
+
+    &.small {
+      color: var(--grey);
+
+      a {
+        text-decoration: none;
+        color: var(--grey);
+      }
+    }
+  }
+
+  .A_PairCover {
+    margin-bottom: 38px;
+  }
+
+  .O_FontInfo {
+    margin-bottom: 38px;
+  }
+}

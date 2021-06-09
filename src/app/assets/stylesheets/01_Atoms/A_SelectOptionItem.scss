@@ -1,0 +1,21 @@
+.A_SelectOptionItem {
+  width: 94px;
+  height: 27px;
+  padding: 0 12px;
+  border-top: 1px solid var(--card-border);
+  font-size: 12px;
+  line-height: 30px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    color: var(--grey);
+  }
+
+  &.active {
+    font-weight: bold;
+    color: var(--black);
+  }
+}

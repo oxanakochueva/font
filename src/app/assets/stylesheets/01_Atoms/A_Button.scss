@@ -1,0 +1,49 @@
+.A_Button {
+  position: relative;
+  border-radius: 6px;
+  background: var(--white);
+  font-size: 12px;
+  line-height: 30px;
+  cursor: pointer;
+
+  &.leftIcon,
+  &.rightIcon {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-size: cover;
+    }
+  }
+
+  &.leftIcon {
+    padding: 0 12px 0 28px;
+
+    &::before {
+      left: 12px;
+    }
+  }
+
+  &.rightIcon {
+    padding: 0 28px 0 12px;
+
+    &::before {
+      right: 12px;
+    }
+  }
+
+  &.back {
+    &::before {
+      background-image: url('../../assets/images/icons/chevron-back.svg');
+    }
+  }
+
+  &.export {
+    &::before {
+      background-image: url('../../assets/images/icons/export.svg');
+    }
+  }
+}

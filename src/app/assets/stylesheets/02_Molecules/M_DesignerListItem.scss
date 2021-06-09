@@ -1,0 +1,26 @@
+.M_DesignerListItem {
+  .W_DesignerMainInfo {
+    display: flex;
+    align-items: center;
+
+    .A_DesignerImage {
+      margin-right: 6px;
+    }
+
+    .C_DesignerDescription {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .A_Text {
+        &.h4 {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  & > .A_Text {
+    margin-top: 16px;
+  }
+}

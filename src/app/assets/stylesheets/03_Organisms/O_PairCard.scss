@@ -1,0 +1,540 @@
+.O_PairCard {
+  position: relative;
+  width: 176px;
+  height: 206px;
+  padding: 11px;
+  background: var(--white);
+  border: 1px solid var(--card-border);
+  box-shadow: 1px 6px 15px rgba(36, 37, 38, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+
+  .C_PairCardFooter {
+    position: absolute;
+    left: 11px;
+    bottom: 11px;
+    display: flex;
+    justify-content: center;
+    width: 152px;
+    height: 20px;
+
+    &:not(:hover) {
+      .W_PairCardFooterTab.active {
+        .A_PairCardContent {
+          display: block;
+        }
+
+        .A_PairCardFooterTabButton {
+          background: var(--grey);
+          color: var(--white);
+        }
+      }
+    }
+
+    .W_PairCardFooterTab {
+      &:hover {
+        .A_PairCardContent {
+          display: block;
+        }
+
+        .A_PairCardFooterTabButton {
+          background: var(--grey);
+          color: var(--white);
+        }
+      }
+
+      &.letters {
+        .A_PairCardContent {
+          &.josefin_sans_cardo {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_cardo.svg');
+          }
+          &.josefin_sans_abril_fatface {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_abril_fatface.svg');
+          }
+          &.josefin_sans_yeseva_one {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_yeseva_one.svg');
+          }
+          &.josefin_sans_lato {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_lato.svg');
+          }
+          &.josefin_sans_playfair {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_playfair.svg');
+          }
+          &.josefin_sans_fira_mono {
+            background-image: url('../../assets/images/pairs/letters/josefin_sans_fira_mono.svg');
+          }
+          &.lora_merriweather {
+            background-image: url('../../assets/images/pairs/letters/lora_merriweather.svg');
+          }
+          &.lora_source_sans_pro {
+            background-image: url('../../assets/images/pairs/letters/lora_source_sans_pro.svg');
+          }
+          &.lora_roboto {
+            background-image: url('../../assets/images/pairs/letters/lora_roboto.svg');
+          }
+          &.lora_ubuntu {
+            background-image: url('../../assets/images/pairs/letters/lora_ubuntu.svg');
+          }
+          &.lora_alegreya {
+            background-image: url('../../assets/images/pairs/letters/lora_alegreya.svg');
+          }
+          &.lora_nunito {
+            background-image: url('../../assets/images/pairs/letters/lora_nunito.svg');
+          }
+          &.ubuntu_lora {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_lora.svg');
+          }
+          &.ubuntu_kreon {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_kreon.svg');
+          }
+          &.ubuntu_rokkitt {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_rokkitt.svg');
+          }
+          &.ubuntu_cabin {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_cabin.svg');
+          }
+          &.ubuntu_source_sans_pro {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_source_sans_pro.svg');
+          }
+          &.ubuntu_prompt {
+            background-image: url('../../assets/images/pairs/letters/ubuntu_prompt.svg');
+          }
+          &.nunito_alegreya {
+            background-image: url('../../assets/images/pairs/letters/nunito_alegreya.svg');
+          }
+          &.nunito_lora {
+            background-image: url('../../assets/images/pairs/letters/nunito_lora.svg');
+          }
+          &.nunito_roboto {
+            background-image: url('../../assets/images/pairs/letters/nunito_roboto.svg');
+          }
+          &.nunito_open_sans {
+            background-image: url('../../assets/images/pairs/letters/nunito_open_sans.svg');
+          }
+          &.source_sans_pro_ubuntu {
+            background-image: url('../../assets/images/pairs/letters/source_sans_pro_ubuntu.svg');
+          }
+          &.source_sans_pro_lora {
+            background-image: url('../../assets/images/pairs/letters/source_sans_pro_lora.svg');
+          }
+          &.source_sans_pro_montserrat {
+            background-image: url('../../assets/images/pairs/letters/source_sans_pro_montserrat.svg');
+          }
+          &.source_sans_pro_alegreya {
+            background-image: url('../../assets/images/pairs/letters/source_sans_pro_alegreya.svg');
+          }
+          &.roboto_archivo {
+            background-image: url('../../assets/images/pairs/letters/roboto_archivo.svg');
+          }
+          &.roboto_lora {
+            background-image: url('../../assets/images/pairs/letters/roboto_lora.svg');
+          }
+          &.roboto_rokkitt {
+            background-image: url('../../assets/images/pairs/letters/roboto_rokkitt.svg');
+          }
+          &.roboto_nunito {
+            background-image: url('../../assets/images/pairs/letters/roboto_nunito.svg');
+          }
+          &.roboto_raleway {
+            background-image: url('../../assets/images/pairs/letters/roboto_raleway.svg');
+          }
+          &.roboto_space_mono {
+            background-image: url('../../assets/images/pairs/letters/roboto_space_mono.svg');
+          }
+          &.open_sans_montserrat {
+            background-image: url('../../assets/images/pairs/letters/open_sans_montserrat.svg');
+          }
+          &.open_sans_bitter {
+            background-image: url('../../assets/images/pairs/letters/open_sans_bitter.svg');
+          }
+          &.open_sans_domine {
+            background-image: url('../../assets/images/pairs/letters/open_sans_domine.svg');
+          }
+          &.open_sans_source_sans_pro {
+            background-image: url('../../assets/images/pairs/letters/open_sans_source_sans_pro.svg');
+          }
+          &.raleway_merriweather {
+            background-image: url('../../assets/images/pairs/letters/raleway_merriweather.svg');
+          }
+          &.raleway_bitter {
+            background-image: url('../../assets/images/pairs/letters/raleway_bitter.svg');
+          }
+          &.raleway_cabin {
+            background-image: url('../../assets/images/pairs/letters/raleway_cabin.svg');
+          }
+          &.raleway_roboto {
+            background-image: url('../../assets/images/pairs/letters/raleway_roboto.svg');
+          }
+          &.raleway_open_sans {
+            background-image: url('../../assets/images/pairs/letters/raleway_open_sans.svg');
+          }
+          &.raleway_pt_sans {
+            background-image: url('../../assets/images/pairs/letters/raleway_pt_sans.svg');
+          }
+          &.lato_abril_fatface {
+            background-image: url('../../assets/images/pairs/letters/lato_abril_fatface.svg');
+          }
+          &.lato_karla {
+            background-image: url('../../assets/images/pairs/letters/lato_karla.svg');
+          }
+          &.lato_merriweather {
+            background-image: url('../../assets/images/pairs/letters/lato_merriweather.svg');
+          }
+          &.lato_francois_one {
+            background-image: url('../../assets/images/pairs/letters/lato_francois_one.svg');
+          }
+          &.montserrat_source_sans_pro {
+            background-image: url('../../assets/images/pairs/letters/montserrat_source_sans_pro.svg');
+          }
+          &.montserrat_karla {
+            background-image: url('../../assets/images/pairs/letters/montserrat_karla.svg');
+          }
+          &.montserrat_fira_sans {
+            background-image: url('../../assets/images/pairs/letters/montserrat_fira_sans.svg');
+          }
+          &.montserrat_cabin {
+            background-image: url('../../assets/images/pairs/letters/montserrat_cabin.svg');
+          }
+          &.montserrat_hind {
+            background-image: url('../../assets/images/pairs/letters/montserrat_hind.svg');
+          }
+          &.montserrat_inconsolata {
+            background-image: url('../../assets/images/pairs/letters/montserrat_inconsolata.svg');
+          }
+        }
+      }
+
+      &.words {
+        .A_PairCardContent {
+          &.josefin_sans_cardo {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_cardo.svg');
+          }
+          &.josefin_sans_abril_fatface {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_abril_fatface.svg');
+          }
+          &.josefin_sans_yeseva_one {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_yeseva_one.svg');
+          }
+          &.josefin_sans_lato {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_lato.svg');
+          }
+          &.josefin_sans_playfair {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_playfair.svg');
+          }
+          &.josefin_sans_fira_mono {
+            background-image: url('../../assets/images/pairs/words/josefin_sans_fira_mono.svg');
+          }
+          &.lora_merriweather {
+            background-image: url('../../assets/images/pairs/words/lora_merriweather.svg');
+          }
+          &.lora_source_sans_pro {
+            background-image: url('../../assets/images/pairs/words/lora_source_sans_pro.svg');
+          }
+          &.lora_roboto {
+            background-image: url('../../assets/images/pairs/words/lora_roboto.svg');
+          }
+          &.lora_ubuntu {
+            background-image: url('../../assets/images/pairs/words/lora_ubuntu.svg');
+          }
+          &.lora_alegreya {
+            background-image: url('../../assets/images/pairs/words/lora_alegreya.svg');
+          }
+          &.lora_nunito {
+            background-image: url('../../assets/images/pairs/words/lora_nunito.svg');
+          }
+          &.ubuntu_lora {
+            background-image: url('../../assets/images/pairs/words/ubuntu_lora.svg');
+          }
+          &.ubuntu_kreon {
+            background-image: url('../../assets/images/pairs/words/ubuntu_kreon.svg');
+          }
+          &.ubuntu_rokkitt {
+            background-image: url('../../assets/images/pairs/words/ubuntu_rokkitt.svg');
+          }
+          &.ubuntu_cabin {
+            background-image: url('../../assets/images/pairs/words/ubuntu_cabin.svg');
+          }
+          &.ubuntu_source_sans_pro {
+            background-image: url('../../assets/images/pairs/words/ubuntu_source_sans_pro.svg');
+          }
+          &.ubuntu_prompt {
+            background-image: url('../../assets/images/pairs/words/ubuntu_prompt.svg');
+          }
+          &.nunito_alegreya {
+            background-image: url('../../assets/images/pairs/words/nunito_alegreya.svg');
+          }
+          &.nunito_lora {
+            background-image: url('../../assets/images/pairs/words/nunito_lora.svg');
+          }
+          &.nunito_roboto {
+            background-image: url('../../assets/images/pairs/words/nunito_roboto.svg');
+          }
+          &.nunito_open_sans {
+            background-image: url('../../assets/images/pairs/words/nunito_open_sans.svg');
+          }
+          &.source_sans_pro_ubuntu {
+            background-image: url('../../assets/images/pairs/words/source_sans_pro_ubuntu.svg');
+          }
+          &.source_sans_pro_lora {
+            background-image: url('../../assets/images/pairs/words/source_sans_pro_lora.svg');
+          }
+          &.source_sans_pro_montserrat {
+            background-image: url('../../assets/images/pairs/words/source_sans_pro_montserrat.svg');
+          }
+          &.source_sans_pro_alegreya {
+            background-image: url('../../assets/images/pairs/words/source_sans_pro_alegreya.svg');
+          }
+          &.roboto_archivo {
+            background-image: url('../../assets/images/pairs/words/roboto_archivo.svg');
+          }
+          &.roboto_lora {
+            background-image: url('../../assets/images/pairs/words/roboto_lora.svg');
+          }
+          &.roboto_rokkitt {
+            background-image: url('../../assets/images/pairs/words/roboto_rokkitt.svg');
+          }
+          &.roboto_nunito {
+            background-image: url('../../assets/images/pairs/words/roboto_nunito.svg');
+          }
+          &.roboto_raleway {
+            background-image: url('../../assets/images/pairs/words/roboto_raleway.svg');
+          }
+          &.roboto_space_mono {
+            background-image: url('../../assets/images/pairs/words/roboto_space_mono.svg');
+          }
+          &.open_sans_montserrat {
+            background-image: url('../../assets/images/pairs/words/open_sans_montserrat.svg');
+          }
+          &.open_sans_bitter {
+            background-image: url('../../assets/images/pairs/words/open_sans_bitter.svg');
+          }
+          &.open_sans_domine {
+            background-image: url('../../assets/images/pairs/words/open_sans_domine.svg');
+          }
+          &.open_sans_source_sans_pro {
+            background-image: url('../../assets/images/pairs/words/open_sans_source_sans_pro.svg');
+          }
+          &.raleway_merriweather {
+            background-image: url('../../assets/images/pairs/words/raleway_merriweather.svg');
+          }
+          &.raleway_bitter {
+            background-image: url('../../assets/images/pairs/words/raleway_bitter.svg');
+          }
+          &.raleway_cabin {
+            background-image: url('../../assets/images/pairs/words/raleway_cabin.svg');
+          }
+          &.raleway_roboto {
+            background-image: url('../../assets/images/pairs/words/raleway_roboto.svg');
+          }
+          &.raleway_open_sans {
+            background-image: url('../../assets/images/pairs/words/raleway_open_sans.svg');
+          }
+          &.raleway_pt_sans {
+            background-image: url('../../assets/images/pairs/words/raleway_pt_sans.svg');
+          }
+          &.lato_abril_fatface {
+            background-image: url('../../assets/images/pairs/words/lato_abril_fatface.svg');
+          }
+          &.lato_karla {
+            background-image: url('../../assets/images/pairs/words/lato_karla.svg');
+          }
+          &.lato_merriweather {
+            background-image: url('../../assets/images/pairs/words/lato_merriweather.svg');
+          }
+          &.lato_francois_one {
+            background-image: url('../../assets/images/pairs/words/lato_francois_one.svg');
+          }
+          &.montserrat_source_sans_pro {
+            background-image: url('../../assets/images/pairs/words/montserrat_source_sans_pro.svg');
+          }
+          &.montserrat_karla {
+            background-image: url('../../assets/images/pairs/words/montserrat_karla.svg');
+          }
+          &.montserrat_fira_sans {
+            background-image: url('../../assets/images/pairs/words/montserrat_fira_sans.svg');
+          }
+          &.montserrat_cabin {
+            background-image: url('../../assets/images/pairs/words/montserrat_cabin.svg');
+          }
+          &.montserrat_hind {
+            background-image: url('../../assets/images/pairs/words/montserrat_hind.svg');
+          }
+          &.montserrat_inconsolata {
+            background-image: url('../../assets/images/pairs/words/montserrat_inconsolata.svg');
+          }
+        }
+      }
+
+      &.phrase {
+        .A_PairCardContent {
+          &.josefin_sans_cardo {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_cardo.svg');
+          }
+          &.josefin_sans_abril_fatface {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_abril_fatface.svg');
+          }
+          &.josefin_sans_yeseva_one {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_yeseva_one.svg');
+          }
+          &.josefin_sans_lato {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_lato.svg');
+          }
+          &.josefin_sans_playfair {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_playfair.svg');
+          }
+          &.josefin_sans_fira_mono {
+            background-image: url('../../assets/images/pairs/phrases/josefin_sans_fira_mono.svg');
+          }
+          &.lora_merriweather {
+            background-image: url('../../assets/images/pairs/phrases/lora_merriweather.svg');
+          }
+          &.lora_source_sans_pro {
+            background-image: url('../../assets/images/pairs/phrases/lora_source_sans_pro.svg');
+          }
+          &.lora_roboto {
+            background-image: url('../../assets/images/pairs/phrases/lora_roboto.svg');
+          }
+          &.lora_ubuntu {
+            background-image: url('../../assets/images/pairs/phrases/lora_ubuntu.svg');
+          }
+          &.lora_alegreya {
+            background-image: url('../../assets/images/pairs/phrases/lora_alegreya.svg');
+          }
+          &.lora_nunito {
+            background-image: url('../../assets/images/pairs/phrases/lora_nunito.svg');
+          }
+          &.ubuntu_lora {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_lora.svg');
+          }
+          &.ubuntu_kreon {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_kreon.svg');
+          }
+          &.ubuntu_rokkitt {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_rokkitt.svg');
+          }
+          &.ubuntu_cabin {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_cabin.svg');
+          }
+          &.ubuntu_source_sans_pro {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_source_sans_pro.svg');
+          }
+          &.ubuntu_prompt {
+            background-image: url('../../assets/images/pairs/phrases/ubuntu_prompt.svg');
+          }
+          &.nunito_alegreya {
+            background-image: url('../../assets/images/pairs/phrases/nunito_alegreya.svg');
+          }
+          &.nunito_lora {
+            background-image: url('../../assets/images/pairs/phrases/nunito_lora.svg');
+          }
+          &.nunito_roboto {
+            background-image: url('../../assets/images/pairs/phrases/nunito_roboto.svg');
+          }
+          &.nunito_open_sans {
+            background-image: url('../../assets/images/pairs/phrases/nunito_open_sans.svg');
+          }
+          &.source_sans_pro_ubuntu {
+            background-image: url('../../assets/images/pairs/phrases/source_sans_pro_ubuntu.svg');
+          }
+          &.source_sans_pro_lora {
+            background-image: url('../../assets/images/pairs/phrases/source_sans_pro_lora.svg');
+          }
+          &.source_sans_pro_montserrat {
+            background-image: url('../../assets/images/pairs/phrases/source_sans_pro_montserrat.svg');
+          }
+          &.source_sans_pro_alegreya {
+            background-image: url('../../assets/images/pairs/phrases/source_sans_pro_alegreya.svg');
+          }
+          &.roboto_archivo {
+            background-image: url('../../assets/images/pairs/phrases/roboto_archivo.svg');
+          }
+          &.roboto_lora {
+            background-image: url('../../assets/images/pairs/phrases/roboto_lora.svg');
+          }
+          &.roboto_rokkitt {
+            background-image: url('../../assets/images/pairs/phrases/roboto_rokkitt.svg');
+          }
+          &.roboto_nunito {
+            background-image: url('../../assets/images/pairs/phrases/roboto_nunito.svg');
+          }
+          &.roboto_raleway {
+            background-image: url('../../assets/images/pairs/phrases/roboto_raleway.svg');
+          }
+          &.roboto_space_mono {
+            background-image: url('../../assets/images/pairs/phrases/roboto_space_mono.svg');
+          }
+          &.open_sans_montserrat {
+            background-image: url('../../assets/images/pairs/phrases/open_sans_montserrat.svg');
+          }
+          &.open_sans_bitter {
+            background-image: url('../../assets/images/pairs/phrases/open_sans_bitter.svg');
+          }
+          &.open_sans_domine {
+            background-image: url('../../assets/images/pairs/phrases/open_sans_domine.svg');
+          }
+          &.open_sans_source_sans_pro {
+            background-image: url('../../assets/images/pairs/phrases/open_sans_source_sans_pro.svg');
+          }
+          &.raleway_merriweather {
+            background-image: url('../../assets/images/pairs/phrases/raleway_merriweather.svg');
+          }
+          &.raleway_bitter {
+            background-image: url('../../assets/images/pairs/phrases/raleway_bitter.svg');
+          }
+          &.raleway_cabin {
+            background-image: url('../../assets/images/pairs/phrases/raleway_cabin.svg');
+          }
+          &.raleway_roboto {
+            background-image: url('../../assets/images/pairs/phrases/raleway_roboto.svg');
+          }
+          &.raleway_open_sans {
+            background-image: url('../../assets/images/pairs/phrases/raleway_open_sans.svg');
+          }
+          &.raleway_pt_sans {
+            background-image: url('../../assets/images/pairs/phrases/raleway_pt_sans.svg');
+          }
+          &.lato_abril_fatface {
+            background-image: url('../../assets/images/pairs/phrases/lato_abril_fatface.svg');
+          }
+          &.lato_karla {
+            background-image: url('../../assets/images/pairs/phrases/lato_karla.svg');
+          }
+          &.lato_merriweather {
+            background-image: url('../../assets/images/pairs/phrases/lato_merriweather.svg');
+          }
+          &.lato_francois_one {
+            background-image: url('../../assets/images/pairs/phrases/lato_francois_one.svg');
+          }
+          &.montserrat_source_sans_pro {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_source_sans_pro.svg');
+          }
+          &.montserrat_karla {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_karla.svg');
+          }
+          &.montserrat_fira_sans {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_fira_sans.svg');
+          }
+          &.montserrat_cabin {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_cabin.svg');
+          }
+          &.montserrat_hind {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_hind.svg');
+          }
+          &.montserrat_inconsolata {
+            background-image: url('../../assets/images/pairs/phrases/montserrat_inconsolata.svg');
+          }
+        }
+      }
+
+      .A_PairCardContent {
+        position: absolute;
+        top: -132px;
+        left: 0;
+        display: none;
+        width: 152px;
+        height: 118px;
+        background-size: cover;
+      }
+    }
+  }
+}
