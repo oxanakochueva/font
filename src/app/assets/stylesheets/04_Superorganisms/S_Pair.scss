@@ -1,7 +1,16 @@
 .S_Pair {
-  .A_Text {
+  & > .A_Text {
     &.h1 {
-      margin-bottom: 38px;
+      margin-bottom: 14px;
+    }
+
+    &.small {
+      color: var(--grey);
+
+      a {
+        text-decoration: none;
+        color: var(--grey);
+      }
     }
   }
 

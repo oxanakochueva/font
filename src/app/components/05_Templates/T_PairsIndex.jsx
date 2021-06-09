@@ -25,6 +25,7 @@ export default class T_PairsIndex extends React.PureComponent {
           type="h3"
           text="Sorry, we didn’t find anything"
           fontFamily="PT Sans"
+          key="404"
         />
       )
     } else {

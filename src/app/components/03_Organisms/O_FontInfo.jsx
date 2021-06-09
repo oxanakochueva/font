@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import A_Text from '../01_Atoms/A_Text'
+import O_Designers from './O_Designers'
 
 export default class O_FontInfo extends React.PureComponent {
   constructor(props) {
@@ -32,6 +33,8 @@ export default class O_FontInfo extends React.PureComponent {
           <A_Text type="h2" text={heading} fontFamily={families[0]} />
           <div className="C_FontDescriptionText">{fontDescriptionElements}</div>
         </div>
+
+        <O_Designers pair={pair} font={font} />
       </div>
     )
   }

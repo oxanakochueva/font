@@ -2,8 +2,14 @@ import { fonts } from '../libraries/fonts.js'
 import { pairs } from '../libraries/pairs.js'
 import { paragraphs } from '../libraries/paragraphs.js'
 import { designers } from '../libraries/designers.js'
-import { getStoreCurrentPair, getStoreImagesForExport } from './store'
 import { getNewFills } from './images'
+
+import {
+  getStoreLanguage,
+  getStoreCurrentPair,
+  getStoreRecomendedPairs,
+  getStoreImagesForExport
+} from './store'
 
 function getImageBytesFromImagesForExportById(id) {
   const imagesForExport = getStoreImagesForExport()
@@ -127,6 +133,10 @@ function renderButtonBackText(black) {
   let text = figma.createText()
   text.characters = 'Back'
   text.fontSize = 14
+  text.fontName = {
+    family: 'PT Sans',
+    style: 'Regular'
+  }
   text.fills = black
 
   return text
@@ -174,6 +184,10 @@ function renderButtonExportText(black) {
   let text = figma.createText()
   text.characters = 'Export to artboard'
   text.fontSize = 14
+  text.fontName = {
+    family: 'PT Sans',
+    style: 'Regular'
+  }
   text.fills = black
 
   return text
@@ -384,8 +398,8 @@ function renderCopyrightText(font, grey) {
 
 function renderFigmaTemplate(imagesForExport) {
   const currentPair = getStoreCurrentPair()
-  const { language } = currentPair
-  const articleNameText = currentPair
+  const recommendedPairs = getStoreRecomendedPairs()
+  const articleNameText = currentPair.heading
   let fontElements = []
   let listOfRecomendations = []
 
@@ -401,14 +415,6 @@ function renderFigmaTemplate(imagesForExport) {
       fontElements.push(font)
     }
   })
-  // а это в другую
-  pairs.forEach((pair, i) => {
-    currentPair.recomendationList.forEach((recomendation, i) => {
-      if (pair.id === recomendation) {
-        listOfRecomendations.push(pair)
-      }
-    })
-  })
 
   let nodes = []
   const background = [
@@ -416,8 +422,8 @@ function renderFigmaTemplate(imagesForExport) {
   ]
   const black = [{ type: 'SOLID', color: { r: 0.165, g: 0.161, b: 0.129 } }]
   const grey = [{ type: 'SOLID', color: { r: 0.62, g: 0.62, b: 0.62 } }]
-  const firstFontFontFamily = fontElements[0].heading
-  const secondFontFontFamily = fontElements[0].heading
+  const firstFontFamily = fontElements[0].heading
+  const secondFontFamily = fontElements[1].heading
 
   const mainFrame = renderMainFrame(background)
 
@@ -445,16 +451,18 @@ function renderFigmaTemplate(imagesForExport) {
   let arrayOfRecomendationsImages = []
 
   let recomendationsImageFirst = renderRecomendationsImage(
-    listOfRecomendations[0].id
-  )
-  let recomendationsImageSecond = renderRecomendationsImage(
-    listOfRecomendations[1].id
-  )
-  let recomendationsImageThird = renderRecomendationsImage(
-    listOfRecomendations[2].id
+    recommendedPairs[0].id
   )
 
-  let copyrightText = renderCopyrightText(secondFontFontFamily, grey)
+  let recomendationsImageSecond = renderRecomendationsImage(
+    recommendedPairs[1].id
+  )
+
+  let recomendationsImageThird = renderRecomendationsImage(
+    recommendedPairs[2].id
+  )
+
+  let copyrightText = renderCopyrightText('PT Sans', grey)
 
   arrayOfRecomendationsImages.push(
     recomendationsImageFirst,
@@ -465,16 +473,13 @@ function renderFigmaTemplate(imagesForExport) {
   // лучше тоже вынести в функцию
   fontElements.forEach((font, fontIndex) => {
     let pairFrame = renderPairFrame(background)
-    let fontName = renderFontName(font.heading, firstFontFontFamily)
+    let fontName = renderFontName(font.heading, firstFontFamily)
     fontPairNames.push(fontName)
 
     paragraphs.forEach((paragraph, i) => {
-      if (paragraph.font_id === font.id) {
-        let pairParagraph = renderParagraph(
-          secondFontFontFamily,
-          paragraph,
-          black
-        )
+      if (paragraph.fontId === font.id) {
+        let pairParagraph = renderParagraph(secondFontFamily, paragraph, black)
+
         arrayOfFontParagraphs[fontIndex].push(pairParagraph)
       }
     })
@@ -496,36 +501,35 @@ function renderFigmaTemplate(imagesForExport) {
 
           let currentFontDesignerName = renderCurrentFontDesignerName(
             designer.name,
-            secondFontFontFamily,
+            firstFontFamily,
             black
           )
 
           let currentFontDesignerCompany = renderCurrentFontDesignerCompany(
             designer.company,
-            secondFontFontFamily,
+            secondFontFamily,
             black
           )
 
           designerFrame = renderDesignerFrame(background)
-
-          designerHeading = renderDesignerHeading(firstFontFontFamily, black)
-
+          designerHeading = renderDesignerHeading(firstFontFamily, black)
           designerFrame.appendChild(designerHeading)
-
           designerFrame.appendChild(currentFontDesignerFrame)
-          if (designer.descriptionHTML.length > 0) {
+
+          if (designer.description.length > 0) {
             let currentFontDesignerDescription = renderCurrentFontDesignerDescription(
-              designer.descriptionHTML,
-              secondFontFontFamily,
+              designer.description,
+              secondFontFamily,
               black
             )
+
             designerFrame.appendChild(currentFontDesignerDescription)
           }
+
           currentFontDesignerFrame.appendChild(currentFontDesignerImage)
           currentFontDesignerFrame.appendChild(currentFontDesignerNameFrame)
           currentFontDesignerNameFrame.appendChild(currentFontDesignerName)
           currentFontDesignerNameFrame.appendChild(currentFontDesignerCompany)
-
           arrayOfFontDesigners[fontIndex].push(designerFrame)
         }
       })

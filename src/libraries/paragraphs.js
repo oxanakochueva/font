@@ -11,7 +11,7 @@ const paragraphs = [
     fontId: 'josefin_sans',
     language: 'en',
     bodyHTML:
-      'To contribute, see  <a href="github.com/googlefonts/josefinsans">github.com/googlefonts/josefinsans</a>',
+      'To contribute, see  <a href="github.com/googlefonts/josefinsans" target="_blank">github.com/googlefonts/josefinsans</a>',
     body: 'To contribute, see github.com/googlefonts/josefinsans'
   },
   {
@@ -42,7 +42,7 @@ const paragraphs = [
     fontId: 'abril_fatface',
     language: 'en',
     bodyHTML:
-      'Abril is designed by TypeTogether - Veronika Burian & José Scaglione. The additional weights of Abril can be seen at  <a href="www.type-together.com/Abril">github.com/googlefonts/josefinsans</a>',
+      'Abril is designed by TypeTogether - Veronika Burian & José Scaglione. The additional weights of Abril can be seen at  <a href="www.type-together.com/Abril" target="_blank">github.com/googlefonts/josefinsans</a>',
     body:
       'Abril is designed by TypeTogether - Veronika Burian & José Scaglione. The additional weights of Abril can be seen at www.type-together.com/Abril'
   },
@@ -82,7 +82,7 @@ const paragraphs = [
     fontId: 'lato',
     language: 'en',
     bodyHTML:
-      "The semi-rounded details of the letters give Lato a feeling of warmth, while the strong structure provides stability and seriousness. “Male and female, serious but friendly. With the feeling of the Summer,” says Łukasz. Learn more at  <a href='www.latofonts.com'</a>",
+      "The semi-rounded details of the letters give Lato a feeling of warmth, while the strong structure provides stability and seriousness. “Male and female, serious but friendly. With the feeling of the Summer,” says Łukasz. Learn more at  <a href='latofonts.com' target='_blank'>latofonts.com</a>",
     body:
       'The semi-rounded details of the letters give Lato a feeling of warmth, while the strong structure provides stability and seriousness. “Male and female, serious but friendly. With the feeling of the Summer,” says Łukasz. Learn more at www.latofonts.com'
   },
@@ -123,7 +123,7 @@ const paragraphs = [
     fontId: 'playfair',
     language: 'en',
     bodyHTML:
-      "The Playfair project is led by Claus Eggers Sørensen, a type designer based in Amsterdam, Netherlands. To contribute, see  <a href='github.com/clauseggers/Playfair-Display'</a>",
+      "The Playfair project is led by Claus Eggers Sørensen, a type designer based in Amsterdam, Netherlands. To contribute, see  <a href='github.com/clauseggers/Playfair-Display' target='_blank'>github.com/clauseggers/Playfair-Display</a>",
     body:
       'The Playfair project is led by Claus Eggers Sørensen, a type designer based in Amsterdam, Netherlands. To contribute, see github.com/clauseggers/Playfair-Display'
   },
@@ -147,7 +147,7 @@ const paragraphs = [
     fontId: 'fira_mono',
     language: 'en',
     bodyHTML:
-      "See the <a href='https://mozilla.design/firefox/'>Mozilla FirefoxOS Style Guide</a>for more details",
+      "See the <a href='mozilla.design/firefox/' target='_blank'>Mozilla FirefoxOS Style Guide</a>for more details",
     body: 'See the Mozilla FirefoxOS Style Guide for more details'
   },
   {
@@ -170,7 +170,7 @@ const paragraphs = [
     fontId: 'merriweather',
     language: 'en',
     bodyHTML:
-      "The Merriweather project is led by Sorkin Type, a type design foundry based in Western Massachaussets, USA. To contribute, see  <a href='github.com/EbenSorkin/Merriweather'>Mozilla FirefoxOS Style Guide</a>",
+      "The Merriweather project is led by Sorkin Type, a type design foundry based in Western Massachaussets, USA. To contribute, see  <a href='github.com/EbenSorkin/Merriweather' target='_blank'>Mozilla FirefoxOS Style Guide</a>",
     body:
       'The Merriweather project is led by Sorkin Type, a type design foundry based in Western Massachaussets, USA. To contribute, see Mozilla FirefoxOS Style Guide'
   },
@@ -202,7 +202,7 @@ const paragraphs = [
     fontId: 'roboto',
     language: 'en',
     bodyHTML:
-      "To contribute see <a href='github.com/google/roboto>github.com/google/roboto</a>",
+      "To contribute see <a href='github.com/google/roboto' target='_blank'>github.com/google/roboto</a>",
     body: 'To contribute see github.com/google/roboto'
   },
   {
@@ -256,7 +256,7 @@ const paragraphs = [
     fontId: 'alegreya',
     language: 'en',
     bodyHTML:
-      '<p>Alegreya is a typeface originally intended for literature. Among its crowning characteristics, it conveys a dynamic and varied rhythm which facilitates the reading of long texts. Also, it provides freshness to the page while referring to the calligraphic letter, not as a literal interpretation, but rather in a contemporary typographic language.</p>',
+      'Alegreya is a typeface originally intended for literature. Among its crowning characteristics, it conveys a dynamic and varied rhythm which facilitates the reading of long texts. Also, it provides freshness to the page while referring to the calligraphic letter, not as a literal interpretation, but rather in a contemporary typographic language.',
     body:
       'Alegreya is a typeface originally intended for literature. Among its crowning characteristics, it conveys a dynamic and varied rhythm which facilitates the reading of long texts. Also, it provides freshness to the page while referring to the calligraphic letter, not as a literal interpretation, but rather in a contemporary typographic language.'
   },
@@ -302,7 +302,7 @@ const paragraphs = [
     fontId: 'nunito',
     language: 'en',
     bodyHTML:
-      "To contribute, see <a href = 'github.com/googlefonts/nunito'>github.com/googlefonts/nunito.</a>",
+      "To contribute, see <a href='github.com/googlefonts/nunito' target='_blank'>github.com/googlefonts/nunito</a>.",
     body: 'To contribute, see github.com/googlefonts/nunito'
   },
   {
@@ -325,7 +325,7 @@ const paragraphs = [
     fontId: 'rokkitt',
     language: 'en',
     bodyHTML:
-      'To contribute, see <a href= "github.com/googlefonts/RokkittFont">github.com/googlefonts/RokkittFont.</a>',
+      'To contribute, see <a href="github.com/googlefonts/RokkittFont" target="_blank">github.com/googlefonts/RokkittFont</a>.',
     body: 'To contribute, see github.com/googlefonts/RokkittFont'
   },
   {
@@ -356,7 +356,7 @@ const paragraphs = [
     fontId: 'cabin',
     language: 'en',
     bodyHTML:
-      "To contribute, see <a href= 'github.com/impallari/Cabin'>github.com/impallari/Cabin.</a></p>",
+      "To contribute, see <a href='github.com/impallari/Cabin' target='_blank'>github.com/impallari/Cabin</a>.",
     body: 'To contribute, see github.com/impallari/Cabin'
   },
   {
@@ -379,7 +379,7 @@ const paragraphs = [
     fontId: 'prompt',
     language: 'en',
     bodyHTML:
-      "The Prompt project is led by Cadson Demak, a type foundry in Thailand. To contribute, see  <a href= 'github.com/cadsondemak/prompt'>github.com/cadsondemak/prompt.</a>",
+      "The Prompt project is led by Cadson Demak, a type foundry in Thailand. To contribute, see  <a href='github.com/cadsondemak/prompt' target='_blank'>github.com/cadsondemak/prompt</a>.",
     body: 'To contribute, see github.com/cadsondemak/prompt'
   },
   {
@@ -402,7 +402,7 @@ const paragraphs = [
     fontId: 'montserrat',
     language: 'en',
     bodyHTML:
-      "The Montserrat project is led by Julieta Ulanovsky, a type designer based in Buenos Aires, Argentina. To contribute, see <a href= 'github.com/JulietaUla/Montserrat'>github.com/JulietaUla/Montserrat.</a>",
+      "The Montserrat project is led by Julieta Ulanovsky, a type designer based in Buenos Aires, Argentina. To contribute, see <a href='github.com/JulietaUla/Montserrat' target='_blank'>github.com/JulietaUla/Montserrat</a>.",
     body:
       'The Montserrat project is led by Julieta Ulanovsky, a type designer based in Buenos Aires, Argentina. To contribute, see github.com/JulietaUla/Montserrat.'
   },
@@ -426,7 +426,7 @@ const paragraphs = [
     fontId: 'archivo',
     language: 'en',
     bodyHTML:
-      "To contribute to the project visit <a href= 'github.com/Omnibus-Type'>github.com/Omnibus-Type</a></p>",
+      "To contribute to the project visit <a href='github.com/Omnibus-Type' target='_blank'>github.com/Omnibus-Type</a>",
     body: 'To contribute to the project visit github.com/Omnibus-Type'
   },
   {
@@ -448,17 +448,23 @@ const paragraphs = [
   {
     fontId: 'raleway',
     language: 'en',
-    bodyHTML:
-      "It also has a sister family, Raleway Dots.</p><p>More information can be found at <a href= 'theleagueofmoveabletype.com'></a> and <a href= 'impallari.com'>impallari.com.</a>",
-    body:
-      'It also has a sister family, Raleway Dots. More information can be found at theleagueofmoveabletype.com and impallari.com.'
+    bodyHTML: 'It also has a sister family, Raleway Dots.',
+    body: 'It also has a sister family, Raleway Dots.'
   },
   {
     fontId: 'raleway',
     language: 'en',
     bodyHTML:
-      "To contribute to the project, visit <a href= 'github.com/impallari/Raleway'>github.com/impallari/Raleway.</a>",
-    body: 'To contribute to the project, visit github.com/impallari/Raleway.'
+      "More information can be found at <a href='theleagueofmoveabletype.com' target='_blank'>theleagueofmoveabletype.com</a> and <a href='impallari.com' target='_blank'>impallari.com</a>.",
+    body:
+      'More information can be found at theleagueofmoveabletype.com and impallari.com'
+  },
+  {
+    fontId: 'raleway',
+    language: 'en',
+    bodyHTML:
+      "To contribute to the project, visit <a href='github.com/impallari/Raleway' target='_blank'>github.com/impallari/Raleway</a>.",
+    body: 'To contribute to the project, visit github.com/impallari/Raleway'
   },
   {
     fontId: 'space_mono',
@@ -488,17 +494,17 @@ const paragraphs = [
     fontId: 'space_mono',
     language: 'en',
     bodyHTML:
-      "Colophon Foundry is a London and Los Angeles-based digital type foundry established in 2009. Its members comprise Benjamin Critton (US), Edd Harrington (UK), and Anthony Sheret (UK). The foundry's commissioned work in type design is complemented by work in editorial design, publishing, curation, and pedagogy. Visit  <a href= 'colophon-foundry.org'>colophon-foundry.org.</a>",
+      "Colophon Foundry is a London and Los Angeles-based digital type foundry established in 2009. Its members comprise Benjamin Critton (US), Edd Harrington (UK), and Anthony Sheret (UK). The foundry's commissioned work in type design is complemented by work in editorial design, publishing, curation, and pedagogy. Visit  <a href='colophon-foundry.org' target='_blank'>colophon-foundry.org</a>.",
     body:
-      "Colophon Foundry is a London and Los Angeles-based digital type foundry established in 2009. Its members comprise Benjamin Critton (US), Edd Harrington (UK), and Anthony Sheret (UK). The foundry's commissioned work in type design is complemented by work in editorial design, publishing, curation, and pedagogy. Visit colophon-foundry.org."
+      "Colophon Foundry is a London and Los Angeles-based digital type foundry established in 2009. Its members comprise Benjamin Critton (US), Edd Harrington (UK), and Anthony Sheret (UK). The foundry's commissioned work in type design is complemented by work in editorial design, publishing, curation, and pedagogy. Visit colophon-foundry.org"
   },
   {
     fontId: 'space_mono',
     language: 'en',
     bodyHTML:
-      "To contribute ideas and feedback, see <a href= 'github.com/googlefonts/spacemono'>github.com/googlefonts/spacemono.</a>",
+      "To contribute ideas and feedback, see <a href='github.com/googlefonts/spacemono' target='_blank'>github.com/googlefonts/spacemono</a>.",
     body:
-      'To contribute ideas and feedback, see github.com/googlefonts/spacemono.'
+      'To contribute ideas and feedback, see github.com/googlefonts/spacemono'
   },
   {
     fontId: 'bitter',
@@ -598,8 +604,8 @@ const paragraphs = [
     fontId: 'domine',
     language: 'en',
     bodyHTML:
-      "Join the project at <a href = 'www.impallari.com/projects/overview/domine'>www.impallari.com/projects/overview/domine</a>",
-    body: 'Join the project at www.impallari.com/projects/overview/domine.'
+      "Join the project at <a href='impallari.com/projects/overview/domine' target='_blank'>impallari.com/projects/overview/domine</a>.",
+    body: 'Join the project at impallari.com/projects/overview/domine'
   },
   {
     fontId: 'open_sans',
@@ -676,10 +682,15 @@ const paragraphs = [
   {
     fontId: 'karla',
     language: 'en',
+    bodyHTML: 'The Tamil parts are available from the Early Access page.',
+    body: 'The Tamil parts are available from the Early Access page.'
+  },
+  {
+    fontId: 'karla',
+    language: 'en',
     bodyHTML:
-      'The Tamil parts are available from the Early Access page.</p><p>To contribute, see <a href = "github.com/googlefonts/karla">github.com/googlefonts/karla.</a>',
-    body:
-      'The Tamil parts are available from the Early Access page. To contribute, see github.com/googlefonts/karla.'
+      'To contribute, see <a href="github.com/googlefonts/karla" target="_blank">github.com/googlefonts/karla</a>.',
+    body: 'To contribute, see github.com/googlefonts/karla'
   },
   {
     fontId: 'francois_one',
@@ -709,9 +720,9 @@ const paragraphs = [
     fontId: 'fira_sans',
     language: 'en',
     bodyHTML:
-      'This project is led by Carrois, a type foundry based in Berlin. To contribute, see <a href = "github.com/mozilla/Fira">github.com/mozilla/Fira.</a>',
+      'This project is led by Carrois, a type foundry based in Berlin. To contribute, see <a href="github.com/mozilla/Fira" target="_blank">github.com/mozilla/Fira</a>.',
     body:
-      'This project is led by Carrois, a type foundry based in Berlin. To contribute, see github.com/mozilla/Fira.'
+      'This project is led by Carrois, a type foundry based in Berlin. To contribute, see github.com/mozilla/Fira'
   },
   {
     fontId: 'hind',
@@ -749,9 +760,9 @@ const paragraphs = [
     fontId: 'hind',
     language: 'en',
     bodyHTML:
-      'The Hind project is led by Indian Type Foundry, a type design foundry based in Ahmedabad, India. To contribute, see  <a href = "github.com/itfoundry/hind">github.com/itfoundry/hind.</a>',
+      'The Hind project is led by Indian Type Foundry, a type design foundry based in Ahmedabad, India. To contribute, see  <a href="github.com/itfoundry/hind" target="_blank">github.com/itfoundry/hind</a>.',
     body:
-      'The Hind project is led by Indian Type Foundry, a type design foundry based in Ahmedabad, India. To contribute, see github.com/itfoundry/hind '
+      'The Hind project is led by Indian Type Foundry, a type design foundry based in Ahmedabad, India. To contribute, see github.com/itfoundry/hind'
   },
   {
     fontId: 'inconsolata',
@@ -781,8 +792,8 @@ const paragraphs = [
     fontId: 'inconsolata',
     language: 'en',
     bodyHTML:
-      "To contribute, see  <a href = 'github.com/googlefonts/inconsolata'>github.com/googlefonts/inconsolata.</a></p>",
-    body: 'To contribute, see  github.com/googlefonts/inconsolata.'
+      "To contribute, see <a href='github.com/googlefonts/inconsolata' target='_blank'>github.com/googlefonts/inconsolata</a>.",
+    body: 'To contribute, see github.com/googlefonts/inconsolata'
   },
   {
     fontId: 'lora',
@@ -820,8 +831,8 @@ const paragraphs = [
     fontId: 'lora',
     language: 'en',
     bodyHTML:
-      "To contribute, see  <a href = 'github.com/cyrealtype/Lora-Cyrillic'>github.com/cyrealtype/Lora-Cyrillic.</a></p>",
-    body: 'To contribute, see github.com/cyrealtype/Lora-Cyrillic.'
+      "To contribute, see <a href='github.com/cyrealtype/Lora-Cyrillic' target='_blank'>github.com/cyrealtype/Lora-Cyrillic</a>.",
+    body: 'To contribute, see github.com/cyrealtype/Lora-Cyrillic'
   }
 ]
 

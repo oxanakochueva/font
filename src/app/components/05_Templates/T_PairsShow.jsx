@@ -15,7 +15,7 @@ export default class T_PairsShow extends React.PureComponent {
     return (
       <div className="T_PairsShow">
         <S_NavigationBar actions={actions} />
-        <S_Pair pair={pair} actions={actions} />
+        <S_Pair pair={pair} defaultValues={defaultValues} actions={actions} />
       </div>
     )
   }

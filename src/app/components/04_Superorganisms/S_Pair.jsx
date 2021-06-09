@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import A_Text from '../01_Atoms/A_Text'
 import A_PairCover from '../01_Atoms/A_PairCover'
 import O_FontInfo from '../03_Organisms/O_FontInfo'
+import O_RecomendedPairs from '../03_Organisms/O_RecomendedPairs'
 
 export default class S_Pair extends React.PureComponent {
   constructor(props) {
@@ -11,9 +12,12 @@ export default class S_Pair extends React.PureComponent {
   }
 
   render() {
-    const { pair, actions, defaultValues } = this.props
+    const { pair, defaultValues, actions } = this.props
     const { families } = pair
-    const { id, heading } = pair.info
+    const { id, heading, cover } = pair.info
+
+    const copyrightNotice =
+      'Information from <a href="https://fonts.google.com" target="_blank">Google Fonts</a>'
 
     const fontInfoElements = pair.fonts.map(fontInfo => {
       return <O_FontInfo pair={pair} font={fontInfo} key={fontInfo.font.id} />
@@ -22,54 +26,12 @@ export default class S_Pair extends React.PureComponent {
     return (
       <div className="S_Pair">
         <A_Text type="h1" text={heading} fontFamily={families[0]} />
-
-        <A_PairCover
-          type="pageCover"
-          image={require(`../../assets/images/pairs/articles/4x/${id}.png`)}
-        />
+        <A_PairCover type="pageCover" image={cover} />
 
         {fontInfoElements}
 
-        {
-          // <div className="pairContainer">
-          //   <div
-          //     className="pairHeader"
-          //     style={{ fontFamily: fontFamilyOfPairs[0], fontWeight: 600 }}
-          //   >
-          //     {pairHeader}
-          //   </div>
-          //   <img
-          //     className="pairCover"
-          //     src={require(`../../assets/images/pairs/articles/4x/${currentPairId}.png`)}
-          //   />
-          //   <FontDescription
-          //     font={fontElements.firstFont.font}
-          //     paragraphs={fontElements.firstFont.fontParagraphs}
-          //     designers={fontElements.firstFont.fontDesigners}
-          //     fontFamily={fontFamilyOfPairs}
-          //   />
-          //   <FontDescription
-          //     font={fontElements.secondFont.font}
-          //     paragraphs={fontElements.secondFont.fontParagraphs}
-          //     designers={fontElements.secondFont.fontDesigners}
-          //     fontFamily={fontFamilyOfPairs}
-          //   />
-          //   <div className="otherPairings">
-          //     <h2 style={{ fontFamily: fontFamilyOfPairs[0], fontWeight: 600 }}>
-          //       Other pairings
-          //     </h2>
-          //     <FontPairRecomendation
-          //       pairs={pairs}
-          //       actions={actions}
-          //       defaultValues={defaultValues}
-          //     />
-          //   </div>
-          //   <div className="copyright">
-          //     Information from{' '}
-          //     <a href="https://fonts.google.com/">Google Fonts</a>
-          //   </div>
-          // </div>
-        }
+        <O_RecomendedPairs defaultValues={defaultValues} actions={actions} />
+        <A_Text type="small" text={copyrightNotice} fontFamily="PT Sans" />
       </div>
     )
   }

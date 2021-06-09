@@ -1,15 +1,17 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+
+import { setStoreCurrentPair, setStoreRecomendedPairs } from '../plugin/store'
 import { getRandom } from '../plugin/utilities'
 
 import T_PairsIndex from './components/05_Templates/T_PairsIndex'
 import T_PairsShow from './components/05_Templates/T_PairsShow'
 
-onmessage = msg => {
-  // if (msg.type === 'get-storage') {
-  console.log('message', msg)
-  // }
-}
+// onmessage = msg => {
+//   // if (msg.type === 'get-storage') {
+//   console.log('message', msg)
+//   // }
+// }
 
 Array.prototype.remove = function() {
   // prettier-ignore
@@ -42,7 +44,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getFromStorage()
-    // this.setToStorage('some id')
+    this.setToStorage('some id')
   }
 
   getFromStorage = () => {
@@ -120,18 +122,26 @@ export default class App extends React.Component {
         }
       })
 
-      const recommendedPairs = getRandom(pairs, 3)
+      pairs.forEach(pair => {
+        if (pair.id === id) {
+          setStoreCurrentPair(pair)
+          console.log('CURRENT PAIR', pair)
+        }
+      })
 
-      console.log(recommendedPairs)
+      const recommendedPairs = getRandom(pairs, 3)
+      setStoreRecomendedPairs(recommendedPairs)
+
+      console.log('RECOMENDED', recommendedPairs)
 
       this.setState({
         page: 'show',
         currentPairId: id,
         recommendedPairs: recommendedPairs
       })
-    }
 
-    this.scrollToTop()
+      this.scrollToTop()
+    }
   }
 
   filterPairs = () => {
@@ -237,9 +247,7 @@ export default class App extends React.Component {
         pairInfo.info = pair
 
         pair.fonts.forEach(fontId => {
-          console.log('FONT ID', fontId)
           const fontInfo = this.collectFontInfo(fontId)
-          console.log('FONT INFO 2', fontInfo)
           pairInfo.fonts.push(fontInfo)
           pairInfo.families.push(fontInfo.fontFamily)
         })
@@ -283,16 +291,17 @@ export default class App extends React.Component {
     return fontInfo
   }
 
-  exportPageToFigma = currentPairId => {
-    const { language, recomendationList } = this.state
+  exportPageToFigma = () => {
+    const { pairs } = this.props
+    const { currentPairId, recommendedPairs } = this.state
 
     parent.postMessage(
       {
         pluginMessage: {
           type: 'font-pair-export',
-          pair: currentPairId,
-          language: language,
-          recomendationList: recomendationList
+          pairs: pairs,
+          currentPairId: currentPairId,
+          recommendedPairs: recommendedPairs
         }
       },
       '*'
